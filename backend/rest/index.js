@@ -6,6 +6,10 @@ const app = express();
 
 conectarDB();
 
+//cargar models
+require('./models/Product.model');
+require('./models/category.model');
+
 app.use(express.json());
 // app.use(cors());
 app.use(require("./routes"));
