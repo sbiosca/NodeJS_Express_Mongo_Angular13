@@ -2,13 +2,12 @@ var router = require("express").Router();
 
 const Category = require("../../models/category.model");
 
-//CREAR CATEGORY
+//Create category
 router.post('/', async (req, res) => {
     try {
       let category;
       category = new Category(req.body);
       await category.save();
-      //console.log(req.body);
       res.send(category);
     } catch (error) {
       console.log(error);
@@ -16,7 +15,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-//MOSTRAR CATEGORY
+//Show category
 router.get('/', async (req, res) => {
     try {
       const { offset, limit } = req.query;
@@ -32,7 +31,7 @@ router.get('/', async (req, res) => {
     }
   });
 
-
+//Obtain all categories
 router.get('/categories', async (req, res) => {
     try {
       const category = await Category.find({});
@@ -47,7 +46,7 @@ router.get('/categories', async (req, res) => {
   });
 
 
-//OBTENER PRODUCTS CATEGORY
+//Obtain category by id
 router.get("/:id", async (req, res) => {
     try {
       // let category = await Category.findOne({name_category:req.params.name}).populate('products');
@@ -64,19 +63,19 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-//DELETE
-router.delete("/:id", async (req, res) => {
-    try {
-      let category = await Category.findById(req.params.id);
-      if (!category) {
-        res.status(404).json({ msg: "No existe la categoria" });
-      }
-      await Category.findOneAndRemove({ _id: req.params.id });
-      res.json({ msg: "categoria eliminado con éxito!" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Hubo un error");
-    }
-  });
+//Delete categorie
+// router.delete("/:id", async (req, res) => {
+//     try {
+//       let category = await Category.findById(req.params.id);
+//       if (!category) {
+//         res.status(404).json({ msg: "No existe la categoria" });
+//       }
+//       await Category.findOneAndRemove({ _id: req.params.id });
+//       res.json({ msg: "categoria eliminado con éxito!" });
+//     } catch (error) {
+//       console.log(error);
+//       res.status(500).send("Hubo un error");
+//     }
+//   });
 
 module.exports = router;

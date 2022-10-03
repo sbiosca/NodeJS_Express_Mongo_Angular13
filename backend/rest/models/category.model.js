@@ -20,7 +20,7 @@ const CategorySchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+  products: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
 });
 CategorySchema.pre("validate", function (next) {
   if (!this.slug) {

@@ -13,7 +13,7 @@ conectarDB();
 const port = process.env.PORT || 3000;
 //cargar models
 require('./');
-require('./models/Product.model');
+require('./models/product.model');
 require('./models/category.model');
 
 app.use(express.json());

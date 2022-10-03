@@ -1,6 +1,6 @@
 var router = require("express").Router();
 
-const product = require("../../models/Product.model");
+const product = require("../../models/product.model");
 
 router.post("/", async (req, res) => {
     try {
@@ -12,10 +12,12 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-
-    }catch {
-        
-    }
+        const products = await product.find();
+        res.json(products.map((product) => product.toJSONFor()));
+      } catch (error) {
+        console.log(error);
+        res.status(500).send("Hubo un error");
+      }
 })
 
 router.delete("/", async (req, res) => {
