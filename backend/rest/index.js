@@ -1,11 +1,18 @@
 const express = require("express");
 const conectarDB = require("./config/db");
-// const cors = require("cors");
+const cors = require("cors");
 const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:4200"
+};
+
+app.use(cors(corsOptions));
 
 
 conectarDB();
 
+const port = process.env.PORT || 8080;
 //cargar models
 require('./models/Product.model');
 require('./models/category.model');
@@ -19,7 +26,7 @@ app.use(function (req, res, next) {
     next(err);
   });
     
-app.listen(3000, "127.0.0.1", () => {
+app.listen(port, "0.0.0.0", () => {
 //app.get('port')
-console.log(`El servidor está corriendo perfectamente en el puerto 3000`);
+console.log(`El servidor está corriendo perfectamente en el puerto ${port}`);
 });
