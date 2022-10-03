@@ -28,4 +28,4 @@ ProductSchema.methods.slugify = function () {
       ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
 };
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model("product", ProductSchema);

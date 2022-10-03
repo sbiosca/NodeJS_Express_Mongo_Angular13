@@ -2,9 +2,8 @@ var router = require("express").Router();
 
 const Category = require("../../models/category.model");
 
-
 //CREAR CATEGORY
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
     try {
       let category;
       category = new Category(req.body);
@@ -18,7 +17,7 @@ router.post("/", async (req, res) => {
   });
 
 //MOSTRAR CATEGORY
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const { offset, limit } = req.query;
       const categorys = await Category.find(
@@ -34,19 +33,20 @@ router.get("/", async (req, res) => {
   });
 
 
-router.get("/list-categories", async (req, res) => {
+router.get('/categories', async (req, res) => {
     try {
-      const categorys = await Category.find({});
-  
-      if (!categorys) {
+      const category = await Category.find({});
+      if (!category) {
         res.status(404).json({ msg: "No existen categorías" });
       }
-      res.json(categorys.map((category) => category.toListJSONFor()));
+      res.json(category.map((category) => category.toListJSONFor()));
     } catch (error) {
       console.log(error);
       res.status(500).send("Hubo un error en /list-categories");
     }
   });
+
+
 //OBTENER PRODUCTS CATEGORY
 router.get("/:id", async (req, res) => {
     try {

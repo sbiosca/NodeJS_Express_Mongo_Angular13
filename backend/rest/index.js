@@ -3,30 +3,33 @@ const conectarDB = require("./config/db");
 const cors = require("cors");
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:4200"
-};
+// var corsOptions = {
+//   origin: "http://localhost:4200"
+// };
 
-app.use(cors(corsOptions));
-
-
+app.use(cors());
 conectarDB();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 //cargar models
+require('./');
 require('./models/Product.model');
 require('./models/category.model');
 
 app.use(express.json());
 // app.use(cors());
 app.use(require("./routes"));
-app.use(function (req, res, next) {
-    var err = new Error("Not Found");
-    err.status = 404;
-    next(err);
-  });
+
+app.get('/', function(req, res) {
+  res.send("{Message: THE APPLICATION IS RUNNING}");
+})
+
+//  app.use(function (req, res, next) {
+//      var err = new Error("Not Found");
+//      err.status = 404;
+//      next(err);
+//    });
     
 app.listen(port, "0.0.0.0", () => {
-//app.get('port')
 console.log(`El servidor está corriendo perfectamente en el puerto ${port}`);
 });
