@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var slug = require("slug");
 
 const ProductSchema = mongoose.Schema({
-    slug: {
+      slug: {
         type: String,
         lowecase: true,
         unique: true,
