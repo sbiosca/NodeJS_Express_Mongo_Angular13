@@ -3,4 +3,5 @@ export class Category {
     reference?: number;
     icon?: string;
     name_category?: string;
+    products?: string;
 }

@@ -20,6 +20,7 @@ import { CategoryService} from "src/app/core/services/category.service";
     AllCategories() {
         this.CategoryService.getAll().subscribe((data) => {
             console.log(data);
+            this.category = data;
         })
     }
 

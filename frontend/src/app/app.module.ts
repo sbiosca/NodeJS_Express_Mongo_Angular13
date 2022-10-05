@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './shared/page/header/header.component';
 import { FooterComponent } from './shared/page/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
     // ProductsListComponent
   ],
   imports: [
+  
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton: true,
       progressBar: true,
     }),
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,11 @@
 <div>
     <h2 style="text-align: center;">CATEGORIES</h2>
+    <div class="div1" *ngFor="let cate of category">
+        <div class="categ">
+            <i class={{cate.icon}}></i>
+            <span>{{cate.name_category}}</span>
+        </div>
+        
+        <!-- <fa-icon [icon]="{{cate.icon}}"></fa-icon> -->
+    </div>
 </div>
