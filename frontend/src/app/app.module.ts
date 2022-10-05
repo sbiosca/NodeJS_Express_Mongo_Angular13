@@ -5,14 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { AddProductComponent } from './components/add-product/add-product.component';
-// import { ProductDetailsComponent } from './components/product-details/product-details.component';
-// import { ProductsListComponent } from './components/products-list/products-list.component';
+import { CoreModule } from './core/core.modules';
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './shared/page/header/header.component';
+import { FooterComponent } from './shared/page/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent
     // AddProductComponent,
     // ProductDetailsComponent,
     // ProductsListComponent
@@ -21,8 +24,10 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     FormsModule,
     HttpClientModule,
+    CoreModule,
     ToastrModule.forRoot({
       positionClass : 'toast-top-right',
       timeOut: 5000, // 15 seconds

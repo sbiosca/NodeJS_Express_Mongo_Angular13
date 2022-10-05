@@ -12,6 +12,8 @@ export class AppComponent {
 
   constructor(private toastrService: ToastrService) { }
 
+  
+
   public toastr_success(): void {
     this.toastrService.success("Message success!", "You can create a new product")
   }

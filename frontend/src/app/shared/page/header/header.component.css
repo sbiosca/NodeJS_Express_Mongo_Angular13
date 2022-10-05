@@ -1,0 +1,30 @@
+nav {
+    height: 85px;
+    margin: auto;
+}
+
+a {
+    color: black;
+}
+
+.button-home {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+    position: relative;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 30px;
+	text-decoration:none;
+    left: 750px;
+}
+.button-home:hover {
+	background-color:#5cbf2a;
+}
+.button-home:active {
+	position:relative;
+	top:1px;
+}

@@ -1,21 +1,3 @@
-<div>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">BiosClothes</a>
-    <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a routerLink="products" class="nav-link" (click)="toastr_allprod()">Products</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="add" class="nav-link" (click)="toastr_success()">Add</a>
-      </li>
-      <button type="button" class="btn btn-sm btn-success" (click)="toastr_success()">Success</button>
-    </div>
-  </nav>
-  <div class="container mt-3">
-    <router-outlet></router-outlet>
-  </div>
-</div>
-
-<!-- <app-header></app-header>
-<router></router>
-<app-footer></app-footer> -->
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

@@ -1,7 +1,5 @@
 export class Product {
-  id?: any;
-  title?: string;
+  slug?: any;
+  name?: string;
   description?: string;
-  category?: string;
-  published?: boolean;
 }
