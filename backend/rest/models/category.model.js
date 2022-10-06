@@ -22,6 +22,8 @@ const CategorySchema = mongoose.Schema({
   },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
 });
+
+
 CategorySchema.pre("validate", function (next) {
   if (!this.slug) {
     this.slugify();
@@ -39,7 +41,8 @@ CategorySchema.methods.toListJSONFor = function () {
     reference: this.reference,
     name_category: this.name_category,
     slug: this.slug,
-    icon: this.icon
+    icon: this.icon,
+    products: this.products
   };
 };
 
