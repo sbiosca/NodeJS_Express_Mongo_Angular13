@@ -24,6 +24,16 @@ router.get("/", async (req, res) => {
       }
 })
 
+router.get("/:slug", async (req, res) => {
+  try {
+      const products = await product.find();
+      res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Hubo un error, no muestra");
+    }
+})
+
 router.delete("/", async (req, res) => {
     try {
 
