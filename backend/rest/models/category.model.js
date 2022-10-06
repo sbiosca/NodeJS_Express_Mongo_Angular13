@@ -24,7 +24,7 @@ const CategorySchema = mongoose.Schema({
 });
 CategorySchema.pre("validate", function (next) {
   if (!this.slug) {
-    this.slugify(); // ProductSchema.methods.slugify = function()
+    this.slugify();
   }
   next();
 });

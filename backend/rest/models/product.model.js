@@ -16,7 +16,21 @@ const ProductSchema = mongoose.Schema({
         type: String,
         lowecase: true,
         default: "",
-        maxLength: 300,
+        maxLength: 1000,
+      },
+      tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "tags" }],
+      img: {
+        type: String,
+        lowecase: true,
+        default: "",
+        maxLength: 100,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
       },
 })
 

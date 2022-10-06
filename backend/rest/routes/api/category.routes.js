@@ -46,8 +46,8 @@ router.get('/categories', async (req, res) => {
   });
 
 
-//Obtain category by id
-router.get("/:id", async (req, res) => {
+//Obtain category by reference
+router.get("/:reference", async (req, res) => {
     try {
       // let category = await Category.findOne({name_category:req.params.name}).populate('products');
       let category = await Category.findOne({ slug: req.params.id }).populate(
