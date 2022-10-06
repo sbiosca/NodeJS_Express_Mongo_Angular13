@@ -41,18 +41,20 @@ router.get('/categories', async (req, res) => {
       res.json(category.map((category) => category.toListJSONFor()));
     } catch (error) {
       console.log(error);
-      res.status(500).send("Hubo un error en /list-categories");
+      res.status(500).send("Hubo un error en /categories");
     }
   });
 
 
 //Obtain category by reference
+//PROBLEM-ERRROR
 router.get("/:reference", async (req, res) => {
     try {
       // let category = await Category.findOne({name_category:req.params.name}).populate('products');
       let category = await Category.findOne({ slug: req.params.id }).populate(
         "products"
       );
+      console.log(category);
       if (!category) {
         res.status(404).json({ msg: "No existe la categoria" });
       }

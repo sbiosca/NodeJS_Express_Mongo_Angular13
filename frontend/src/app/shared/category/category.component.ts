@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Category } from "src/app/core/models/category.model";
+import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { CategoryService} from "src/app/core/services/category.service";
 
 @Component ({
@@ -22,6 +23,11 @@ import { CategoryService} from "src/app/core/services/category.service";
             console.log(data);
             this.category = data;
         })
+    }
+
+    jump_shop(cate: any) {
+        console.log(cate);
+        
     }
 
     // OneCategory() {
