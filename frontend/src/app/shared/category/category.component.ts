@@ -3,6 +3,7 @@ import { Category } from "src/app/core/models/category.model";
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { CategoryService} from "src/app/core/services/category.service";
 
+
 @Component ({
     selector: 'app-category',
     templateUrl: './category.component.html',
@@ -25,10 +26,12 @@ import { CategoryService} from "src/app/core/services/category.service";
         })
     }
 
-    jump_shop(cate: any) {
-        console.log(cate);
-        
-    }
+    // jump_shop(cate: any) {
+    //     console.log(cate);
+    //     this.CategoryService.get(cate).subscribe((data) => {
+    //         console.log(data.products);
+    //     })
+    // }
 
     // OneCategory() {
     //     this.CategoryService.get().subscribe((data) => {

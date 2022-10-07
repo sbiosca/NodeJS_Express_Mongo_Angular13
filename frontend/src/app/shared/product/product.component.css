@@ -1,3 +1,8 @@
 .div1 {
-    height: 17cm;
+    height: 50px;
+}
+
+.produ {
+    border: 1px solid black;
+    width: 85px;
 }

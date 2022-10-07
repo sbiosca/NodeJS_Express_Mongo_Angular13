@@ -1,4 +1,9 @@
 <div>
     <h2 style="text-align: center;">PRODUCTS</h2>
-    <div class="div1"></div>
+    <div class="div1" *ngFor="let prod of product">
+        <div class="produ">
+            <!-- <i class={{product}}></i>  -->
+            <span id="{{prod.name}}">{{prod.name}}</span>
+        </div>
+    </div>
 </div>
