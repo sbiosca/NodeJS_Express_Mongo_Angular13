@@ -13,7 +13,7 @@ import { Category } from "src/app/core/models/category.model";
 
 export class ProductComponent implements OnInit {
     product?: Product[];
-    product_category?: Category;
+    //product_category?: Product[];
     ref_Category: String = '';
 
     constructor(private ProductService: ProductService
@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
             console.log(this.ref_Category);
             this.CategoryService.get(this.ref_Category).subscribe((data) => {
                 console.log(data.products);
-                this.product_category = data;
+                this.product = data.products;
             })
         }
         

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Category } from "src/app/core/models/category.model";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
+import { faCar, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { CategoryService} from "src/app/core/services/category.service";
+import { Icon } from "@fortawesome/fontawesome-svg-core";
 
 
 @Component ({

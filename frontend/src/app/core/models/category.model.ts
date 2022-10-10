@@ -3,7 +3,7 @@ export class Category {
     reference?: number;
     icon?: string;
     name_category?: string;
-    products?: string[];
+    products?: Category[];
     // constructor (
     //     slug: string,
     //     reference: number,

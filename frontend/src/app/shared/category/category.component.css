@@ -1,8 +1,15 @@
-.div1 {
+.div1 div{
     height: 50px;
+    display: flex;
+}
+
+.for {
+    justify-content: center;
 }
 
 .categ {
     border: 1px solid black;
     width: 85px;
+    justify-content: center;
+    flex-direction: row-reverse;
 }
