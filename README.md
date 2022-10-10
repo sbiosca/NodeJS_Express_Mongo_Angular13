@@ -1,0 +1,3 @@
+Bootstrap : 
+-npm i @ng-bootstrap/ng-bootstrap@12.x.x --legacy-peer-deps
+-npm install @popperjs/core --save --force
