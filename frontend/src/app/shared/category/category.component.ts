@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Category } from "src/app/core/models/category.model";
-import { faCar, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
 import { CategoryService} from "src/app/core/services/category.service";
-import { Icon } from "@fortawesome/fontawesome-svg-core";
+
 
 
 @Component ({
@@ -12,7 +12,7 @@ import { Icon } from "@fortawesome/fontawesome-svg-core";
 
 })export class CategoryComponent implements OnInit {
 
-    category?: Category[];
+    category: Category[] = [];
 
     constructor(private CategoryService: CategoryService) {}
     ngOnInit(): void {
@@ -23,7 +23,7 @@ import { Icon } from "@fortawesome/fontawesome-svg-core";
     AllCategories() {
         this.CategoryService.getAll().subscribe((data) => {
             console.log(data);
-            this.category = data;
+            this.category = data
         })
     }
 

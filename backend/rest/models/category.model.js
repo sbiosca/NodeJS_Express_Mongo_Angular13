@@ -14,7 +14,10 @@ const CategorySchema = mongoose.Schema({
     required: true,
   },
   icon: {
-    type: String
+    prefix:
+      {type: String, required: true},
+    name:
+      {type: String, required: true}
   },
   name_category: {
     type: String,
@@ -47,3 +50,5 @@ CategorySchema.methods.toListJSONFor = function () {
 };
 
 module.exports = mongoose.model("Category", CategorySchema);
+
+

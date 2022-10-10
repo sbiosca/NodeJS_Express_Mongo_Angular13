@@ -10,7 +10,9 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './shared/page/header/header.component';
 import { FooterComponent } from './shared/page/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
-import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary} from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+//import { far } from '@fortawesome/free-regular-svg-icons';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     // ProductsListComponent
   ],
   imports: [
-  
+    FontAwesomeModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
@@ -35,11 +37,13 @@ import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
       timeOut: 5000, // 15 seconds
       closeButton: true,
       progressBar: true,
-    }),
-    FontAwesomeModule,
-    
+    }),    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas)
+  }
+}

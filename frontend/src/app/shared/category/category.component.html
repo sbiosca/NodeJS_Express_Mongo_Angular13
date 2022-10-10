@@ -2,10 +2,10 @@
     <h2 style="text-align: center;">CATEGORIES</h2>
     <div class="for" *ngFor="let cate of category">
         <div class="categ" [routerLink]="['/shop/category', cate.reference]">
-            <i class={{cate.icon}}></i>
-            <span id="{{cate.reference}}">{{cate.name_category}}</span>
+            <fa-icon [icon]="[cate.icon!.prefix, cate.icon!.name]"></fa-icon>
+            <span id="{{cate.reference}}"></span> 
         </div>
         
-        <!-- <fa-icon [icon]="faCar"></fa-icon> -->
+        
     </div>
 </div>

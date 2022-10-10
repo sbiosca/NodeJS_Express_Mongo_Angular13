@@ -1,9 +1,14 @@
-export class Category {
-    slug?: any;
-    reference?: number;
-    icon?: string;
-    name_category?: string;
-    products?: Category[];
+import { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
+
+export interface Category {
+    slug?: any
+    reference?: number
+    icon?: {
+        prefix: IconPrefix
+        name: IconName
+    }
+    name_category?: string
+    products?: Category[]
     // constructor (
     //     slug: string,
     //     reference: number,
@@ -18,3 +23,4 @@ export class Category {
     //     this.slug=slug
     // }
 }
+
