@@ -5,6 +5,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 //import {CarouselModule} from 'primeng/carousel';
 import { CategoryComponent } from "./category/category.component";
 import { ProductComponent } from "./product/product.component";
+import { CarouselComponent } from "./carousel/carousel.component";
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
 
 @NgModule({
@@ -12,17 +14,20 @@ import { ProductComponent } from "./product/product.component";
         CommonModule,
         RouterModule,
         FontAwesomeModule,
+        // NgbModule
         //CarouselModule
     ],
     declarations: [
         CategoryComponent,
         ProductComponent,
+        CarouselComponent,
         // CarouselComponent
         
     ],
     exports: [
         CategoryComponent,
         ProductComponent,
+        CarouselComponent,
         // CarouselComponent        
     ]
 })

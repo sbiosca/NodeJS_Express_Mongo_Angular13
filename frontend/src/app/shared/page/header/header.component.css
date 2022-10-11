@@ -28,3 +28,7 @@ a {
 	position:relative;
 	top:1px;
 }
+
+img {
+	height: 50px;
+}
