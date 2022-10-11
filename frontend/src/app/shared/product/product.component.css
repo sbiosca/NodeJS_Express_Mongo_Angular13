@@ -1,8 +1,14 @@
-.div1 {
+
+.div1 div {
     height: 50px;
+    background-color: aqua;
+    margin: 5cm;
+    width: 185px;
 }
 
 .produ {
     border: 1px solid black;
-    width: 85px;
+    width: 185px;
+    float: left;
+    text-align: center;
 }
