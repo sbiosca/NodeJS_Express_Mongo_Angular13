@@ -2,6 +2,7 @@
     <h2 style="text-align: center;">CATEGORIES</h2>
     <div class="for" *ngFor="let cate of category">
         <div class="categ" [routerLink]="['/shop/category', cate.reference]">
+            <!-- <fa-icon [icon]="['fas', 'clothes']"></fa-icon> -->
             <fa-icon [icon]="[cate.icon!.prefix, cate.icon!.name]"></fa-icon>
             <span id="{{cate.reference}}"></span> 
         </div>

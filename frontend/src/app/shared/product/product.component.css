@@ -1,14 +1,35 @@
 
 .div1 div {
     height: 50px;
-    background-color: aqua;
-    margin: 5cm;
+    background-color: rgb(172, 194, 194);
+    margin: 3%;
     width: 185px;
+    height: 255px;
 }
 
 .produ {
     border: 1px solid black;
     width: 185px;
     float: left;
+    position: relative;
+    left: 12%;
     text-align: center;
 }
+
+img {
+    object-fit: cover;
+    object-position: center;
+    width: 175px;
+    height: 180px;
+}
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
