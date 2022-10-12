@@ -47,7 +47,6 @@ router.get('/categories', async (req, res) => {
 
 
 //Obtain category by reference
-//PROBLEM-ERRROR
 router.get("/:reference", async (req, res) => {
     try {
       // let category = await Category.findOne({name_category:req.params.name}).populate('products');
@@ -60,7 +59,7 @@ router.get("/:reference", async (req, res) => {
       console.log(error);
       res.status(500).send("Hubo un error");
     }
-  });
+});
 
 //Delete categorie
 // router.delete("/:id", async (req, res) => {

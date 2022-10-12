@@ -24,7 +24,9 @@ img {
 }
 
 .pagination {
-    display: inline-block;
+    position: absolute;
+    top: 115%;
+    left: 45%;
   }
   
   .pagination a {
