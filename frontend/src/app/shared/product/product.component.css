@@ -2,7 +2,7 @@
 .div1 div {
     height: 50px;
     background-color: rgb(172, 194, 194);
-    margin: 3%;
+    margin: 5%;
     width: 185px;
     height: 255px;
 }
@@ -25,7 +25,6 @@ img {
 
 .pagination {
     display: inline-block;
-    text-align: center;
   }
   
   .pagination a {
