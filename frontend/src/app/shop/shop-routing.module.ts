@@ -12,6 +12,11 @@ const routes: Routes = [
         path: 'category/:id',
         component: ShopComponent,
         resolve: {}
+    },
+    {
+        path: 'product/:page',
+        component: ShopComponent,
+        resolve: {}
     }
 ];
 
