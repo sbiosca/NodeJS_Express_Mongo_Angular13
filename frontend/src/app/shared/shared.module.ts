@@ -6,6 +6,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CategoryComponent } from "./category/category.component";
 import { ProductComponent } from "./product/product.component";
 import { CarouselComponent } from "./carousel/carousel.component";
+import { FiltersComponent } from "./filters/filters.component";
+import { NgxPaginationModule } from "ngx-pagination";
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
 
@@ -14,6 +16,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
         CommonModule,
         RouterModule,
         FontAwesomeModule,
+        NgxPaginationModule,
         // NgbModule
         //CarouselModule
     ],
@@ -21,6 +24,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
         CategoryComponent,
         ProductComponent,
         CarouselComponent,
+        FiltersComponent,
         // CarouselComponent
         
     ],
@@ -28,6 +32,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
         CategoryComponent,
         ProductComponent,
         CarouselComponent,
+        FiltersComponent
         // CarouselComponent        
     ]
 })

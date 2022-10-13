@@ -5,3 +5,6 @@ Bootstrap :
 PrimeNG:
 npm install primeng --save
 npm install primeicons --save
+
+Pagination:
+npm install ngx-pagination --save

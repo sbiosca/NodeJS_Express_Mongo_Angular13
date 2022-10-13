@@ -14,7 +14,7 @@ const routes: Routes = [
         resolve: {}
     },
     {
-        path: 'product/:page',
+        path: ':filters',
         component: ShopComponent,
         resolve: {}
     }

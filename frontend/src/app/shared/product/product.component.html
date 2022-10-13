@@ -1,18 +1,14 @@
 <div class="all">
     <h2 style="text-align: center;">PRODUCTS</h2>
-    <div class="div1" *ngFor="let prod of product">
+    <div class="div1" *ngFor="let prod of product | paginate: { itemsPerPage: 8, currentPage: p}">
         <div class="produ">
-            <!-- <i class={{product}}></i>  -->
-            <img src="../../../assets/img/{{prod.img}}"/>
+            <img src="assets/img/{{prod.img}}"/>
             <span id="{{prod}}">{{prod.name}}</span><p></p>
             <span>{{prod.price}}€</span>
         </div>
     </div>
-    <div class="pagination">
-        <div><a [routerLink]="['/shop']" >&laquo;</a></div>
-        <div (click)="product_pagination()"><a [routerLink]="['/shop']">1</a></div>
-        <div (click)="product_pagination()"><a [routerLink]="['/shop/product', 1]">2</a></div>
-        <div (click)="product_pagination()"><a [routerLink]="['/shop/product', 2]">3</a></div>
-        <div><a [routerLink]="['/shop/product', 1]">&raquo;</a></div>
-      </div>
+    <div id="pagination">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    
 </div><br>
