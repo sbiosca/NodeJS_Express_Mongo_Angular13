@@ -11,12 +11,16 @@ import { Filters } from "src/app/core/models/filters.model";
     styleUrls: ['./filters.component.css']
 })export class FiltersComponent {
     category: Category[] = [];
-    url_filters?: String | null;
-    filters?:Filters;
+    url_filters?: string | null;
+    filters?: Filters;
+    reference? : number;
+
+    @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
+
     constructor(private CategoryService: CategoryService,
             private ActivatedRoute: ActivatedRoute,
             private location: Location) {
-                this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') ;
+                this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
             }
 
     
@@ -41,15 +45,21 @@ import { Filters } from "src/app/core/models/filters.model";
       }
 
     onchange(value: any) {
-        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') ;
-        // this.filters = new Filters()
-        //this.filters = JSON.parse(atob(this.url_filters));
+        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
+        if (this.url_filters) {
+            this.filters = new Filters()
+            this.filters = JSON.parse(atob(this.url_filters));
+        }else {
+            this.filters = new Filters()
+        }
         console.log(value);
         this.checkTime(this.filters);
         this.filters = value.reference;
     }
 
     replaceEmit() {
-        this.location.replaceState('/shop/' + this.filters);
+        // this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
+        this.location.replaceState('/shop/' +this.filters);
+        this.filterEvent.emit(this.filters);
     }
 }

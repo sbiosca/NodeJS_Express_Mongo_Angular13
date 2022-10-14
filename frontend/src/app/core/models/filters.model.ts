@@ -1,6 +1,6 @@
 import { Category } from "./category.model";
 
-export interface Filters {
+export class Filters {
     category?: Category[];
     price?: number;
     state?: String;
