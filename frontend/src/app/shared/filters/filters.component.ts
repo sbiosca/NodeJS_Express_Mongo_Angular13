@@ -13,10 +13,13 @@ import { Filters } from "src/app/core/models/filters.model";
     url_filters?: String | null;
     filters?:Filters;
 
+
+    @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
+
     constructor(private CategoryService: CategoryService,
             private ActivatedRoute: ActivatedRoute,
             private location: Location) {
-                this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') ;
+                this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
             }
 
     ngOnInit(): void {
