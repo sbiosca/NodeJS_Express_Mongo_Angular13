@@ -1,5 +1,5 @@
 <div>
-    <select (change)="onchange(this)">
+    <select (change)="onchange($event)">
         <option label="All Categories" disabled selected></option>
         <option *ngFor="let cate of category" [value]="cate.reference">{{cate.name_category}}</option>
     </select>
