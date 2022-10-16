@@ -10,10 +10,11 @@ import { Filters } from "src/app/core/models/filters.model";
     styleUrls: ['./filters.component.css']
 })export class FiltersComponent {
     category: Category[] = [];
-    url_filters?: String | null;
+    url_filters?: string = '';
     filters?:Filters;
+    selected?: Filters;
 
-
+    //@Input() listCategories: Category[];
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
 
     constructor(private CategoryService: CategoryService,
@@ -32,6 +33,13 @@ import { Filters } from "src/app/core/models/filters.model";
         this.CategoryService.getAll().subscribe((data) => {
             console.log(data);
             this.category = data;
+            if (this.url_filters) {
+                this.filters = JSON.parse(atob(this.url_filters));
+                this.selected = this.filters;
+                console.log(this.selected);
+            }
+        })
+        this.CategoryService.getAll().subscribe((data) => {
         })
     }
 
@@ -42,8 +50,8 @@ import { Filters } from "src/app/core/models/filters.model";
     }
 
     onchange(value: any) {
-        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') ;
-        //this.filters = new Filters()
+        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
+        this.filters = new Filters();
         //this.filters = JSON.parse(atob(this.url_filters));
         this.filters = value.target.value;
         console.log(this.url_filters);
