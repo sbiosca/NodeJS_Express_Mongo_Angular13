@@ -1,10 +1,7 @@
 <div>
-<<<<<<< HEAD
     <select (change)="onchange($event)">
-=======
-    <select (ngModel)="reference" (change)="onchange(this)">
->>>>>>> 521198e91ddeaa68a02b4627fdc7ad809d850d41
         <option label="All Categories" disabled selected></option>
-        <option *ngFor="let cate of category" [value]="cate.reference">{{cate.name_category}}</option>
+        <option *ngFor="let cate of category" [selected]="cate.reference === selected" [value]="cate.reference" >{{cate.name_category}}</option>
     </select>
+    <input type="range" min="0" max="50">
 </div>
