@@ -17,7 +17,7 @@ import { NgxPaginationModule } from "ngx-pagination";
         RouterModule,
         FontAwesomeModule,
         NgxPaginationModule,
-        // NgbModule
+       // NgbModule
         //CarouselModule
     ],
     declarations: [

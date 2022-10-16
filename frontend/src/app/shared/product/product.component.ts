@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Product } from "src/app/core/models/product.model";
 import { ProductService} from "src/app/core/services/product.service";
 import { CategoryService} from "src/app/core/services/category.service";
 import { ActivatedRoute } from '@angular/router';
+import { Filters } from "src/app/core";
 // import { Category } from "src/app/core/models/category.model";
 
 @Component ({
@@ -16,29 +17,48 @@ export class ProductComponent implements OnInit {
     p!: number;
     value_product!: Number;
     ref_Category: String = '';
+    url_filters: string = '';
+    filters = new Filters();
+
+    @Input() set config(filters: Filters) {
+        if (filters) {
+          console.log("FILTROS")
+        }
+      }
 
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
         private ActivatedRoute: ActivatedRoute) {}
     ngOnInit(): void {
-        
         this.ref_Category =
             this.ActivatedRoute.snapshot.paramMap.get('id') || '';
+        this.url_filters =
+            this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
         this.product_categories();
     }
 
     product_categories() {
-        if (this.ref_Category == '' ) {
+        if ((this.ref_Category == '' ) && (this.url_filters == '')) {
             this.ProductService.getAll().subscribe((data) => {
                 this.product = data;
             })
-        }else if(this.ref_Category != '') {
-            console.log(this.ref_Category);
+            //console.log("1");
+        }else if((this.ref_Category != '') && (this.url_filters == '')) {
+            //console.log(this.ref_Category);
             this.CategoryService.get(this.ref_Category).subscribe((data) => {
                 console.log(data.products);
                 this.product = data.products!;
             })
-        }      
+            //console.log("2");
+        }else if((this.ref_Category == '') && (this.url_filters != '')){
+            console.log()
+            this.url_filters = JSON.parse(atob(this.url_filters)); 
+            this.CategoryService.get(this.url_filters).subscribe((data) => {
+                console.log(data.products);
+                this.product = data.products!;
+            })
+            //console.log("3");
+        }
     }
  
     
