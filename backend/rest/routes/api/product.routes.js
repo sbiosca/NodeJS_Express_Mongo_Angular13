@@ -2,6 +2,19 @@ var router = require("express").Router();
 
 const product = require("../../models/product.model");
 
+router.param("slug", async (req, res, next, slug) => {
+  await product.findOne({ slug: slug }).populate("slug")
+    .then(function (product) {
+      if (!product) {
+        return res.sendStatus(404);
+      }
+      req.product = product;
+      return next();
+      //res.json(product);
+    })
+    .catch(next);
+});
+
 router.post("/", async (req, res) => {
     try {
       let products;
@@ -13,6 +26,8 @@ router.post("/", async (req, res) => {
       res.status(500).send("Hubo un error");
     }
 })
+
+
 
 router.get("/", async (req, res) => {
     try {
@@ -34,18 +49,17 @@ router.get("/", async (req, res) => {
 })
 
 
-
-// router.get("/:slug", async (req, res, next) => {
-//   await product.findOne({ slug: req.params.slug })
-//   .then(function (product) {
-//     if (!product) {
-//       return res.sendStatus(404);
-//     }
-//     res.json(product);
-//     return next();
-//   })
-//   .catch(next);
-// });
+router.get("/:slug", async (req, res, next) => {
+  await product.findOne({ slug: req.params.slug }).populate("slug")
+  .then(function (product) {
+    if (!product) {
+      return res.sendStatus(404);
+    }
+    res.json(product);
+    return next();
+  })
+  .catch(next);
+});
 
 router.delete("/", async (req, res) => {
     try {

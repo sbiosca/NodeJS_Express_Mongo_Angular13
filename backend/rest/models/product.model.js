@@ -42,4 +42,18 @@ ProductSchema.methods.slugify = function () {
       ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
 };
 
+
+ProductSchema.methods.toListJSONFor = function () {
+  return {
+    slug: this.slug,
+    name: this.name,
+    description: this.description,
+    tags: this.tags,
+    img: this.img,
+    price: this.price,
+    date: this.date
+  };
+};
+
+
 module.exports = mongoose.model("product", ProductSchema);
