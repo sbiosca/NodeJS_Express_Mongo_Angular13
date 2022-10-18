@@ -3,7 +3,7 @@ import { Product } from "src/app/core/models/product.model";
 import { ProductService} from "src/app/core/services/product.service";
 import { CategoryService} from "src/app/core/services/category.service";
 import { ActivatedRoute } from '@angular/router';
-import { Filters } from "src/app/core";
+import { Category, Filters } from "src/app/core";
 // import { Category } from "src/app/core/models/category.model";
 
 @Component ({
@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
     ref_Category: String = '';
     url_filters: string = '';
     filters = new Filters();
+    listcategory: Category[] = []; 
 
     @Input() set config(filters: Filters) {
         if (filters) {
@@ -35,6 +36,7 @@ export class ProductComponent implements OnInit {
         this.url_filters =
             this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
         this.product_categories();
+        this.list_categories();
     }
 
     product_categories() {
@@ -46,6 +48,7 @@ export class ProductComponent implements OnInit {
         }else if((this.ref_Category != '') && (this.url_filters == '')) {
             //console.log(this.ref_Category);
             this.CategoryService.get(this.ref_Category).subscribe((data) => {
+                this.listcategory = data.products!;
                 console.log(data.products);
                 this.product = data.products!;
             })
@@ -55,10 +58,18 @@ export class ProductComponent implements OnInit {
             this.url_filters = JSON.parse(atob(this.url_filters));
             this.CategoryService.get(this.url_filters).subscribe((data) => {
                 console.log(data.products);
+                this.listcategory = data.products!;
                 this.product = data.products!;
             })
-            console.log("3");
+            //console.log("3");
         }
+    }
+
+    list_categories() {
+        this.CategoryService.getAll().subscribe((data) => {
+            this.listcategory = data;
+            console.log(data)
+        })
     }
  
     // refresRouteFilter() {

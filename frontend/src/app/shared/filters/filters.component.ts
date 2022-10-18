@@ -10,9 +10,8 @@ import { Filters } from "src/app/core/models/filters.model";
     templateUrl: './filters.component.html',
     styleUrls: ['./filters.component.css']
 })export class FiltersComponent {
-    category: Category[] = [];
     url_filters?: string = '';
-    filters?:Filters;
+    filters!:Filters;
     selected?: Filters;
 
     @Input() listcategory: Category[] = [];
@@ -32,16 +31,11 @@ import { Filters } from "src/app/core/models/filters.model";
     }
 
     start_filters() {
-        this.CategoryService.getAll().subscribe((data) => {
-            console.log(data);
-            this.category = data;
-            if (this.url_filters) {
-                this.filters = JSON.parse(atob(this.url_filters));
-                this.selected = this.filters;
-                console.log(this.selected);
-            }
-        })
-        console.log(this.CategoryService);
+        if (this.url_filters) {
+            this.filters = JSON.parse(atob(this.url_filters));
+            this.selected = this.filters;
+            console.log(this.selected);
+        }
     }
 
     checkTime(filters: any) {
@@ -52,17 +46,28 @@ import { Filters } from "src/app/core/models/filters.model";
 
     onchange(value: any) {
         this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
-        this.filters = new Filters();
-        //this.filters = JSON.parse(atob(this.url_filters));
-        this.filters = value.target.value;
-        console.log(this.url_filters);
+       
+        if (this.url_filters) {
+            this.filters = new Filters();
+            this.filters = JSON.parse(atob(this.url_filters));
+        }else {
+            this.filters = new Filters();
+        }
+        console.log(value.target.id);
+        if (value.target.id === "price") {
+            this.filters.price = value.target.value;
+            console.log()
+        }
+        if (value.target.id === "cate") {
+            this.filters.listcategory = value.target.value;
+        }
         this.checkTime(this.filters);
         
     }
 
     replaceEmit() {
         this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
-        location.reload()
+        //location.reload()
         this.filterEvent.emit(this.filters);
         console.log(this.filters)
     }

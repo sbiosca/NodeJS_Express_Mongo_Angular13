@@ -31,14 +31,6 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-      // let transUndefined = (varQuery, otherResult) => {
-      //   return varQuery != "undefined" && varQuery ? varQuery : otherResult;
-      // };
-      // let limit = transUndefined(req.query.limit, 10);
-      // let offset = transUndefined(req.query.offset, 0);
-      //const { offset, limit } = req.query;
-      // const offset = 1;
-      // const limit = 8;
       const products = await product.find();
       //res.json(products);
       res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
