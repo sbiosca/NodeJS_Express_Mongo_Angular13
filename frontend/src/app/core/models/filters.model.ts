@@ -1,7 +1,7 @@
 import { Category } from "./category.model";
 
 export class Filters {
-    category?: Category[];
+    listcategory?: Category[];
     price?: number;
     state?: String;
     location?: String;

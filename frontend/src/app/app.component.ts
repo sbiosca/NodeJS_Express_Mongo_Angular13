@@ -11,8 +11,7 @@ export class AppComponent {
   //title = 'Angular 13 CRUD example';
 
   constructor(private toastrService: ToastrService) { }
-
-
+  
   public toastr_success(): void {
     this.toastrService.success("Message success!", "You can create a new product")
   }

@@ -1,7 +1,7 @@
 <div>
     <select (change)="onchange($event)">
         <option label="All Categories" disabled selected></option>
-        <option *ngFor="let cate of category" [selected]="cate.reference === selected" [value]="cate.reference" >{{cate.name_category}}</option>
+        <option *ngFor="let cate of category" id="{{selected}}" [selected]="cate.reference === selected" [value]="cate.reference">{{cate.name_category}}</option>
     </select>
-    <input type="range" min="0" max="50">
+    <input type="number" >
 </div>

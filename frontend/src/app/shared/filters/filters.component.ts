@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Category  } from "src/app/core/models/category.model";
 import { Location } from "@angular/common";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute} from "@angular/router";
 import { CategoryService } from "src/app/core/";
 import { Filters } from "src/app/core/models/filters.model";
+
 @Component({
     selector: 'app-filters',
     templateUrl: './filters.component.html',
@@ -14,12 +15,13 @@ import { Filters } from "src/app/core/models/filters.model";
     filters?:Filters;
     selected?: Filters;
 
-    //@Input() listCategories: Category[];
+    @Input() listcategory: Category[] = [];
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
 
     constructor(private CategoryService: CategoryService,
             private ActivatedRoute: ActivatedRoute,
-            private location: Location) {
+            private location: Location
+            ) {
                 this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
             }
 
@@ -39,8 +41,7 @@ import { Filters } from "src/app/core/models/filters.model";
                 console.log(this.selected);
             }
         })
-        this.CategoryService.getAll().subscribe((data) => {
-        })
+        console.log(this.CategoryService);
     }
 
     checkTime(filters: any) {
@@ -61,6 +62,8 @@ import { Filters } from "src/app/core/models/filters.model";
 
     replaceEmit() {
         this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
+        location.reload()
+        this.filterEvent.emit(this.filters);
         console.log(this.filters)
     }
 }

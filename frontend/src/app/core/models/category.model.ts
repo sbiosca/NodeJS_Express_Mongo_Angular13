@@ -8,19 +8,20 @@ export interface Category {
         name: IconName
     }
     name_category?: string
-    products?: Category[]
+    products?: Category[];
+
     // constructor (
     //     slug: string,
     //     reference: number,
-    //     icon: string,
+    //     icon: any,
     //     name_category: string,
-    //     products: string[],
+    //     products: Category[],
     // ) {
     //     this.reference = reference;
     //     this.icon = icon;
     //     this.name_category = name_category;
-    //     this.products= products;
+    //     this.products = products;
     //     this.slug=slug
-    // }
+    //}
 }
 
