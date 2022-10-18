@@ -1,8 +1,12 @@
 <header>
     <a href="/#"><img src="../../../../assets/img/logo2.png"/></a>
-    <input type="text"/>
-    <button><fa-icon [icon]="['fas', 'search']"></fa-icon></button>
-    <button><fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon></button>
-    <button><fa-icon [icon]="['fas', 'heart']"></fa-icon></button>
-    <button><fa-icon [icon]="['fas', 'user']"></fa-icon></button>
+    <div class="search">
+        <input type="text" maxlength="100"/>
+        <button><fa-icon [icon]="['fas', 'search']" size="3x"></fa-icon></button>
+    </div>
+    <div class="header_buttons">
+        <button><fa-icon [icon]="['fas', 'cart-shopping']" size="3x"></fa-icon></button>
+        <button><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
+        <button><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
+    </div>
 </header>
