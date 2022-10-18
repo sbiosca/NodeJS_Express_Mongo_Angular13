@@ -1,3 +1,7 @@
-<!-- <ngb-carousel>
-
-</ngb-carousel> -->
+<p-carousel [value]="category">
+    <ng-template let-part pTemplate="item">
+        <div class="categ" [routerLink]="['/shop/category', part.reference]">
+            <fa-icon [icon]="[part.icon!.prefix, part.icon!.name]"></fa-icon>
+        </div>
+    </ng-template>
+</p-carousel>

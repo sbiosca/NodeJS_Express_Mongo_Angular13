@@ -6,14 +6,17 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CategoryComponent } from "./category/category.component";
 import { ProductComponent } from "./product/product.component";
 import { CarouselComponent } from "./carousel/carousel.component";
+import {CarouselModule} from 'primeng/carousel';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
+
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         FontAwesomeModule,
+        CarouselModule
         // NgbModule
         //CarouselModule
     ],
@@ -21,6 +24,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
         CategoryComponent,
         ProductComponent,
         CarouselComponent,
+        
         // CarouselComponent
         
     ],

@@ -3,13 +3,10 @@ import { Category } from "src/app/core/models/category.model";
 
 import { CategoryService} from "src/app/core/services/category.service";
 
-
-
-
 @Component ({
     selector: 'app-category',
     templateUrl: './category.component.html',
-    styleUrls: ['./category.component.css']
+    styleUrls: ['./category.component.scss']
 
 })export class CategoryComponent implements OnInit {
 
@@ -23,7 +20,6 @@ import { CategoryService} from "src/app/core/services/category.service";
 
     AllCategories() {
         this.CategoryService.getAll().subscribe((data) => {
-            console.log(data);
             this.category = data
         })
     }

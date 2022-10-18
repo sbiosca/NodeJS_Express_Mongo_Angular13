@@ -12,7 +12,11 @@ import { FooterComponent } from './shared/page/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule, FaIconLibrary} from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+
 //import { far } from '@fortawesome/free-regular-svg-icons';
+
+import {CarouselModule} from 'primeng/carousel';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     FontAwesomeModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CarouselModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
