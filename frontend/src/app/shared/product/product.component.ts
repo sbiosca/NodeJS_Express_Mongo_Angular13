@@ -52,15 +52,25 @@ export class ProductComponent implements OnInit {
             //console.log("2");
         }else if((this.ref_Category == '') && (this.url_filters != '')){
             console.log()
-            this.url_filters = JSON.parse(atob(this.url_filters)); 
+            this.url_filters = JSON.parse(atob(this.url_filters));
             this.CategoryService.get(this.url_filters).subscribe((data) => {
                 console.log(data.products);
                 this.product = data.products!;
             })
-            //console.log("3");
+            console.log("3");
         }
     }
  
+    // refresRouteFilter() {
+    //     this.url_filters =
+    //         this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
+    //     if(typeof(this.url_filters) == "string" ){
+    //       //this.filters = JSON.parse(atob(this.url_filters));
+    //       console.log(this.filters);
+    //     }else{
+    //       this.filters = new Filters();
+    //     }
+    //   }
     
 }
 
