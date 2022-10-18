@@ -6,5 +6,10 @@ PrimeNG:
 npm install primeng --save
 npm install primeicons --save
 
+<<<<<<< HEAD
 Pagination:
 npm install ngx-pagination --save
+=======
+SCSS:
+npm install -g scss
+>>>>>>> home

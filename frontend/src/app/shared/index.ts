@@ -1,2 +1,3 @@
 export * from './category/category.component';
-// export * from './product/product.component'
+// export * from './carousel/carousel.component';
+//export * from './product/product.component'
