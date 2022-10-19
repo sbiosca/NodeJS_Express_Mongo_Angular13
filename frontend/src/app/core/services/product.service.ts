@@ -21,6 +21,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${baseUrl}/${page}`);
   }
 
+  getFilters(filters: any, value: any): Observable<Product[]> {
+    return this.http.get<Product[]>(`${baseUrl}${filters +"_"+ value}`);
+  }
+
   // get(id: any): Observable<Product> {
   //   return this.http.get(`${baseUrl}/${id}`);
   // }

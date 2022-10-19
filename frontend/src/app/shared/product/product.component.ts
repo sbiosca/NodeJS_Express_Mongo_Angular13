@@ -25,6 +25,8 @@ export class ProductComponent implements OnInit {
         if (filters) {
           console.log("FILTROS")
         }
+        this.url_filters =
+            this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
       }
 
     constructor(private ProductService: ProductService
@@ -43,7 +45,9 @@ export class ProductComponent implements OnInit {
         if ((this.ref_Category == '' ) && (this.url_filters == '')) {
             this.ProductService.getAll().subscribe((data) => {
                 this.product = data;
+                console.log(data);
             })
+            
             //console.log("1");
         }else if((this.ref_Category != '') && (this.url_filters == '')) {
             //console.log(this.ref_Category);
@@ -54,13 +58,14 @@ export class ProductComponent implements OnInit {
             })
             //console.log("2");
         }else if((this.ref_Category == '') && (this.url_filters != '')){
-            console.log()
-            this.url_filters = JSON.parse(atob(this.url_filters));
-            this.CategoryService.get(this.url_filters).subscribe((data) => {
-                console.log(data.products);
-                this.listcategory = data.products!;
-                this.product = data.products!;
-            })
+            console.log("hola")
+            this.filtered_products(this.url_filters);
+            // this.url_filters = JSON.parse(atob(this.url_filters));
+            // this.CategoryService.get(this.url_filters).subscribe((data) => {
+            //     console.log(data.products);
+            //     this.listcategory = data.products!;
+            //     this.product = data.products!;
+            // })
             //console.log("3");
         }
     }
@@ -70,6 +75,23 @@ export class ProductComponent implements OnInit {
             this.listcategory = data;
             console.log(data)
         })
+    }
+
+    filtered_products(value: any) {
+        this.filters = JSON.parse(atob(value));
+        console.log(this.filters);
+        if (this.filters.listcategory) {
+            this.CategoryService.get(this.filters.listcategory).subscribe((data) => {
+                console.log(data)
+                this.product = data.products!;
+            })
+        }
+        if (this.filters.price) {
+            this.ProductService.getFilters(this.filters.price, "price").subscribe((data) => {
+                console.log(data);
+            })
+        }
+        
     }
  
     // refresRouteFilter() {

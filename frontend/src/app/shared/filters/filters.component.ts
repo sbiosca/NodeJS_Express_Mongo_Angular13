@@ -54,13 +54,16 @@ import { Filters } from "src/app/core/models/filters.model";
             this.filters = new Filters();
         }
         console.log(value.target.id);
+        
         if (value.target.id === "price") {
             this.filters.price = value.target.value;
-            console.log()
+            console.log("PRICE")
         }
         if (value.target.id === "cate") {
             this.filters.listcategory = value.target.value;
+            console.log("CATE")
         }
+
         this.checkTime(this.filters);
         
     }
