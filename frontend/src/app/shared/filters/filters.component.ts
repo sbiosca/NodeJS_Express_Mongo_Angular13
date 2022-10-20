@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { ActivatedRoute} from "@angular/router";
 import { CategoryService } from "src/app/core/";
 import { Filters } from "src/app/core/models/filters.model";
+import { ProductComponent } from "../product/product.component";
 
 @Component({
     selector: 'app-filters',
@@ -19,7 +20,8 @@ import { Filters } from "src/app/core/models/filters.model";
 
     constructor(private CategoryService: CategoryService,
             private ActivatedRoute: ActivatedRoute,
-            private location: Location
+            private location: Location,
+            private prodComp: ProductComponent
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
             }
@@ -78,8 +80,12 @@ import { Filters } from "src/app/core/models/filters.model";
 
     replaceEmit() {
         this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
-        //location.reload()
+        this.prodComp.ngOnInit()
         this.filterEvent.emit(this.filters);
         console.log(this.filters)
+    }
+
+    delete_filters() {
+        this.location.replaceState('/shop/');
     }
 }

@@ -3,12 +3,13 @@
         <option label="All Categories" disabled selected></option>
         <option *ngFor="let cate of listcategory" [selected]="cate.reference === selected" [value]="cate.reference">{{cate.name_category}}</option>
     </select>
-    <input type="number" id="priceMin" placeholder="price" (input)="onchange($event)"><br>
-    <input type="number" id="priceMax" placeholder="price" (input)="onchange($event)"><br>
+    <input type="number" id="priceMin" placeholder="priceMin" (input)="onchange($event)" >
+    <input type="number" id="priceMax" placeholder="priceMax" (input)="onchange($event)">
     <select (change)="onchange($event)"  id="state">
         <option label="State Of Product" disabled selected></option>
         <option value="new">NEW</option>
         <option value="as_new">AS_NEW</option>
         <option value="good_state">GOOD_STATE</option>
     </select>
+    <button [routerLink]="['/shop/']">DELETE</button>
 </div>

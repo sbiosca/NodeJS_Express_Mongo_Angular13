@@ -21,7 +21,7 @@ export class ProductService {
     return this.http.get<Product[]>(`${baseUrl}/${page}`);
   }
 
-  getFilters(filters: any): Observable<{products: Product[], productCount: number}> {
+  getFilters(filters: any): Observable<Product[]> {
     let params = {};
     params = filters;
     return this.api.get('product', new HttpParams({fromObject:params}));

@@ -25,8 +25,6 @@ export class ProductComponent implements OnInit {
         if (filters) {
           console.log("FILTROS")
         }
-        this.url_filters =
-            this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
       }
 
     constructor(private ProductService: ProductService
@@ -42,12 +40,12 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
+        console.log(this.url_filters)
         if ((this.ref_Category == '' ) && (this.url_filters == '')) {
             this.ProductService.getAll().subscribe((data) => {
                 this.product = data;
                 console.log(data);
             })
-            
             //console.log("1");
         }else if((this.ref_Category != '') && (this.url_filters == '')) {
             //console.log(this.ref_Category);
@@ -88,7 +86,7 @@ export class ProductComponent implements OnInit {
         if (this.filters.priceMax || this.filters.priceMin || this.filters.state) {
             this.ProductService.getFilters(this.filters).subscribe((data) => {
                 console.log(data);
-                //this.product = data;
+                this.product = data;
             })
         }
         
