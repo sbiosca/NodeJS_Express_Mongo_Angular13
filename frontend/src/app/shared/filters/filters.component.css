@@ -1,0 +1,26 @@
+div {
+    
+    width: 100px;
+    height: 500px;
+    position: absolute;
+    left: 3%;
+    top: 24.5%;
+}
+
+#cate {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+#price {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+#state {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+}

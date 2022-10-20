@@ -13,7 +13,7 @@ import { Category, Filters } from "src/app/core";
 })
 
 export class ProductComponent implements OnInit {
-    product!: Product[];
+    product: Product[] = [];
     p!: number;
     value_product!: Number;
     ref_Category: String = '';
@@ -58,7 +58,6 @@ export class ProductComponent implements OnInit {
             })
             //console.log("2");
         }else if((this.ref_Category == '') && (this.url_filters != '')){
-            console.log("hola")
             this.filtered_products(this.url_filters);
             // this.url_filters = JSON.parse(atob(this.url_filters));
             // this.CategoryService.get(this.url_filters).subscribe((data) => {
@@ -86,9 +85,10 @@ export class ProductComponent implements OnInit {
                 this.product = data.products!;
             })
         }
-        if (this.filters.price) {
-            this.ProductService.getFilters(this.filters.price, "price").subscribe((data) => {
+        if (this.filters.priceMax || this.filters.priceMin || this.filters.state) {
+            this.ProductService.getFilters(this.filters).subscribe((data) => {
                 console.log(data);
+                //this.product = data;
             })
         }
         

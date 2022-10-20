@@ -54,14 +54,22 @@ import { Filters } from "src/app/core/models/filters.model";
             this.filters = new Filters();
         }
         console.log(value.target.id);
-        
-        if (value.target.id === "price") {
-            this.filters.price = value.target.value;
+
+        if (value.target.id === "priceMin") {
+            this.filters.priceMin = value.target.value;
+            console.log("PRICE")
+        }
+        if (value.target.id === "priceMax") {
+            this.filters.priceMax = value.target.value;
             console.log("PRICE")
         }
         if (value.target.id === "cate") {
             this.filters.listcategory = value.target.value;
             console.log("CATE")
+        }
+        if (value.target.id === "state") {
+            this.filters.state = value.target.value;
+            console.log("STATE")
         }
 
         this.checkTime(this.filters);

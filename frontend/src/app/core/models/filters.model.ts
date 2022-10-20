@@ -2,7 +2,8 @@ import { Category } from "./category.model";
 
 export class Filters {
     listcategory?: Category[];
-    price?: number;
+    priceMax?: number;
+    priceMin?: number;
     state?: String;
     location?: String;
     date?: Date;
