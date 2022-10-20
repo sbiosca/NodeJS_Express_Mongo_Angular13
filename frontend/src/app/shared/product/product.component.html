@@ -1,11 +1,12 @@
 <div class="all">
     <app-filters [listcategory]="listcategory"></app-filters>
     <h2 style="text-align: center;">PRODUCTS</h2>
-    <div class="div1" *ngFor="let prod of product | paginate: { itemsPerPage: 8, currentPage: p}">
+    <div class="div1" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}">
         <div class="produ" [routerLink]="['/details', prod.slug]">
             <img src="assets/img/{{prod.img}}"/>
             <span id="{{prod}}">{{prod.name}}</span><p></p>
-            <span>{{prod.price}}€</span>
+            <span>{{prod.price}}€</span>&nbsp;
+            <button><fa-icon [icon]="['fas', 'heart']"></fa-icon></button>
         </div>
     </div>
     <div id="pagination">

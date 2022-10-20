@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
-
+import { ApiService } from './api.service';
 
 const baseUrl = 'http://localhost:3000/api/product/';
 
@@ -11,7 +11,7 @@ const baseUrl = 'http://localhost:3000/api/product/';
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private api: ApiService) { }
 
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>(baseUrl);
@@ -21,8 +21,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${baseUrl}/${page}`);
   }
 
-  getFilters(filters: any, value: any): Observable<Product[]> {
-    return this.http.get<Product[]>(`${baseUrl}${filters +"_"+ value}`);
+  getFilters(filters: any): Observable<{products: Product[], productCount: number}> {
+    let params = {};
+    params = filters;
+    return this.api.get('product', new HttpParams({fromObject:params}));
   }
 
   // get(id: any): Observable<Product> {
