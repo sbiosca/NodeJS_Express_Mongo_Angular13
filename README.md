@@ -14,3 +14,5 @@ npm install ngx-pagination --save
 
 SCSS:
 npm install -g scss
+
+payload -> auth

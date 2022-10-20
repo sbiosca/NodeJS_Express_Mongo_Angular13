@@ -1,4 +1,4 @@
-<div>
+<div class="filters">
     <select (change)="onchange($event)"  id="cate">
         <option label="All Categories" disabled selected></option>
         <option *ngFor="let cate of listcategory" [selected]="cate.reference === selected" [value]="cate.reference">{{cate.name_category}}</option>

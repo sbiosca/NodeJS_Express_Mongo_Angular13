@@ -1,31 +1,54 @@
-
-.div1 div {
-    height: 50px;
-    background-color: rgb(172, 194, 194);
-    margin: 5%;
-    width: 185px;
-    height: 255px;
-   
+div.all {
+    margin-top: 2.5%;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    background-color: rgb(27, 27, 141);
+    width: 100%;
+    height: 100%;
+    .content_products{
+        width: 70%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        div.product {
+            background-color: white;            
+            width: 25%;
+            margin: 2.5%;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            padding: 1.5%;
+            border-radius: 15%;
+            .price {
+                font-size: 150%;
+                font-weight: 900;
+                align-self: flex-end;
+                margin: 1.5%;
+            }
+            img {
+                width: 85%;
+            }
+            .name_product {
+                font-size: 150%;
+                font-weight: 900;
+                align-self: flex-start;
+            }
+            div.use_buttons {
+                width: 80%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+                button {
+                    border: none;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+    }
 }
-
-.produ {
-    border: 1px solid black;
-    width: 185px;
-    float: left;
-    position: relative;
-    left: 12%;
-    text-align: center;
-}
-
-img {
-    object-fit: cover;
-    object-position: center;
-    width: 175px;
-    height: 180px;
-}
-
-#pagination {
-    position: absolute;
-    top: 110%;
-    left: 40%;
-  }

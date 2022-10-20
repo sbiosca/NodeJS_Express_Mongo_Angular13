@@ -8,7 +8,7 @@ import { Filters } from "src/app/core/models/filters.model";
 @Component({
     selector: 'app-filters',
     templateUrl: './filters.component.html',
-    styleUrls: ['./filters.component.css']
+    styleUrls: ['./filters.component.scss']
 })export class FiltersComponent {
     url_filters?: string = '';
     filters!:Filters;

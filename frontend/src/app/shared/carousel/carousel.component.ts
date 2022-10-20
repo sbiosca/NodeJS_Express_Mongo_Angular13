@@ -36,7 +36,6 @@ import { CategoryService} from "src/app/core/services/category.service";
     ngOnInit() {
         this.Categories.getAll().subscribe((data) => {
             this.category = data 
-            console.log(this.category)       
 })
     }
 

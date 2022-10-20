@@ -1,15 +1,19 @@
 <div class="all">
     <app-filters [listcategory]="listcategory"></app-filters>
-    <h2 style="text-align: center;">PRODUCTS</h2>
-    <div class="div1" *ngFor="let prod of product | paginate: { itemsPerPage: 8, currentPage: p}">
-        <div class="produ" [routerLink]="['/details', prod.slug]">
+    <div class="content_products" >
+        <div class="product" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}" [routerLink]="['/details', prod.slug]">
+            <span class="price">{{prod.price}}€</span>
             <img src="assets/img/{{prod.img}}"/>
-            <span id="{{prod}}">{{prod.name}}</span><p></p>
-            <span>{{prod.price}}€</span>
+            <span class="name_product" id="{{prod}}">{{prod.name}}</span><p></p>
+            <div class="use_buttons">
+                <button><fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon></button>
+                <button><fa-icon [icon]="['fas', 'heart']" size="2x"></fa-icon></button>
+            </div>
         </div>
     </div>
-    <div id="pagination">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div id="pagination" class="pagination">
+        <div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
     </div>
-    
 </div><br>
