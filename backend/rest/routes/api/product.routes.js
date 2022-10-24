@@ -33,40 +33,66 @@ router.get("/", async (req, res) => {
     try {
       //let query = {}
         //res.json(products)
-        query = {}
+      query = {}
       let priceMax = req.query.priceMax;
       let priceMin = req.query.priceMin;
       //let price = req.query.price;
       let state = req.query.state;
-      let cate = req.query.listcategory;
-      if ((priceMin) && (!priceMax) && (!state)) {
+      let name = req.query.name;
+      if ((priceMin) && (!priceMax) && (!state) && (!name)) {
         query = {price:{$gt:priceMin}};
 
       }
-      if ((!priceMin) && (priceMax) && (!state)) {
+      if ((!priceMin) && (priceMax) && (!state) && (!name)) {
         query = {price:{$lt:priceMax}};
 
       }
-      if((state) && (!priceMin) && (!priceMax)) {
+      if ((state) && (!priceMin) && (!priceMax) && (!name)) {
         query = {state:state}
-
       }
-      if((priceMin) && (state) && (!priceMax)) {
+      if ((name) && (!state) && (!priceMin) && (!priceMax)) {
+        query = {name: name}
+      }
+      if ((priceMin) && (state) && (!priceMax) && (!name)) {
         query = {state:state, price:{$gt:priceMin}}
 
       }
-      if ((priceMax) && (state) && (!priceMin)) {
+      if ((priceMax) && (state) && (!priceMin) && (!name)) {
         query = {state:state, price:{$lt:priceMax}}
 
-      } if((priceMax) && (priceMin) && (!state)){
+      }
+      if ((priceMax) && (priceMin) && (!state) && (!name)){
         query = {price:{$gt:priceMin,$lt:priceMax}}
 
-      } if((priceMax) && (priceMin) && (state)) {
-        query = {price:{$gt:priceMin,$lt:priceMax}, state:state}
-        
       }
-  
-      
+      if ((priceMin) && (!state) && (!priceMax) && (name)) {
+        query = {name:name, price:{$gt:priceMin}}
+
+      }
+      if ((priceMax) && (!state) && (!priceMin) && (name)) {
+        query = {name:name, price:{$lt:priceMax}}
+
+      }
+      if ((priceMax) && (state) && (priceMin) && (!name)) {
+        query = {state:state, price:{$gt:priceMin,$lt:priceMax}}
+
+      }
+      if ((priceMax) && (!state) && (priceMin) && (name)) {
+        query = {name:name, price:{$gt:priceMin,$lt:priceMax}}
+
+      }
+      if ((priceMax) && (state) && (!priceMin) && (name)) {
+        query = {state:state,name:name, price:{$lt:priceMax}}
+
+      }
+      if ((!priceMax) && (state) && (!priceMin) && (name)) {
+        query = {name:name, state:state}
+
+      }
+      if ((priceMax) && (priceMin) && (state) && (name)) {
+        query = {price:{$gt:priceMin,$lt:priceMax}, state:state, name:name}
+      }
+           
       const products = await product.find(query);   
       res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
       } catch (error) {
@@ -94,12 +120,12 @@ router.get("/list-search/:search", async (req, res) => {
     console.log("LIST_SEARCH!");
     let search = new RegExp(req.params.search);
 
-    const product = await Product.find({ name: { $regex: search } }).limit(20);
+    const Product = await product.find({ name: { $regex: search } }).limit(20);
 
-    if (!product) {
+    if (!Product) {
       res.status(404).json({ msg: "No existe el product" });
     }
-    res.json(product.map((product) => product.toListJSONFor()));
+    res.json(Product.map((product) => product.toListJSONFor()));
   } catch (error) {
     console.log(error);
     res.status(500).send("Hubo un error en router.get /search/:search");
@@ -111,12 +137,12 @@ router.get("/search/:search", async (req, res) => {
     console.log("SEARCH");
     let search = new RegExp(req.params.search);
 
-    const product = await Product.find({ name: { $regex: search } });
+    const Product = await product.find({ name: { $regex: search } });
 
-    if (!product) {
+    if (!Product) {
       res.status(404).json({ msg: "No existe el product" });
     }
-    res.json(product.map((product) => product.toJSONFor()));
+    res.json(Product.map((product) => product.toJSONFor()));
   } catch (error) {
     console.log(error);
     res.status(500).send("Hubo un error en router.get /search/:search");

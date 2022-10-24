@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ApiService } from './api.service';
+import { map } from 'rxjs/operators';
 
 const baseUrl = 'http://localhost:3000/api/product/';
 
@@ -26,6 +27,15 @@ export class ProductService {
     params = filters;
     return this.api.get('product', new HttpParams({fromObject:params}));
   }
+
+  getProductsSearch(search: string): Observable<any> {
+    return this.http.get<Product>(baseUrl + 'list-search/' + search).pipe(
+      map((data) => {
+        //console.log(data);
+        return data;
+      })
+    );
+  } 
 
   // get(id: any): Observable<Product> {
   //   return this.http.get(`${baseUrl}/${id}`);

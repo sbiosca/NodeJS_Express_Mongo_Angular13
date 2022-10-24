@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
         }
       }
 
+      
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
         private ActivatedRoute: ActivatedRoute) {}
@@ -83,7 +84,7 @@ export class ProductComponent implements OnInit {
                 this.product = data.products!;
             })
         }
-        if (this.filters.priceMax || this.filters.priceMin || this.filters.state) {
+        if (this.filters.priceMax || this.filters.priceMin || this.filters.state || this.filters.name) {
             this.ProductService.getFilters(this.filters).subscribe((data) => {
                 console.log(data);
                 this.product = data;
