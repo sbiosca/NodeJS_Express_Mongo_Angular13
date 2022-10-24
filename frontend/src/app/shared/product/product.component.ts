@@ -25,10 +25,10 @@ export class ProductComponent implements OnInit {
         if (filters) {
           console.log("FILTROS")
         }
-        this.url_filters =
-            this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
+        
       }
 
+      
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
         private ActivatedRoute: ActivatedRoute) {}
@@ -42,32 +42,33 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
-        if ((this.ref_Category == '' ) && (this.url_filters == '')) {
-            this.ProductService.getAll().subscribe((data) => {
-                this.product = data;
-                console.log(data);
-            })
-            
-            //console.log("1");
-        }else if((this.ref_Category != '') && (this.url_filters == '')) {
-            //console.log(this.ref_Category);
-            this.CategoryService.get(this.ref_Category).subscribe((data) => {
-                this.listcategory = data.products!;
-                console.log(data.products);
-                this.product = data.products!;
-            })
-            //console.log("2");
-        }else if((this.ref_Category == '') && (this.url_filters != '')){
-            console.log("hola")
-            this.filtered_products(this.url_filters);
-            // this.url_filters = JSON.parse(atob(this.url_filters));
-            // this.CategoryService.get(this.url_filters).subscribe((data) => {
-            //     console.log(data.products);
-            //     this.listcategory = data.products!;
-            //     this.product = data.products!;
-            // })
-            //console.log("3");
-        }
+            if ((this.ref_Category == '' ) && (this.url_filters == '' )) {
+                this.ProductService.getAll().subscribe((data) => {
+                    this.product = data;
+                    console.log(data);
+                })
+                
+                //console.log("1");
+            }else if((this.ref_Category != '') && (this.url_filters == '')) {
+                //console.log(this.ref_Category);
+                this.CategoryService.get(this.ref_Category).subscribe((data) => {
+                    this.listcategory = data.products!;
+                    console.log(data.products);
+                    this.product = data.products!;
+                })
+                //console.log("2");
+            }else if((this.ref_Category == '') && (this.url_filters != '')){
+                this.filtered_products(this.url_filters);
+                console.log("pepe")
+                // this.url_filters = JSON.parse(atob(this.url_filters));
+                // this.CategoryService.get(this.url_filters).subscribe((data) => {
+                //     console.log(data.products);
+                //     this.listcategory = data.products!;
+                //     this.product = data.products!;
+                // })
+                //console.log("3");
+            }
+               
     }
 
     list_categories() {

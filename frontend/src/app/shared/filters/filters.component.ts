@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Category  } from "src/app/core/models/category.model";
 import { Location } from "@angular/common";
 import { ActivatedRoute} from "@angular/router";
-import { CategoryService } from "src/app/core/";
+import { ProductComponent } from "src/app/shared/product/product.component";
 import { Filters } from "src/app/core/models/filters.model";
 
 @Component({
@@ -17,7 +17,7 @@ import { Filters } from "src/app/core/models/filters.model";
     @Input() listcategory: Category[] = [];
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
 
-    constructor(private CategoryService: CategoryService,
+    constructor(private productcomp: ProductComponent,
             private ActivatedRoute: ActivatedRoute,
             private location: Location
             ) {
@@ -50,6 +50,7 @@ import { Filters } from "src/app/core/models/filters.model";
         if (this.url_filters) {
             this.filters = new Filters();
             this.filters = JSON.parse(atob(this.url_filters));
+  
         }else {
             this.filters = new Filters();
         }
@@ -65,7 +66,7 @@ import { Filters } from "src/app/core/models/filters.model";
         }
 
         this.checkTime(this.filters);
-        
+        this.productcomp.product_categories()
     }
 
     replaceEmit() {
