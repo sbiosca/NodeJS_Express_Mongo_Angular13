@@ -11,6 +11,9 @@
             </div>
         </div>
     </div>
+    <div *ngIf="product.length === 0">
+        <h1 style="text-align: center;">NO HAY PRODUCTOS</h1>
+    </div>
     <div id="pagination" class="pagination">
         <div>
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

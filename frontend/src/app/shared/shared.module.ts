@@ -6,6 +6,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CategoryComponent } from "./category/category.component";
 import { ProductComponent } from "./product/product.component";
 import { CarouselComponent } from "./carousel/carousel.component";
+import { SearchComponent } from "./search/search.component";
 import { FiltersComponent } from "./filters/filters.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import {CarouselModule} from 'primeng/carousel';
@@ -27,7 +28,8 @@ import {CarouselModule} from 'primeng/carousel';
     declarations: [
         CategoryComponent,
         ProductComponent,
-        CarouselComponent,
+        SearchComponent,
+        CarouselComponent,    
         FiltersComponent,
         
         // CarouselComponent
@@ -36,6 +38,7 @@ import {CarouselModule} from 'primeng/carousel';
     exports: [
         CategoryComponent,
         ProductComponent,
+        SearchComponent,
         CarouselComponent,
         FiltersComponent
         // CarouselComponent        
