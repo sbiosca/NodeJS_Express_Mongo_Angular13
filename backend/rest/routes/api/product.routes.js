@@ -3,11 +3,6 @@ var router = require("express").Router();
 const product = require("../../models/product.model");
 
 router.param("slug", async (req, res, next, slug) => {
-  // let param = req.params.slug.slice(4)
-  
-  // if (param === "price") {
-  //   res.json(param)
-  // }
   await product.findOne({ slug: slug }).populate("price")
     .then(function (product) {
       if (!product) {
@@ -36,12 +31,70 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-      const products = await product.find();
-      let query = {}
-      let price = req.query.price;
-      //res.json(price);
-      res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
+      //let query = {}
+        //res.json(products)
+      query = {}
+      let priceMax = req.query.priceMax;
+      let priceMin = req.query.priceMin;
+      //let price = req.query.price;
+      let state = req.query.state;
+      let name = req.query.name;
+      if ((priceMin) && (!priceMax) && (!state) && (!name)) {
+        query = {price:{$gt:priceMin}};
 
+      }
+      if ((!priceMin) && (priceMax) && (!state) && (!name)) {
+        query = {price:{$lt:priceMax}};
+
+      }
+      if ((state) && (!priceMin) && (!priceMax) && (!name)) {
+        query = {state:state}
+      }
+      if ((name) && (!state) && (!priceMin) && (!priceMax)) {
+        query = {name: name}
+      }
+      if ((priceMin) && (state) && (!priceMax) && (!name)) {
+        query = {state:state, price:{$gt:priceMin}}
+
+      }
+      if ((priceMax) && (state) && (!priceMin) && (!name)) {
+        query = {state:state, price:{$lt:priceMax}}
+
+      }
+      if ((priceMax) && (priceMin) && (!state) && (!name)){
+        query = {price:{$gt:priceMin,$lt:priceMax}}
+
+      }
+      if ((priceMin) && (!state) && (!priceMax) && (name)) {
+        query = {name:name, price:{$gt:priceMin}}
+
+      }
+      if ((priceMax) && (!state) && (!priceMin) && (name)) {
+        query = {name:name, price:{$lt:priceMax}}
+
+      }
+      if ((priceMax) && (state) && (priceMin) && (!name)) {
+        query = {state:state, price:{$gt:priceMin,$lt:priceMax}}
+
+      }
+      if ((priceMax) && (!state) && (priceMin) && (name)) {
+        query = {name:name, price:{$gt:priceMin,$lt:priceMax}}
+
+      }
+      if ((priceMax) && (state) && (!priceMin) && (name)) {
+        query = {state:state,name:name, price:{$lt:priceMax}}
+
+      }
+      if ((!priceMax) && (state) && (!priceMin) && (name)) {
+        query = {name:name, state:state}
+
+      }
+      if ((priceMax) && (priceMin) && (state) && (name)) {
+        query = {price:{$gt:priceMin,$lt:priceMax}, state:state, name:name}
+      }
+           
+      const products = await product.find(query);   
+      res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
       } catch (error) {
         console.log(error);
         res.status(500).send("Hubo un error, no muestra");
@@ -62,6 +115,39 @@ router.get("/:slug", async (req, res, next) => {
   .catch(next);
 });
 
+router.get("/list-search/:search", async (req, res) => {
+  try {
+    console.log("LIST_SEARCH!");
+    let search = new RegExp(req.params.search);
+
+    const Product = await product.find({ name: { $regex: search } }).limit(20);
+
+    if (!Product) {
+      res.status(404).json({ msg: "No existe el product" });
+    }
+    res.json(Product.map((product) => product.toListJSONFor()));
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error en router.get /search/:search");
+  }
+});
+
+router.get("/search/:search", async (req, res) => {
+  try {
+    console.log("SEARCH");
+    let search = new RegExp(req.params.search);
+
+    const Product = await product.find({ name: { $regex: search } });
+
+    if (!Product) {
+      res.status(404).json({ msg: "No existe el product" });
+    }
+    res.json(Product.map((product) => product.toJSONFor()));
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error en router.get /search/:search");
+  }
+});
 
 
 router.delete("/", async (req, res) => {

@@ -32,6 +32,9 @@ const ProductSchema = mongoose.Schema({
       date: {
         type: Date,
       },
+      state: {
+        type: String,
+      }
 })
 
 
@@ -51,7 +54,8 @@ ProductSchema.methods.toListJSONFor = function () {
     tags: this.tags,
     img: this.img,
     price: this.price,
-    date: this.date
+    date: this.date,
+    state: this.state
   };
 };
 

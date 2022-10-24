@@ -1,0 +1,25 @@
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+
+    input {
+        font-size: 150%;
+        height: 45%;
+        width: 50%;
+        border: none;
+        border-bottom: 3px solid blue;
+    }
+
+    button {
+        height: 45%;
+        width: 10%;
+        border: transparent;
+        background-color: transparent;
+        &:hover {
+            color: blue;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+<div class="search">
+    <input type="text" list="list_search" maxlength="100" (change)="enter_key(this)"
+    (input)="writting_search($any($event.target).value)"/>
+    <button><fa-icon [icon]="['fas', 'search']" size="3x"></fa-icon></button>
+    <datalist id="list_search">
+        <option *ngFor="let product of products" [value]="product.name">{{product.name}}</option>
+    </datalist>
+</div>

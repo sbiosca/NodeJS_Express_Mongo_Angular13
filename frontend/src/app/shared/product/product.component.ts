@@ -13,7 +13,7 @@ import { Category, Filters } from "src/app/core";
 })
 
 export class ProductComponent implements OnInit {
-    product!: Product[];
+    product: Product[] = [];
     p!: number;
     value_product!: Number;
     ref_Category: String = '';
@@ -25,7 +25,6 @@ export class ProductComponent implements OnInit {
         if (filters) {
           console.log("FILTROS")
         }
-        
       }
 
       
@@ -42,33 +41,31 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
-            if ((this.ref_Category == '' ) && (this.url_filters == '' )) {
-                this.ProductService.getAll().subscribe((data) => {
-                    this.product = data;
-                    console.log(data);
-                })
-                
-                //console.log("1");
-            }else if((this.ref_Category != '') && (this.url_filters == '')) {
-                //console.log(this.ref_Category);
-                this.CategoryService.get(this.ref_Category).subscribe((data) => {
-                    this.listcategory = data.products!;
-                    console.log(data.products);
-                    this.product = data.products!;
-                })
-                //console.log("2");
-            }else if((this.ref_Category == '') && (this.url_filters != '')){
-                this.filtered_products(this.url_filters);
-                console.log("pepe")
-                // this.url_filters = JSON.parse(atob(this.url_filters));
-                // this.CategoryService.get(this.url_filters).subscribe((data) => {
-                //     console.log(data.products);
-                //     this.listcategory = data.products!;
-                //     this.product = data.products!;
-                // })
-                //console.log("3");
-            }
-               
+        console.log(this.url_filters)
+        if ((this.ref_Category == '' ) && (this.url_filters == '')) {
+            this.ProductService.getAll().subscribe((data) => {
+                this.product = data;
+                console.log(data);
+            })
+            //console.log("1");
+        }else if((this.ref_Category != '') && (this.url_filters == '')) {
+            //console.log(this.ref_Category);
+            this.CategoryService.get(this.ref_Category).subscribe((data) => {
+                this.listcategory = data.products!;
+                console.log(data.products);
+                this.product = data.products!;
+            })
+            //console.log("2");
+        }else if((this.ref_Category == '') && (this.url_filters != '')){
+            this.filtered_products(this.url_filters);
+            // this.url_filters = JSON.parse(atob(this.url_filters));
+            // this.CategoryService.get(this.url_filters).subscribe((data) => {
+            //     console.log(data.products);
+            //     this.listcategory = data.products!;
+            //     this.product = data.products!;
+            // })
+            //console.log("3");
+        }
     }
 
     list_categories() {
@@ -87,9 +84,10 @@ export class ProductComponent implements OnInit {
                 this.product = data.products!;
             })
         }
-        if (this.filters.price) {
-            this.ProductService.getFilters(this.filters.price, "price").subscribe((data) => {
+        if (this.filters.priceMax || this.filters.priceMin || this.filters.state || this.filters.name) {
+            this.ProductService.getFilters(this.filters).subscribe((data) => {
                 console.log(data);
+                this.product = data;
             })
         }
         

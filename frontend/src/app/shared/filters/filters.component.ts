@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Category  } from "src/app/core/models/category.model";
 import { Location } from "@angular/common";
 import { ActivatedRoute} from "@angular/router";
-import { ProductComponent } from "src/app/shared/product/product.component";
 import { Filters } from "src/app/core/models/filters.model";
+import { ProductComponent } from "../product/product.component";
 
 @Component({
     selector: 'app-filters',
     templateUrl: './filters.component.html',
-    styleUrls: ['./filters.component.css']
+    styleUrls: ['./filters.component.scss']
 })export class FiltersComponent {
     url_filters?: string = '';
     filters!:Filters;
@@ -19,7 +19,8 @@ import { Filters } from "src/app/core/models/filters.model";
 
     constructor(private productcomp: ProductComponent,
             private ActivatedRoute: ActivatedRoute,
-            private location: Location
+            private location: Location,
+            private prodComp: ProductComponent
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
             }
@@ -44,7 +45,7 @@ import { Filters } from "src/app/core/models/filters.model";
         }, 200);
     }
 
-    onchange(value: any) {
+    public onchange(value: any): void {
         this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '' ;
        
         if (this.url_filters) {
@@ -55,14 +56,22 @@ import { Filters } from "src/app/core/models/filters.model";
             this.filters = new Filters();
         }
         console.log(value.target.id);
-        
-        if (value.target.id === "price") {
-            this.filters.price = value.target.value;
+
+        if (value.target.id === "priceMin") {
+            this.filters.priceMin = value.target.value;
+            console.log("PRICE")
+        }
+        if (value.target.id === "priceMax") {
+            this.filters.priceMax = value.target.value;
             console.log("PRICE")
         }
         if (value.target.id === "cate") {
             this.filters.listcategory = value.target.value;
             console.log("CATE")
+        }
+        if (value.target.id === "state") {
+            this.filters.state = value.target.value;
+            console.log("STATE")
         }
 
         this.checkTime(this.filters);
@@ -71,7 +80,7 @@ import { Filters } from "src/app/core/models/filters.model";
 
     replaceEmit() {
         this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
-        //location.reload()
+        this.prodComp.ngOnInit()
         this.filterEvent.emit(this.filters);
         console.log(this.filters)
     }
