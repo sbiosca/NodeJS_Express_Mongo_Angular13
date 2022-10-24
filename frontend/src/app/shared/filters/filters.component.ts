@@ -84,8 +84,4 @@ import { ProductComponent } from "../product/product.component";
         this.filterEvent.emit(this.filters);
         console.log(this.filters)
     }
-
-    delete_filters() {
-        this.location.replaceState('/shop/');
-    }
 }

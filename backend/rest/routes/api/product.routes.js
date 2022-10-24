@@ -89,6 +89,39 @@ router.get("/:slug", async (req, res, next) => {
   .catch(next);
 });
 
+router.get("/list-search/:search", async (req, res) => {
+  try {
+    console.log("LIST_SEARCH!");
+    let search = new RegExp(req.params.search);
+
+    const product = await Product.find({ name: { $regex: search } }).limit(20);
+
+    if (!product) {
+      res.status(404).json({ msg: "No existe el product" });
+    }
+    res.json(product.map((product) => product.toListJSONFor()));
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error en router.get /search/:search");
+  }
+});
+
+router.get("/search/:search", async (req, res) => {
+  try {
+    console.log("SEARCH");
+    let search = new RegExp(req.params.search);
+
+    const product = await Product.find({ name: { $regex: search } });
+
+    if (!product) {
+      res.status(404).json({ msg: "No existe el product" });
+    }
+    res.json(product.map((product) => product.toJSONFor()));
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error en router.get /search/:search");
+  }
+});
 
 
 router.delete("/", async (req, res) => {
