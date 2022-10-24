@@ -16,3 +16,7 @@ SCSS:
 npm install -g scss
 
 payload -> auth
+
+npm install jsonwebtoken --save 
+npm install passport --save  
+npm install express-jwt --save  

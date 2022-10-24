@@ -1,6 +1,7 @@
 var router = require("express").Router();
 
 router.use("/category", require("./category.routes"))
+router.use("/user", require("./users.routes"))
 router.use("/product", require("./product.routes"));
 router.use("/product_category", require("./product_category.routes"));
 
