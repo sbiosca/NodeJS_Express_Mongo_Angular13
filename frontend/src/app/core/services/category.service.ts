@@ -20,5 +20,6 @@ export class CategoryService {
     
     get(id: any): Observable<Category> {
         return this.http.get(`${baseUrl}/${id}`);
-    }     
+    }
+
 }

@@ -10,10 +10,11 @@ import { CategoryService} from "src/app/core/services/category.service";
 })export class CategoryComponent implements OnInit {
 
     category: Category[] = [];
-
+    category_mv: Category[] = [];
     constructor(private CategoryService: CategoryService) {}
     ngOnInit(): void {
         this.AllCategories();
+        this.MorevisitedCategories();
         //this.OneCategory();
     }
 
@@ -23,6 +24,12 @@ import { CategoryService} from "src/app/core/services/category.service";
         })
     }
 
+    MorevisitedCategories() {
+        this.CategoryService.getAll().subscribe((data) => {
+            this.category_mv = data.sort(((a, b) => b.visited! - a.visited!));
+            console.log(this.category_mv.slice(0,3))
+        })
+    }
     // jump_shop(cate: any) {
     //     console.log(cate);
     //     this.CategoryService.get(cate).subscribe((data) => {
