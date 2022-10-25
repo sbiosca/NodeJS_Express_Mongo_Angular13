@@ -10,19 +10,15 @@ const baseUrl = 'http://localhost:3000/api/category/';
 
 export class CategoryService {
     
-        constructor(private http: HttpClient) {
-            this.getAll();
-        }
+    constructor(private http: HttpClient) {
+        this.getAll();
+    }
 
-        
-        getAll(): Observable<Category[]> {
-            //console.log(this.http.get<Category[]>(baseUrl))
-            return this.http.get<Category[]>(baseUrl);
-        }
-        
-        get(id: any): Observable<Category> {
-            return this.http.get(`${baseUrl}/${id}`);
-        }
-
-        
+    getAll(): Observable<Category[]> {
+        return this.http.get<Category[]>(baseUrl);
+    }
+    
+    get(id: any): Observable<Category> {
+        return this.http.get(`${baseUrl}/${id}`);
+    }     
 }

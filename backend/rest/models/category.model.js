@@ -24,6 +24,10 @@ const CategorySchema = mongoose.Schema({
     required: true,
   },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
+  visited: {
+    type: Number,
+    required: true
+  }
 });
 
 
@@ -45,7 +49,8 @@ CategorySchema.methods.toListJSONFor = function () {
     name_category: this.name_category,
     slug: this.slug,
     icon: this.icon,
-    products: this.products
+    products: this.products,
+    visited: this.visited
   };
 };
 

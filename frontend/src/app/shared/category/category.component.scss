@@ -1,0 +1,11 @@
+.category_box {
+    width: 100%;
+    display: flex;
+    justify-content: center;    
+    div {
+        width: 60%;
+        div.categ {
+            width: 25%;
+        }
+    }
+}

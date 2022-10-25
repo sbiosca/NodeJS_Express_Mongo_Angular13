@@ -41,7 +41,7 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
-        console.log(this.url_filters)
+        //console.log(this.url_filters)
         if ((this.ref_Category == '' ) && (this.url_filters == '')) {
             this.ProductService.getAll().subscribe((data) => {
                 this.product = data;
@@ -52,7 +52,7 @@ export class ProductComponent implements OnInit {
             //console.log(this.ref_Category);
             this.CategoryService.get(this.ref_Category).subscribe((data) => {
                 this.listcategory = data.products!;
-                console.log(data.products);
+                console.log(data);
                 this.product = data.products!;
             })
             //console.log("2");
@@ -81,7 +81,7 @@ export class ProductComponent implements OnInit {
         if (this.filters.listcategory) {
             this.CategoryService.get(this.filters.listcategory).subscribe((data) => {
                 console.log(data)
-                this.product = data.products!;
+                // this.product = data.category.products!;
             })
         }
         if (this.filters.priceMax || this.filters.priceMin || this.filters.state || this.filters.name) {

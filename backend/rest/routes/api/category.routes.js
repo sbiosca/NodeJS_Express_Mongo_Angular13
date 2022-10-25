@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     try {
       const { offset, limit } = req.query;
       const categorys = await Category.find(
-        {},
+        {}, 
         {},
         { skip: Number(offset), limit: Number(limit) }
       );
@@ -51,10 +51,13 @@ router.get("/:reference", async (req, res) => {
     try {
       // let category = await Category.findOne({name_category:req.params.name}).populate('products');
       let category = await Category.findOne({ reference: req.params.reference }).populate('products');
+      await Category.updateOne({reference: req.params.reference},{$inc:{"visited":1}});
+
       if (!category) {
         res.status(404).json({ msg: "No existe la categoria" });
       }
       res.json(category);
+  
     } catch (error) {
       console.log(error);
       res.status(500).send("Hubo un error");

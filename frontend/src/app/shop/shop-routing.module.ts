@@ -4,7 +4,7 @@ import { ShopComponent } from './shop.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'category/-1',
         component: ShopComponent,
         resolve: {},
     },
