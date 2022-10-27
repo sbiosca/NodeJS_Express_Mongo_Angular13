@@ -1,7 +1,10 @@
+<h1>More visited</h1>
 <div class="category_box">
     <div>
-        <div class="categ" *ngFor="let cate of category" [routerLink]="['/shop/category', cate.reference]">
-            <span>hola</span>
+        <div class="categ" *ngFor="let cate of category_mv" [routerLink]="['/shop/category', cate.reference]">
+            <h4>Times visited: <span>{{cate.visited}}</span></h4>
+            <h5>{{cate.name_category}}</h5>
+            <fa-icon [icon]="[cate.icon!.prefix, cate.icon!.name]" size="3x"></fa-icon>
         </div> 
     </div>
 </div>

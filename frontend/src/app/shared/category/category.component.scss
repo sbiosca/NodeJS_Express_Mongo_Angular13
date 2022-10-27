@@ -1,11 +1,19 @@
 .category_box {
     width: 100%;
     display: flex;
-    justify-content: center;    
+    justify-content: center;  
     div {
         width: 60%;
-        div.categ {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        div.categ{
             width: 25%;
+            border: 2px solid black;
+            display: flex;
+            flex-flow: column wrap;
+            padding: 2.5%;
+            align-items: center;
         }
     }
 }
