@@ -26,9 +26,10 @@ import { CategoryService} from "src/app/core/services/category.service";
 
     MorevisitedCategories() {
         this.CategoryService.getAll().subscribe((data) => {
-            this.category_mv = data.sort(((a, b) => b.visited! - a.visited!));
-            this.category_mv = this.category_mv.slice(0,3)
-            console.log(this.category_mv)
+
+            data = data.filter((item) => item.reference != -1)
+            this.category_mv = data.sort(((a, b) => b.visited! - a.visited!)).slice(0,3);
+            console.table(this.category_mv)
         })
     }
     // jump_shop(cate: any) {
