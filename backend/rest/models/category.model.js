@@ -25,8 +25,7 @@ const CategorySchema = mongoose.Schema({
   },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
   visited: {
-    type: Number,
-    required: true
+    type: Number
   }
 });
 

@@ -27,7 +27,8 @@ import { CategoryService} from "src/app/core/services/category.service";
     MorevisitedCategories() {
         this.CategoryService.getAll().subscribe((data) => {
             this.category_mv = data.sort(((a, b) => b.visited! - a.visited!));
-            console.log(this.category_mv.slice(0,3))
+            this.category_mv = this.category_mv.slice(0,3)
+            console.log(this.category_mv)
         })
     }
     // jump_shop(cate: any) {
