@@ -56,30 +56,29 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  // attemptAuth(type, credentials): Observable<User> {
-  //   const route = (type === 'login') ? '/login' : '';
-  //   return this.apiService.post(`/users${route}`, {user: credentials})
-  //     .pipe(map(
-  //     data => {
-  //       this.setAuth(data.user);
-  //       return data;
-  //     }
-  //   ));
-  // }
+  attemptAuth(type: string | String, credentials: any): Observable<User> {
+    const route = (type === 'login') ? '/login' : '';
+    return this.apiService.post(`/users${route}`, {user: credentials})
+      .pipe(map(
+      data => {
+        this.setAuth(data.user);
+        return data;
+      }
+    ));
+  }
 
   getCurrentUser(): User {
     return this.currentUserSubject.value;
   }
 
-  // Update the user on the server (email, pass, etc)
-  // update(user): Observable<User> {
-  //   return this.apiService
-  //   .put('/user', { user })
-  //   .pipe(map(data => {
-  //     // Update the currentUser observable
-  //     this.currentUserSubject.next(data.user);
-  //     return data.user;
-  //   }));
-  // }
+  update(user: any): Observable<User> {
+    return this.apiService
+    .put('/user', { user })
+    .pipe(map(data => {
+      // Update the currentUser observable
+      this.currentUserSubject.next(data.user);
+      return data.user;
+    }));
+  }
 
 }

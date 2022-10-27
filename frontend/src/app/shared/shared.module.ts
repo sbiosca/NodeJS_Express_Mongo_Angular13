@@ -10,6 +10,7 @@ import { SearchComponent } from "./search/search.component";
 import { FiltersComponent } from "./filters/filters.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import {CarouselModule} from 'primeng/carousel';
+import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
 
@@ -21,7 +22,9 @@ import {CarouselModule} from 'primeng/carousel';
         FontAwesomeModule,
         NgxPaginationModule,
        // NgbModule
-        CarouselModule
+        CarouselModule,
+        FormsModule,
+        ReactiveFormsModule
         // NgbModule
         //CarouselModule
     ],
@@ -40,7 +43,9 @@ import {CarouselModule} from 'primeng/carousel';
         ProductComponent,
         SearchComponent,
         CarouselComponent,
-        FiltersComponent
+        FiltersComponent,
+        FormsModule,
+        ReactiveFormsModule
         // CarouselComponent        
     ]
 })
