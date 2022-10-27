@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { User, UserService } from './core';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -7,11 +7,24 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  //title = 'Angular 13 CRUD example';
-
-  constructor(private toastrService: ToastrService) { }
+export class AppComponent implements OnInit {
+ 
+  constructor(private toastrService: ToastrService,
+    private userService: UserService,) { }
   
+    user: boolean = false;
+  ngOnInit(): void {
+    if (localStorage.getItem("Token")) {
+      this.userService.isAuthenticated.subscribe(
+        (isAuthenticated) => {
+          this.user = isAuthenticated;
+          console.log(this.user)
+        }
+      )
+    }else {
+    }
+    
+  }
   public toastr_success(): void {
     this.toastrService.success("Message success!", "You can create a new product")
   }

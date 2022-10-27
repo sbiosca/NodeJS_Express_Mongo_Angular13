@@ -11,6 +11,7 @@ import { FiltersComponent } from "./filters/filters.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import {CarouselModule} from 'primeng/carousel';
 import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
+//import { ShowAuthedDirective } from "./show-authed.directive";
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
 
@@ -34,7 +35,7 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
         SearchComponent,
         CarouselComponent,    
         FiltersComponent,
-        
+        //ShowAuthedDirective
         // CarouselComponent
         
     ],
@@ -45,7 +46,8 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
         CarouselComponent,
         FiltersComponent,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        //ShowAuthedDirective
         // CarouselComponent        
     ]
 })
