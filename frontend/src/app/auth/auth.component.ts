@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,  ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,13 +9,11 @@ import { UserService } from '../core/services/user.service';
   selector: 'app-auth-page',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent implements OnInit {
   authType: String = '';
   title: String = '';
   errors: Errors = {errors: {}};
-  isSubmitting = false;
   authForm: FormGroup;
 
   constructor(
@@ -41,34 +39,32 @@ export class AuthComponent implements OnInit {
       this.authType = data[data.length - 1].path;
       this.title = (this.authType === 'login') ? 'SIGN IN' : 'SIGN UP';
     
-      // add form control for username if this is the register page
       if (this.authType === 'register') {
         //this.authForm.addControl('username', new FormControl());
       }
       this.cd.markForCheck();
     });
-    console.log("auth-component")
-
   }
 
   submitForm() {
-    //this.isSubmitting = true;
-    this.errors = {errors: {}};
-
     const credentials = this.authForm.value;
-    //console.log(credentials)
     this.userService
     .attemptAuth(this.authType, credentials)
-    .subscribe(data => {
-      if (this.title === "SIGN IN") {
-        this.ToastrService.success("Welcome!", "Login succesfully")
+    .subscribe({
+      next: (data) => {
+        if (this.title === "SIGN IN") {
+          this.ToastrService.success("Welcome!", "Login succesfully")
+        }
+        if (this.title === "SIGN UP") {
+          this.ToastrService.success("Welcome!", "Register succesfully")
+        }
+        this.router.navigateByUrl('/')
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error.errors);
+        this.errors = error;
       }
-      if (this.title === "SIGN UP") {
-        this.ToastrService.success("Welcome!", "Register succesfully")
-      }
-      this.router.navigateByUrl('/')
-      console.log(data);
-    }
-  );
+    })
 }
 }
