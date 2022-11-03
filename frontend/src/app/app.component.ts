@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService } from './core';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,27 +9,29 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent implements OnInit {
  
-  constructor(private toastrService: ToastrService,
-    private userService: UserService,) { }
+  constructor(
+    private userService: UserService
+  ) { }
   
-    user: boolean = false;
+  user: boolean = false;
   ngOnInit(): void {
-    if (localStorage.getItem("Token")) {
-      this.userService.isAuthenticated.subscribe(
-        (isAuthenticated) => {
-          this.user = isAuthenticated;
-          console.log(this.user)
-        }
-      )
-    }else {
-    }
-    
+    // if (localStorage.getItem("Token")) {
+    //   this.userService.isAuthenticated.subscribe(
+    //     (isAuthenticated) => {
+    //       this.user = isAuthenticated;
+    //       console.log(this.user);
+    //     }
+    //   )
+    // }else {
+    //   console.log("NOT TOKEN")
+    // }
+    this.userService.populate();
   }
-  public toastr_success(): void {
-    this.toastrService.success("Message success!", "You can create a new product")
-  }
-  public toastr_allprod(): void {
-    this.toastrService.success("Message success!", "This are the all products")
-  }
+  // public toastr_success(): void {
+  //   this.toastrService.success("Message success!", "You can create a new product")
+  // }
+  // public toastr_allprod(): void {
+  //   this.toastrService.success("Message success!", "This are the all products")
+  // }
 }
 
