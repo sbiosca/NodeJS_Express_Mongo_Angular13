@@ -1,5 +1,5 @@
 <header>
-    <a href="/#"><img src="../../../../assets/img/logo2.png"/></a>
+    <a routerLink="/"><img src="../../../../assets/img/logo2.png"/></a>
     <app-search class="search"></app-search>
     <!-- <div class="search">
         <input type="text" maxlength="100"/>
@@ -8,13 +8,8 @@
     <div class="header_buttons">
         <button><fa-icon [icon]="['fas', 'cart-shopping']" size="3x"></fa-icon></button>
         <button><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
-        <button (click)="delete_user()"><fa-icon [icon]="['fas', 'trash']" size="3x"></fa-icon></button>
-        <div *ngIf="user == false"><!--*ngIf="user == false"-->
-            <button routerLink="/auth/login" routerLinkActive="active"><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
-        </div>
-        <div *ngIf="user == true">
-            <button routerLink="/auth/login" routerLinkActive="active"><img src="https://avatars.dicebear.com/api/adventurer/your-cusadfadfatom-seed.svg"/></button>
-        </div>
-        
+        <button (click)="delete_user()"><fa-icon [icon]="['fas', 'door-open']" size="3x" *ngIf="user == true"></fa-icon></button>
+        <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
+        <button *ngIf="user == true"><img src="https://avatars.dicebear.com/api/adventurer/your-cusadfadfatom-seed.svg"/></button>
     </div>
 </header>
