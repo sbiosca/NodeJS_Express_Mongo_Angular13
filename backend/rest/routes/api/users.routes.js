@@ -16,11 +16,11 @@ router.get('/user', auth.required, function(req, res, next){
 
 router.post('/users/login', function(req, res, next){
   if(!req.body.user.username){
-    return res.status(422).json({errors: {username: "user es erroneo"}});
+    return res.status(422).json({errors: {username: "can't be blank"}});
   }
 
   if(!req.body.user.password){
-    return res.status(422).json({errors: {password: "password es erroneo"}});
+    return res.status(422).json({errors: {password: "can't be blank"}});
   }
 
   passport.authenticate('local', {session: false}, function(err, user, info){
@@ -44,10 +44,13 @@ router.post('/users', function(req, res, next){
   user.image = req.body.user.image;
   //user.password = req.body.user.password;
   user.setPassword(req.body.user.password);
-
+  if (req.body.user.password != req.body.user.password2) {
+    return res.status(422).json({errors: {passwords: "aren't the same"}});
+  }
+  
   user.save().then(function(){
     return res.json({user: user.toAuthJSON()});
-  }).catch(next);
+  }).catch(next)
 });
 
 router.put('/user', auth.required, function(req, res, next){
