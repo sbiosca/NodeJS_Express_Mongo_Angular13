@@ -5,7 +5,6 @@ import { JwtService } from './jwt.service';
 import { User } from '../models/user.model';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +17,7 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
 
@@ -60,7 +59,7 @@ export class UserService {
 
   attemptAuth(type: string | String, credentials: any): Observable<User> {
     const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post(`/User/users${route}`, {user: credentials})
+    return this.apiService.post(`User/users${route}`, {user: credentials})
       .pipe(map(
       data => {
         this.setAuth(data.user);
@@ -75,7 +74,7 @@ export class UserService {
 
   update(user: any): Observable<User> {
     return this.apiService
-    .put('/user', { user })
+    .put('User/user', { user })
     .pipe(map(data => {
       // Update the currentUser observable
       this.currentUserSubject.next(data.user);

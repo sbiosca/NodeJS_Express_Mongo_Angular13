@@ -13,18 +13,7 @@ export class AppComponent implements OnInit {
     private userService: UserService
   ) { }
   
-  user: boolean = false;
   ngOnInit(): void {
-    // if (localStorage.getItem("Token")) {
-    //   this.userService.isAuthenticated.subscribe(
-    //     (isAuthenticated) => {
-    //       this.user = isAuthenticated;
-    //       console.log(this.user);
-    //     }
-    //   )
-    // }else {
-    //   console.log("NOT TOKEN")
-    // }
     this.userService.populate();
   }
   // public toastr_success(): void {
