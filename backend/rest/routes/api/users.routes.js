@@ -14,10 +14,9 @@ router.get('/user', auth.required, function(req, res, next){
   }).catch(next);
 });
 
-
 router.post('/users/login', function(req, res, next){
-  if(!req.body.user.email){
-    return res.status(422).json({errors: {email: "user es erroneo"}});
+  if(!req.body.user.username){
+    return res.status(422).json({errors: {username: "user es erroneo"}});
   }
 
   if(!req.body.user.password){
@@ -27,6 +26,7 @@ router.post('/users/login', function(req, res, next){
   passport.authenticate('local', {session: false}, function(err, user, info){
     if(err){ return next(err); }
 
+    //console.log(user);
     if(user){
       user.token = user.generateJWT();
       return res.json({user: user.toAuthJSON()});
@@ -41,11 +41,39 @@ router.post('/users', function(req, res, next){
 
   user.username = req.body.user.username;
   user.email = req.body.user.email;
+  user.image = req.body.user.image;
   //user.password = req.body.user.password;
   user.setPassword(req.body.user.password);
 
   user.save().then(function(){
     return res.json({user: user.toAuthJSON()});
+  }).catch(next);
+});
+
+router.put('/user', auth.required, function(req, res, next){
+  User.findById(req.auth.id).then(function(user){
+    if(!user){ return res.sendStatus(401); }
+
+    if(req.body.user.username !== ''){
+      user.username = req.body.user.username;
+    }
+    if(req.body.user.email !== ''){
+      user.email = req.body.user.email;
+    }
+    if(req.body.user.bio !== ''){
+      user.bio = req.body.user.bio;
+    }
+    if(req.body.user.image !== ''){
+      user.image = req.body.user.image;
+    }
+    if(req.body.user.password !== ''){
+      console.log(req.body.user.password)
+      user.setPassword(req.body.user.password);
+    }
+
+    return user.save().then(function(){
+      return res.json({user: user.toAuthJSON()});
+    });
   }).catch(next);
 });
 

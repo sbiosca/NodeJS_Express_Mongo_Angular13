@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
-
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models/user.model';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
-
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +17,21 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
-  // Verify JWT in localstorage with server & load user's info.
-  // This runs once on application startup.
+
   populate() {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
-      this.apiService.get('/user')
-      .subscribe(
-        data => this.setAuth(data.user),
-        err => this.purgeAuth()
+      //console.log(this.jwtService.getToken())
+      this.apiService.get('User/user')
+      .subscribe(data => {
+          this.setAuth(data.user)
+          console.log(data.user)
+      }
+        // data => this.setAuth(data.user),
+        // err => this.purgeAuth()
       );
     } else {
       // Remove any potential remnants of previous auth states
@@ -58,7 +59,7 @@ export class UserService {
 
   attemptAuth(type: string | String, credentials: any): Observable<User> {
     const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post(`/users${route}`, {user: credentials})
+    return this.apiService.post(`User/users${route}`, {user: credentials})
       .pipe(map(
       data => {
         this.setAuth(data.user);
@@ -73,7 +74,7 @@ export class UserService {
 
   update(user: any): Observable<User> {
     return this.apiService
-    .put('/user', { user })
+    .put('User/user', { user })
     .pipe(map(data => {
       // Update the currentUser observable
       this.currentUserSubject.next(data.user);

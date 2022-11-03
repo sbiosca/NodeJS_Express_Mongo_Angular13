@@ -23,8 +23,8 @@ export class ApiService {
   }
 
   put(path: string, body: Object = {}): Observable<any> {
-    console.log(`${baseUrl}${path}`)
-    console.log(body)
+    console.log(`${baseUrl}${"User/"+path}`, )
+    console.log(path)
     // return this.http.put(`${environment.url}${path}`,JSON.stringify(body)).pipe(catchError(this.formatErrors));
     return this.http.put(`${baseUrl}${path}`,body/* JSON.stringify(body) */).pipe(catchError(this.formatErrors));
   }

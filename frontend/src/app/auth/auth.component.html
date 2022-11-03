@@ -1,10 +1,14 @@
 <div id="form-auth">
     <div id="login-form">
+        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
-            <input formControlName="username" type="text" placeholder="Username"/><p></p>
+            <input formControlName="username" type="text" placeholder="Username" /><p></p>
             <input formControlName="email" type="text" placeholder="Email@email.com" *ngIf="authType === 'register'"/><p></p>
             <input formControlName="password" type="password" placeholder="password"/><p></p>
             <input formControlName="password2" type="password" placeholder="Reapeat password" *ngIf="authType === 'register'"/><p></p>
+            <!-- <p *ngIf="authType === 'register'">Put image or url:</p> -->
+            <input formControlName="image" type="text" placeholder="Put url to image" *ngIf="authType === 'register'"/><p></p>
+            <!-- <input formControlName="image" type="file" *ngIf="authType === 'register'"/><p></p> -->
             <a routerLink="/auth/register" *ngIf="authType === 'login'">Need an account</a><p></p>
             <a routerLink="/auth/login" *ngIf="authType === 'register'">Have an account</a><p></p>
             <button type="submit">{{title}}</button>

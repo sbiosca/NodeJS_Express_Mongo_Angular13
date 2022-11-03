@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
                 this.product = data;
                 console.log(data);
             })
-            //console.log("1");
+            console.log("1");
         }else if((this.ref_Category != '') && (this.url_filters == '')) {
             //console.log(this.ref_Category);
             this.CategoryService.get(this.ref_Category).subscribe((data) => {
@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit {
                 console.log(data);
                 this.product = data.products!;
             })
-            //console.log("2");
+            console.log("2");
         }else if((this.ref_Category == '') && (this.url_filters != '')){
             this.filtered_products(this.url_filters);
             // this.url_filters = JSON.parse(atob(this.url_filters));
@@ -64,7 +64,7 @@ export class ProductComponent implements OnInit {
             //     this.listcategory = data.products!;
             //     this.product = data.products!;
             // })
-            //console.log("3");
+            console.log("3");
         }
     }
 

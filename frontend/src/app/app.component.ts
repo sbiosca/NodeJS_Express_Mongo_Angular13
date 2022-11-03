@@ -1,22 +1,26 @@
-import { Component } from '@angular/core';
-
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { User, UserService } from './core';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  //title = 'Angular 13 CRUD example';
-
-  constructor(private toastrService: ToastrService) { }
+export class AppComponent implements OnInit {
+ 
+  constructor(
+    private userService: UserService
+  ) { }
   
-  public toastr_success(): void {
-    this.toastrService.success("Message success!", "You can create a new product")
+  ngOnInit(): void {
+    this.userService.populate();
   }
-  public toastr_allprod(): void {
-    this.toastrService.success("Message success!", "This are the all products")
-  }
+  // public toastr_success(): void {
+  //   this.toastrService.success("Message success!", "You can create a new product")
+  // }
+  // public toastr_allprod(): void {
+  //   this.toastrService.success("Message success!", "This are the all products")
+  // }
 }
 

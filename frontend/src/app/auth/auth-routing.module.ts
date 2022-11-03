@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: ':login',
     component: AuthComponent,
-    //canActivate: [NoAuthGuard]
+    canActivate: [NoAuthGuard]
   },
   {
     path: ':register',
     component: AuthComponent,
-    //canActivate: [NoAuthGuard]
+    canActivate: [NoAuthGuard]
   }
 ];
 
