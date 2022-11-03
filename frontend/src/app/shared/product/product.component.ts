@@ -81,12 +81,11 @@ export class ProductComponent implements OnInit {
         if (this.filters.listcategory) {
             this.CategoryService.get(this.filters.listcategory).subscribe((data) => {
                 console.log(data)
-                // this.product = data.category.products!;
+                this.product = data.products!;
             })
         }
         if (this.filters.priceMax || this.filters.priceMin || this.filters.state || this.filters.name) {
             this.ProductService.getFilters(this.filters).subscribe((data) => {
-                console.log(data);
                 this.product = data;
             })
         }
