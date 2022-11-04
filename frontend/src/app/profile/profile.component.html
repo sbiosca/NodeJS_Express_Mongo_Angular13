@@ -1,6 +1,6 @@
 <div class="profile-page">
     <div class="card">
-        <img [src]="profile.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%">
+        <a target="_blank" href="{{profile.image}}"><img [src]="profile.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%"></a>
         <h1>{{profile.username}}</h1>
         <p class="email">{{profile.email}}</p>
         <div class="bio">

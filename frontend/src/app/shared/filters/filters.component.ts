@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { ActivatedRoute} from "@angular/router";
 import { Filters } from "src/app/core/models/filters.model";
 import { ProductComponent } from "../product/product.component";
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-filters',
@@ -13,6 +14,7 @@ import { ProductComponent } from "../product/product.component";
     url_filters?: string = '';
     filters!:Filters;
     selected?: Filters;
+    //filtersForm!: FormGroup;
 
     @Input() listcategory: Category[] = [];
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
