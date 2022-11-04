@@ -1,15 +1,12 @@
 <div class="settings-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-  
+    <div class="card">
           <h1 class="text-xs-center">Your Settings</h1>
   
           <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
-  
           <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
             <fieldset [disabled]="isSubmitting">
   
+              <img [src]="user.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%"/>
               <fieldset class="form-group">
                 <input class="form-control"
                   type="text"
@@ -61,9 +58,7 @@
             (click)="logout()">
             Or click here to logout.
           </button>
-  
-        </div>
-      </div>
     </div>
+    <p></p>
   </div>
   

@@ -1,0 +1,21 @@
+<div class="profile-page">
+    <div class="card">
+        <img [src]="profile.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%">
+        <h1>{{profile.username}}</h1>
+        <p class="email">{{profile.email}}</p>
+        <div class="bio">
+            <hr>
+            <strong>Biography:</strong>
+            <p>{{profile.bio}}</p>
+        </div>
+        <p></p>
+        <!-- <app-follow-button
+            [hidden]="isUser"
+            [Profile]="Profile"
+            (toggle)="onToggleFollowing($event)">
+          </app-follow-button> -->
+        <button  routerLink="/settings" routerLinkActive="active">Settings</button>
+    </div>
+    
+</div>
+  

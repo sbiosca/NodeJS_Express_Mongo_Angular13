@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
