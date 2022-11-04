@@ -49,4 +49,14 @@ UserSchema.methods.toAuthJSON = function(){
   };
 };
 
+UserSchema.methods.toProfileJSONFor = function(user){
+  return {
+    username: this.username,
+    bio: this.bio,
+    email: this.email,
+    image: this.image || 'https://www.ibei.org/images/4611/person_box.png',
+    //following: user ? user.isFollowing(this._id) : false
+  };
+};
+
 mongoose.model('User', UserSchema);
