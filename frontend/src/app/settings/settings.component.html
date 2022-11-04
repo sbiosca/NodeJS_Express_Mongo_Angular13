@@ -2,11 +2,9 @@
     <div class="card">
           <h1 class="text-xs-center">Your Settings</h1>
   
-          <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
           <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
             <fieldset [disabled]="isSubmitting">
-  
-              <img [src]="user.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%"/>
+              <a target="_blank" href="{{user.image}}"><img [src]="user.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width:10%"/></a>
               <fieldset class="form-group">
                 <input class="form-control"
                   type="text"
@@ -43,6 +41,7 @@
                   formControlName="password" />
               </fieldset>
   
+              <span style="color: red;">{{errors}}</span>
               <button class="btn btn-lg btn-primary pull-xs-right"
                 type="submit">
                 Update Settings
@@ -56,7 +55,7 @@
   
           <button class="btn btn-outline-danger"
             (click)="logout()">
-            Or click here to logout.
+            Logout
           </button>
     </div>
     <p></p>

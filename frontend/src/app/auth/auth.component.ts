@@ -1,6 +1,7 @@
 import { Component, OnInit,  ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Errors } from '../core/models/error.model'
 import { UserService } from '../core/services/user.service';
@@ -15,6 +16,8 @@ export class AuthComponent implements OnInit {
   title: String = '';
   errors: Errors = {errors: {}};
   authForm: FormGroup;
+  isSubmitting = false;
+  error2!: string;
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
@@ -47,6 +50,7 @@ export class AuthComponent implements OnInit {
   }
 
   submitForm() {
+    this.isSubmitting = true;
     const credentials = this.authForm.value;
     this.userService
     .attemptAuth(this.authType, credentials)
@@ -58,12 +62,20 @@ export class AuthComponent implements OnInit {
         if (this.title === "SIGN UP") {
           this.ToastrService.success("Welcome!", "Register succesfully")
         }
+        this.isSubmitting = true;
         this.router.navigateByUrl('/')
         console.log(data);
       },
       error: (error) => {
         console.log(error.errors);
-        this.errors = error;
+        if (!error.errors) {
+          this.error2 = "Email or username aren't available";
+        }else {
+          this.errors = error;
+        }
+        this.ToastrService.error("Auth!", "Error in Form Login or Register")
+        this.isSubmitting = false;
+        
       }
     })
 }

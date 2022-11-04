@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User, UserService } from '../core';
+import { Errors } from '../core/models/error.model'
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SettingsComponent implements OnInit {
   user: User = {} as User;
   settingsForm: FormGroup;
-  errors: Object = {};
+  errors!: string;
   isSubmitting = false;
 
   constructor(
@@ -50,13 +51,20 @@ export class SettingsComponent implements OnInit {
     this.updateUser(this.settingsForm.value);
     this.userService
     .update(this.user)
-    .subscribe( updatedUser => {
-      console.log(updatedUser)
-      this.ToastrService.success("Settings!", "Updated your profile properly")
-      //this.router.navigateByUrl('/profile/' + updatedUser.username)
-      this.router.navigateByUrl('home')
-    }
-    );
+    .subscribe({
+      next: (data) => {
+        console.log(data)
+        this.isSubmitting = true;
+        this.ToastrService.success("Settings!", "Updated your profile properly")
+        this.router.navigateByUrl('/profile/' + data.username)
+      },
+      error: (error) => {
+        console.log(error)
+        this.isSubmitting = false;
+        this.ToastrService.error("Settings!", "Username or email exists")
+        this.errors = "Email or username aren't available";
+      }
+    });
   }
 
   updateUser(values: Object) {
