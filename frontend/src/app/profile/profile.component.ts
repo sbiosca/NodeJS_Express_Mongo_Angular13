@@ -26,35 +26,22 @@ export class ProfileComponent implements OnInit {
   isUser!: boolean;
 
   ngOnInit(): void {
-    //this.route.data.pipe(concatMap(({ profile: Profile }) => {
-        // return this.userService.currentUser.pipe(tap(
-        //   (userData: User) => {
-        //     this.currentUser = userData;
-        //     console.log(userData)
-        //     this.isUser = (this.currentUser.username === this.profile.username);
-        //   }
-        // ));
-        this.ProfilService.get(this.url_user).subscribe({
-            next: (data) => {
-                console.log(data);
-                this.profile = data;
-            },
-            error: (error) => {
-                console.log(error)
-                this.isUser = true;
-                this.router.navigateByUrl('/')
-            }
-        })    
-    //   })
-    // ).subscribe((() => {
-    //   this.cd.markForCheck();
-    // }));
-    
+    this.ProfilService.get(this.url_user).subscribe({
+      next: (data) => {
+          console.log(data);
+          this.profile = data;
+      },
+      error: (error) => {
+          console.log(error)
+          this.isUser = true;
+          this.router.navigateByUrl('/')
+      }
+  })     
     console.log("PROFILE.COMPONENT")
   }
 
-  onToggleFollowing(following: boolean) {
-    this.profile.following = following;
-  }
+  // onToggleFollowing(following: boolean) {
+  //   this.profile.following = following;
+  // }
 
 }

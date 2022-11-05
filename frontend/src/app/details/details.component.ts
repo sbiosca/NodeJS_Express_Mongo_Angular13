@@ -1,17 +1,17 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../core/services/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../core';
+import { Product } from '../core/models/product.model';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.scss']
 })
 
 export class DetailsComponent implements OnInit {
   slug?: string = '';
-  product?: Product[];
+  products!: Product;
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute
@@ -25,8 +25,8 @@ export class DetailsComponent implements OnInit {
   product_details() {
     console.log(this.slug)
     this.ProductService.get(this.slug).subscribe((data) => {
+      this.products = data;
       console.log(data);
-      this.product = data;
     })
   }
 }

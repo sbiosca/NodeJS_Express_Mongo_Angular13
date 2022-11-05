@@ -18,8 +18,8 @@ export class ProductService {
     return this.http.get<Product[]>(baseUrl);
   }
 
-  get(page: any): Observable<Product[]> {
-    return this.http.get<Product[]>(`${baseUrl}/${page}`);
+  get(page: any): Observable<Product> {
+    return this.http.get<Product>(`${baseUrl}/${page}`);
   }
 
   getFilters(filters: any): Observable<Product[]> {
