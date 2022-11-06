@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userService.populate();
   }
+ 
   // public toastr_success(): void {
   //   this.toastrService.success("Message success!", "You can create a new product")
   // }

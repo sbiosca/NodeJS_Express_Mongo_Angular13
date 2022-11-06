@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CarouselModule} from 'primeng/carousel';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+
 
 
 @NgModule({
@@ -14,7 +16,8 @@ import {CarouselModule} from 'primeng/carousel';
         SharedModule,
         CommonModule,
         FontAwesomeModule,
-        CarouselModule
+        CarouselModule,
+        InfiniteScrollModule
     ],
     declarations: [
         HomeComponent
