@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
 import { Category } from "src/app/core/models/category.model";
 import { CategoryService} from "src/app/core/services/category.service";
 
@@ -11,7 +12,15 @@ import { CategoryService} from "src/app/core/services/category.service";
 
     category: Category[] = [];
     category_mv: Category[] = [];
-    constructor(private CategoryService: CategoryService) {}
+    actualPage: number;
+    finishPage: number;
+    showGoUpButton: boolean;
+    list = [1,2,3,4]
+    constructor(private CategoryService: CategoryService,private spinner: NgxSpinnerService) {
+        this.actualPage = 1;
+        this.showGoUpButton = false;
+        this.finishPage = 3;
+    }
     ngOnInit(): void {
         this.AllCategories();
         this.MorevisitedCategories();
@@ -24,6 +33,21 @@ import { CategoryService} from "src/app/core/services/category.service";
         })
     }
 
+    scrollTop() {
+        document.documentElement.scrollTop = 0;
+    }
+    onScroll() {
+        this.spinner.show()
+        console.log("aparece")
+        setTimeout(() => {
+            this.spinner.hide()
+            console.log("desaparece")
+        }, 900);
+        if (this.list.length < 6) {
+            this.list.push(1,2,3,4)
+        }
+        
+    }
     MorevisitedCategories() {
         this.CategoryService.getAll().subscribe((data) => {
 
