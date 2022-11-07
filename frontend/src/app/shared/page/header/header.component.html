@@ -10,7 +10,9 @@
         <button><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
         <!-- <button routerLink="/settings" routerLinkActive="active"><fa-icon [icon]="['fas', 'gear']" size="3x"></fa-icon></button> -->
         <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
-        <button (click)="delete_user()"><fa-icon [icon]="['fas', 'door-open']" size="3x" *ngIf="user == true"></fa-icon></button>
-        <button routerLink="/profile/{{currentUser.username}}" *ngIf="user == true"><img [src]= "currentUser.image || 'https://www.ibei.org/images/4611/person_box.png'" style="width: 70%;"/></button>
+        <div class="small_profile">
+            <button class="profile" routerLink="/profile/{{currentUser.username}}" *ngIf="user == true"><img [src]= "currentUser.image || 'https://www.ibei.org/images/4611/person_box.png'"/></button>
+            <button class="logout" (click)="delete_user()"><fa-icon [icon]="['fas', 'door-open']" *ngIf="user == true" ></fa-icon></button>
+        </div>
     </div>
 </header>

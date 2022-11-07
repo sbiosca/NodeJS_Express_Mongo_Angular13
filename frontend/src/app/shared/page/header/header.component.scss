@@ -50,6 +50,21 @@ header {
 				color: blue;
 			}
 		}
+		.small_profile {
+			width: 30%;
+			margin: 0%;
+			float: right;
+			.profile {
+				border-radius: 50%;
+				img {
+					width: 150%;
+					border-radius: 50%;
+				}
+			}
+			.logout {
+				font-size: 15px;
+			}
+		}
 	}
 
 }
