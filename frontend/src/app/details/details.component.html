@@ -1,55 +1,50 @@
 <div class="details">
-    <strong style="font-size: 300%;">{{products?.name}}</strong><p></p>
-    <p-carousel class="carrousel" [value]="img_products!" [numVisible]="1" [numScroll]="1">
-        <ng-template let-part pTemplate="item" >
-            <div *ngFor="let img of img_products!">
-                <img style="width: 45%;" src="assets/img/{{img}}"/><p></p>
-            </div>
-        </ng-template>
-    </p-carousel>
-    <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p>
-    <span style="font-size: 120%;">{{products?.price}}€</span>
+  <strong style="font-size: 300%;">{{products?.name}}</strong><p></p>
+  <p-carousel class="carrousel" [value]="img_products!" [numVisible]="1" [numScroll]="1">
+      <ng-template let-part pTemplate="item" >
+          <div>
+              <img style="width: 45%;" src="assets/img/{{part}}"/><p></p>
+          </div>
+      </ng-template>
+  </p-carousel>
+  <!-- <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p> -->
+  <span style="font-size: 120%;">{{products?.price}}€</span>
 </div>
 
 <div class="comments">
-    <strong style="font-size: 300%;">Comments</strong><p></p>
-    <div class="comment_author">
-        <span>AUTHOR</span>
-    </div>
-    <div class="comment_author">
-        <span>AUTHOR</span>
-    </div>
+  <strong style="font-size: 300%;">Comments</strong>
+  <p></p>
+
+  <div class="comment_author" *ngFor="let comment of comments">
+    <span>AUTHOR</span>
+    <p></p>
+    {{comment}}
+  </div>
+
+
 </div>
 <br>
-<div class="container mt-7">
-    <div class="d-flex justify-content-center row">
-      <div class="col-md-12">
-        <!-- <app-comments
-          *ngFor="let comment of comments"
-          [comment]="comment"
-          (deleteComment)="onDeleteComment(comment)">
-        </app-comments> -->
-  
-        <div class="media g-mb-30 media-comment">
-          <!-- <img  [routerLink]="['/profile', currentUser.username]" class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" [src]="'../../assets/images/'+currentUser.image" onerror="this.src='../../assets/images/bbyoda.png'" alt="Image Description"> -->
-          <div class="media-body u-shadow-v18 bg-primary g-pa-30">
-            <!-- <form (ngSubmit)="addComment()"> -->
-              <fieldset >
-                <textarea class="form-control ml-1 shadow-none textarea" placeholder="Write a comment..." rows="3" cols="50"
-                ></textarea>
-                <div class="mt-2 text-right"><button class="btn btn-light text-primary btn-sm shadow-none" type="submit">Post comment</button><button class="btn btn-outline-light btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
-              </fieldset>
-            <!-- </form> -->
-          </div>
-        </div>
-  
-        <div class="media g-mb-30 media-comment">
-          <div class="media-body u-shadow-v18 bg-primary text-light g-pa-30 ">
-            <a class="text-dark text-decoration-none" [routerLink]="['/login']">Sign in</a> or <a class="text-dark text-decoration-none" [routerLink]="['/register']">sign up</a> to add comments on this
-            article.
-          </div>
+<div>
+  <div>
+    <div>
+      <!-- <img  [routerLink]="['/profile', currentUser.username]" [src]="'../../assets/images/'+currentUser.image" onerror="this.src='../../assets/images/bbyoda.png'" alt="Image Description"> -->
+      <div>
+        <form (ngSubmit)="addComment()">
+          <fieldset>
+            <textarea [formControl]="commentControl" placeholder="Write a comment..." rows="3" cols="50"></textarea>
+            <div><button type="submit">Post comment</button><button type="button">Cancel</button></div>
+          </fieldset>
+        </form>
+      </div>
+
+
+      <div>
+        <div>
+          <a [routerLink]="['/auth/login']">Sign in</a> or <a [routerLink]="['/auth/register']">sign up</a> to add
+          comments on this
+          article.
         </div>
       </div>
     </div>
   </div>
-  
+</div>

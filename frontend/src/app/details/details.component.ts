@@ -1,7 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../core/services/product.service';
+import { Comment } from '../core/models/comment.module';
+import { CommentsService } from '../core/services/comment.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../core/models/product.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -17,15 +20,16 @@ export class DetailsComponent implements OnInit {
 
   // currentUser: User;
   // canModify: boolean;
-  // comments: Comments[];
-  // commentControl = new FormControl();
+  comments!: Comment[];
+  commentControl = new FormControl();
   commentFormErrors = {};
   isSubmitting = false;
   isDeleting = false;
   img_products?: [];
   constructor(
     private ProductService: ProductService,
-    private ActivateRoute: ActivatedRoute
+    private ActivateRoute: ActivatedRoute,
+    private CommentsService: CommentsService
   ) {
     this.slug = this.ActivateRoute.snapshot.paramMap.get('slug') || '';
   }
@@ -38,6 +42,7 @@ export class DetailsComponent implements OnInit {
     this.ProductService.get(this.slug).subscribe((data) => {
       this.products = data;
       this.img_products = data.img;
+      this.getComments();
       console.log(this.products);
     })
   }
@@ -54,42 +59,40 @@ export class DetailsComponent implements OnInit {
   //   });
   // }
 
-  // populateComments() {
-  //   if (this.product.slug) {
-  //     this.commentsService.getAll(this.product.slug).subscribe((comments) => {
-  //       this.comments = comments;
-  //       console.log(this.comments);
-  //       this.cd.markForCheck();
-  //     });
-  //   }
-  // }
+  getComments() {
+    if (this.products.slug) {
+      this.CommentsService.getAll(this.products.slug).subscribe((comments) => {
+        this.comments = comments;
+        console.log(this.comments);
+        //this.cd.markForCheck();
+      });
+    }
+  }
 
-  // addComment() {
-  //   this.isSubmitting = true;
-  //   this.commentFormErrors = {};
-  //   if (this.product.slug) {
-  //     const commentBody = this.commentControl.value;
-  //     this.commentsService.add(this.product.slug, commentBody).subscribe(
-  //       (comment) => {
-  //         this.comments.unshift(comment);
-  //         this.commentControl.reset('');
-  //         this.isSubmitting = false;
-  //         this.notifyService.showSuccess('Tu comentario se ha publicado con éxito');
+  addComment() {
+    this.isSubmitting = true;
+    this.commentFormErrors = {};
+    if (this.products.slug) {
+      const commentBody = this.commentControl.value;
+      this.CommentsService.add(this.products.slug, commentBody).subscribe(
+        (comment) => {
+          console.log(comment)
+          this.comments.unshift(comment);
+          this.commentControl.reset('');
+          this.isSubmitting = false;
+          //this.notifyService.showSuccess('Tu comentario se ha publicado con éxito');
 
-  //         this.cd.markForCheck();
-  //       },
-  //       (errors) => {
-  //         this.notifyService.showWarning(
-  //           'Hay algún tipo de problema con el comentario',
-  //           'Bualabob ERROR'
-  //         );
-  //         this.isSubmitting = false;
-  //         this.commentFormErrors = errors;
-  //         this.cd.markForCheck();
-  //       }
-  //     );
-  //   }
-  // }
+          //this.cd.markForCheck();
+        },
+        (errors) => {
+          console.log(errors)
+          this.isSubmitting = false;
+          this.commentFormErrors = errors;
+          //this.cd.markForCheck();
+        }
+      );
+    }
+  }
 
   // onDeleteComment(comment:Comments) {
   //     if (this.product.slug) {
