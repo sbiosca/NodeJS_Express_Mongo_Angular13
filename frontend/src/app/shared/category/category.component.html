@@ -5,18 +5,24 @@
         <div class="category_box">
             <div>
                 <div class="categ" *ngFor="let cate of category_mv" [routerLink]="['/shop/category', cate.reference]">
-                    <h4>Times visited: <span>{{cate.visited}}</span></h4>
-                    <h5>{{cate.name_category}}</h5>
-                    <fa-icon [icon]="[cate.icon!.prefix, cate.icon!.name]" size="3x"></fa-icon>
+                    <h4>Times visited <span>{{cate.visited}}</span></h4>
+                    <fa-icon class="icon_category" [icon]="[cate.icon!.prefix, cate.icon!.name]" size="5x"></fa-icon>
                 </div> 
             </div>
         </div>
     </div>
-   <ngx-spinner bdOpacity = 0.9 bdColor = "" size = "default" color = "#581f87" type="ball-scale-multiple" [fullScreen] = "false">
-   </ngx-spinner>
-    <button
-     class="btn btn-dark"
-    (click)="scrollTop()">GO UP
-    </button>
+    <div style="position: relative">
+        <ngx-spinner
+            bdOpacity = 0.9
+            bdColor = "#f4f4f9"
+            size = "medium"
+            color = "#1010ee"
+            type = "ball-clip-rotate"
+            [fullScreen] = "false">
+        </ngx-spinner>
+      </div>
 </div>
+<button *ngIf="[showGoUpButton]"
+(click)="scrollTop()"><fa-icon class="icon_category" [icon]="['fas','arrow-up']" size="2x"></fa-icon>
+</button>
 </div>

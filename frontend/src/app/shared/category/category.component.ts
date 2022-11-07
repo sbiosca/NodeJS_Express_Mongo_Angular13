@@ -38,10 +38,9 @@ import { CategoryService} from "src/app/core/services/category.service";
     }
     onScroll() {
         this.spinner.show()
-        console.log("aparece")
+        this.showGoUpButton = false;
         setTimeout(() => {
             this.spinner.hide()
-            console.log("desaparece")
         }, 900);
         if (this.list.length < 6) {
             this.list.push(1,2,3,4)
