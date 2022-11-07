@@ -18,6 +18,7 @@ require('./');
 require('./models/product.model');
 require('./models/category.model');
 require('./models/User.model');
+require('./models/comment.model');
 require('./config/passport')
 
 app.use(express.json());

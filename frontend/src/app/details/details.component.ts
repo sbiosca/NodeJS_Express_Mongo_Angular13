@@ -12,6 +12,7 @@ import { Product } from '../core/models/product.model';
 export class DetailsComponent implements OnInit {
   slug?: string = '';
   products!: Product;
+  //img_products?: [];
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute
@@ -26,7 +27,8 @@ export class DetailsComponent implements OnInit {
     console.log(this.slug)
     this.ProductService.get(this.slug).subscribe((data) => {
       this.products = data;
-      console.log(data);
+      //this.img_products = data.img;
+      console.log(this.products);
     })
   }
 }
