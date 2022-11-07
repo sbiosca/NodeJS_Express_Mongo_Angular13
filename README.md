@@ -20,3 +20,6 @@ payload -> auth
 npm install jsonwebtoken --save 
 npm install passport --save  
 npm install express-jwt --save  
+
+npm install --save ngx-infinite-scroll@10 --force
+npm install --save ngx-spinner@10 --force
