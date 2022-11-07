@@ -6,3 +6,38 @@
     margin-top: 5%;
     margin-left: 10%;
 }
+
+.comments {
+    border: 1px solid black;
+    border-radius: 2%;
+    max-width: 40%;
+    text-align: center;
+    margin-top: 18%;
+    margin-left: 25%;
+}
+
+.comment_author {
+    border: 1px solid black;
+    border-radius: 2%;
+    max-width: 40%;
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 25%;
+}
+
+.p-carousel-content {
+    margin-top: 2.5%;
+    width: 100% !important;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+}
+.p-carousel-container {
+    width: 40%;
+    margin-bottom: 2.5%;
+}
+
+.p-carousel-item {
+    text-align: center;
+    padding: 2.5%;
+}
