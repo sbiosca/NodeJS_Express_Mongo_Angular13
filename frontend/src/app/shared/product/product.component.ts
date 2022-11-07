@@ -72,7 +72,8 @@ export class ProductComponent implements OnInit {
     list_categories() {
         this.CategoryService.getAll().subscribe((data) => {
             this.listcategory = data;
-            console.log(this.listcategory)
+            this.listcategory = this.listcategory.filter((value) => value.reference!=-1)
+
         })
     }
 

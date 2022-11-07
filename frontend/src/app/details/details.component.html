@@ -1,12 +1,12 @@
 <div class="details">
     <strong style="font-size: 300%;">{{products?.name}}</strong><p></p>
-    <!-- <p-carousel class="carrousel" [value]="img_products!" [numVisible]="1" [numScroll]="1">
+    <p-carousel class="carrousel" [value]="img_products!" [numVisible]="1" [numScroll]="1">
         <ng-template let-part pTemplate="item" >
             <div *ngFor="let img of img_products!">
                 <img style="width: 45%;" src="assets/img/{{img}}"/><p></p>
             </div>
         </ng-template>
-    </p-carousel> -->
+    </p-carousel>
     <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p>
     <span style="font-size: 120%;">{{products?.price}}€</span>
 </div>

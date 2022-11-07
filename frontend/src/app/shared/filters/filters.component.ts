@@ -66,20 +66,21 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
         if (value.target.id === "priceMin") {
             this.filters.priceMin = value.target.value;
-            console.log("PRICE")
+            //console.log("PRICE")
         }
         if (value.target.id === "priceMax") {
             this.filters.priceMax = value.target.value;
-            console.log("PRICE")
+            //console.log("PRICE")
         }
         if (value.target.id === "cate") {
             this.filters.listcategory = value.target.value;
+            console.log("1-"+this.selected)
             this.selected = value.target.value;
-            console.log(this.selected)
+            console.log("2-"+this.selected)
         }
         if (value.target.id === "state") {
             this.filters.state = value.target.value;
-            console.log("STATE")
+            //console.log("STATE")
         }
         
 
@@ -88,15 +89,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     }
 
     submit(value: any) {
-        console.log(value.data)
+        //console.log(value.data)
     }
 
     replaceEmit() {
-        console.log(this.selected)
+        //console.log(this.selected)
         this.Router.navigate(['/shop/'  + btoa(JSON.stringify(this.filters))])
         //this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
         //this.prodComp.ngOnInit()
         //this.filterEvent.emit(this.filters);
-        console.log(this.filters)
+        //console.log(this.filters)
     }
 }

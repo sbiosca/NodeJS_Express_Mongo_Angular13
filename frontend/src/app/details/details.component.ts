@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
   commentFormErrors = {};
   isSubmitting = false;
   isDeleting = false;
-  //img_products?: [];
+  img_products?: [];
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute
@@ -37,7 +37,7 @@ export class DetailsComponent implements OnInit {
     console.log(this.slug)
     this.ProductService.get(this.slug).subscribe((data) => {
       this.products = data;
-      //this.img_products = data.img;
+      this.img_products = data.img;
       console.log(this.products);
     })
   }
