@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
     @Input() set config(filters: Filters) {
 
         if (filters) {
-          //console.log("FILTROS")
+          console.log("FILTROS")
         }
       }
 
@@ -38,9 +38,10 @@ export class ProductComponent implements OnInit {
         this.ref_Category =
             this.ActivatedRoute.snapshot.paramMap.get('id') || '';
         this.url_filters =
-            this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
+            this.ActivatedRoute.snapshot.params['filters'] || '';
         this.product_categories();
         this.list_categories();
+        console.log(this.url_filters)
     }
 
     product_categories() {
@@ -71,7 +72,7 @@ export class ProductComponent implements OnInit {
     list_categories() {
         this.CategoryService.getAll().subscribe((data) => {
             this.listcategory = data;
-            //console.log(data)
+            console.log(this.listcategory)
         })
     }
 

@@ -2,16 +2,17 @@
     <!-- <form [formGroup]="filtersForm" (ngSubmit)="onchange($event)"> -->
         <select (change)="onchange($event)"  id="cate">
             <option label="All Categories" disabled selected></option>
-            <option *ngFor="let cate of listcategory" [selected]="cate.reference === selected" [value]="cate.reference">{{cate.name_category}}</option>
+            <option *ngFor="let cate of listcategory" [value]="cate.reference">{{cate.name_category}}</option>
         </select>
         <input type="number" id="priceMin" placeholder="priceMin" value="$event" (input)="onchange($event)" (change)="onchange($event)">
-        <input type="number" id="priceMax" placeholder="priceMax" (input)="onchange($event)" (change)="onchange($event)">
-        <select (change)="onchange($event)"  id="state">
+        <input type="number" id="priceMax" placeholder="priceMax" value="$event" (input)="onchange($event)" (change)="onchange($event)">
+        <select (change)="onchange($event)" id="state">
             <option label="State Of Product" disabled selected></option>
             <option value="new">NEW</option>
             <option value="as_new">AS_NEW</option>
             <option value="good_state">GOOD_STATE</option>
         </select>
+        <button type="submit">SUBMIT</button>
         <button [routerLink]="['/shop/category/-1']">DELETE</button>
     <!-- </form> -->
 </div>
