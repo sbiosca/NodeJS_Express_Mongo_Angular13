@@ -49,6 +49,11 @@ UserSchema.methods.toAuthJSON = function(){
   };
 };
 
+UserSchema.methods.updateKarmaSave = function (qty, userKarma) {
+  userKarma.karma = userKarma.karma + qty;
+  return userKarma.save();
+};
+
 UserSchema.methods.toProfileJSONFor = function(user){
   return {
     username: this.username,

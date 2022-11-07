@@ -17,13 +17,13 @@ export class CommentsService {
   add(slug:string, payload:any): Observable<Comment> {
     return this.apiService
     .post(
-      `products/${slug}/comments`,
+      `comments/${slug}`,
       { comment: { body: payload } }
     ).pipe(map(data => data.comment));
   }
 
   getAll(slug:string): Observable<Comment[]> {
-    return this.apiService.get(`products/${slug}/comments`)
+    return this.apiService.get(`comments/${slug}`)
       .pipe(map(data => data.comments));
   }
 
