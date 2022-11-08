@@ -29,6 +29,7 @@ export class UserService {
       .subscribe(data => {
           this.setAuth(data.user)
           console.log(data.user)
+          return data.user;
       }
         // data => this.setAuth(data.user),
         // err => this.purgeAuth()

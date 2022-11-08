@@ -12,7 +12,7 @@
     border-radius: 2%;
     max-width: 40%;
     text-align: center;
-    margin-top: 18%;
+    margin-top: 5%;
     margin-left: 25%;
 }
 
@@ -21,8 +21,8 @@
     border-radius: 2%;
     max-width: 40%;
     text-align: center;
-    margin-top: 10%;
-    margin-left: 25%;
+    margin-top: 2%;
+    margin-left: 30%;
 }
 
 .p-carousel-content {
@@ -40,4 +40,8 @@
 .p-carousel-item {
     text-align: center;
     padding: 2.5%;
+}
+
+fieldset {
+    border: none;
 }

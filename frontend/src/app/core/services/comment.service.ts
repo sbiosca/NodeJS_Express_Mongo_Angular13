@@ -18,7 +18,7 @@ export class CommentsService {
     return this.apiService
     .post(
       `comments/${slug}`,
-      { comment: { body: payload } }
+      { body: payload }
     ).pipe(map(data => data.comment));
   }
 
@@ -29,7 +29,7 @@ export class CommentsService {
 
   destroy(commentId:string, articleSlug:string) {
     return this.apiService
-      .delete(`products/${articleSlug}/comments/${commentId}`);
+      .delete(`comments/${articleSlug}/${commentId}`);
   }
 
 }

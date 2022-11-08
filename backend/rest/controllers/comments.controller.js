@@ -13,11 +13,23 @@ exports.list_Comment = async (req, res, next) => {
     Promise.resolve(req.payload ? User.findById(req.payload.id) : null)
         .then(function (user) {
             Product.findOne({ slug: productSlug })
+                .populate({
+                    path: "tags",
+                    populate: {
+                        path: "author",
+                    },
+                    options: {
+                        sort: {
+                            createdAt: "desc",
+                        },  
+                    },
+                })
                 .then(function (product) {
+                    //console.log(product)
                     return res.json({
                         comments: product.tags.map(function (comment) {
-                            //return comment.toJSONFor(comment.author);
-                            return comment;
+                            return comment.toJSONFor(comment.author);
+                            //return comment;
                         }),
                     });
                 });
@@ -36,14 +48,14 @@ exports.create_comment = async (req, res, next) => {
                 user.updateKarmaSave(5, user);
  
                 var comment = new Comment(req.body);
-                console.log(comment);
+                //console.log(comment);
                 Product.findOne({ slug: productSlug }).then(function (product) {
                     if (!product) return res.sendStatus(404);
                     
                     comment.author = user._id;
                     comment.product = product._id;
                     return comment.save().then(function () {
-                        
+                        console.log(comment)
                         product.tags.push(comment);
                         
                         return product.save().then(function () {
@@ -62,8 +74,8 @@ exports.create_comment = async (req, res, next) => {
 exports.delete_Comment = async(req, res, next) => {
     console.log("delete_comment")
     let idComment = req.params.comment;
-    let productSlug = req.params.article;
-
+    let productSlug = req.params.product;
+    //return res.json({comment: idComment, product : productSlug})
     try {
         User.findById(req.auth.id)
             .then(function (user) {
@@ -76,11 +88,11 @@ exports.delete_Comment = async(req, res, next) => {
 
         await Comment.findById(idComment).then(function (comment) {
             if (!comment) return res.sendStatus(404);
-            if (comment.author.toString() === req.payload.id.toString()) {
+            if (comment.author.toString() === req.auth.id.toString()) {
             Product.findOne({ slug: productSlug }).then(function (product) {
                 if (!product) return res.sendStatus(404);
               
-                product.comments.remove(idComment);
+                product.tags.remove(idComment);
                 product.save();
                 comment.remove();
                 res.sendStatus(204);
