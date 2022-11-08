@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private ProfilService: ProfilesService,
-    private cd: ChangeDetectorRef
   ) { 
     this.url_user = this.route.snapshot.paramMap.get('username') || '' ;
   }
@@ -30,6 +29,7 @@ export class ProfileComponent implements OnInit {
       next: (data) => {
           console.log(data);
           this.profile = data;
+          this.currentUser = this.userService.getCurrentUser();
       },
       error: (error) => {
           console.log(error)

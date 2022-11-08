@@ -2,9 +2,12 @@ import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../core/services/product.service';
 import { Comment } from '../core/models/comment.module';
 import { CommentsService } from '../core/services/comment.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../core/models/product.model';
 import { FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../core/services/user.service';
+import { User } from '../core/models/user.model';
 
 @Component({
   selector: 'app-details',
@@ -16,20 +19,23 @@ export class DetailsComponent implements OnInit {
   slug?: string = '';
   products!: Product;
   images: String[] = [];
-  public classList: String = '';
-
-  // currentUser: User;
-  // canModify: boolean;
+  error!: boolean;
   comments!: Comment[];
   commentControl = new FormControl();
   commentFormErrors = {};
   isSubmitting = false;
   isDeleting = false;
   img_products?: [];
+  user: User = {} as User;
+  token!: String;
+
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute,
-    private CommentsService: CommentsService
+    private CommentsService: CommentsService,
+    private router: Router,
+    private ToastrService: ToastrService,
+    private userService: UserService,
   ) {
     this.slug = this.ActivateRoute.snapshot.paramMap.get('slug') || '';
   }
@@ -63,64 +69,53 @@ export class DetailsComponent implements OnInit {
     if (this.products.slug) {
       this.CommentsService.getAll(this.products.slug).subscribe((comments) => {
         this.comments = comments;
-        console.log(this.comments);
-        //this.cd.markForCheck();
+        this.user = this.userService.getCurrentUser();
       });
     }
   }
 
   addComment() {
-    this.isSubmitting = true;
+    this.error = false;
     this.commentFormErrors = {};
     if (this.products.slug) {
-      const commentBody = this.commentControl.value;
-      this.CommentsService.add(this.products.slug, commentBody).subscribe(
-        (comment) => {
-          console.log(comment)
-          this.comments.unshift(comment);
-          this.commentControl.reset('');
-          this.isSubmitting = false;
-          //this.notifyService.showSuccess('Tu comentario se ha publicado con éxito');
-
-          //this.cd.markForCheck();
-        },
-        (errors) => {
-          console.log(errors)
-          this.isSubmitting = false;
-          this.commentFormErrors = errors;
-          //this.cd.markForCheck();
-        }
-      );
+      const commentvalue = this.commentControl.value;
+      if (commentvalue === null) {
+        console.log(commentvalue)
+        this.error = true;
+      }else {
+        this.error = false;
+        this.CommentsService.add(this.products.slug, commentvalue).subscribe({
+          next: (data) => {
+            console.log(data);
+            this.comments.unshift(data);
+            this.commentControl.reset('');
+          },
+          error: (errors) => {
+            console.log(errors)
+            this.router.navigateByUrl('/auth/login');
+            this.ToastrService.error("ERROR COMMENT", "You must have a account to write a comment")
+          }
+        });
+      }
+      
     }
   }
 
-  // onDeleteComment(comment:Comments) {
-  //     if (this.product.slug) {
-
-  //     this.commentsService.destroy(comment.id, this.product.slug)
-  //       .subscribe(
-  //         success => {
-  //           this.comments = this.comments.filter((item) => item !== comment);
-  //           this.cd.markForCheck();
-  //         }
-  //       );
-  //   }
-  // }
-
-  // onDeleteProduct() {
-  //   if (this.product.slug) {
-  //     this.graphqlService.deleteProduct(this.product.slug).subscribe(
-  //       (data) => {
-  //         console.log(data);
-  //         this.notifyService.showInfo('Este producto ha sido eliminado con éxito', '¡Producto eliminado!');
-  //         this.router.navigateByUrl('/shop');
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //         this.notifyService.showWarning('Ha habido algún problema y no se ha elimindado el producto', 'Error al eliminar');
-  //       });
-  //   }
-  // }
+  delete_comment(comment:any) {
+    console.log(comment)
+      if (this.products.slug) {
+      this.CommentsService.destroy(comment, this.products.slug)
+        .subscribe({
+          next: () => {
+            this.getComments();
+          }, 
+          error: (error) => {
+            console.log(error)
+          }
+          }
+        );
+    }
+  }
 
   // onToggleFavorite(favorited: boolean) {
   //   this.product.favorited = favorited;

@@ -8,7 +8,8 @@
       </ng-template>
   </p-carousel>
   <!-- <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p> -->
-  <span style="font-size: 120%;">{{products?.price}}€</span>
+  <span style="font-size: 120%;">{{products?.price}}€</span><p></p>
+  <span style="font-size: 120%;">{{products?.description}}</span>
 </div>
 
 <div class="comments">
@@ -16,35 +17,29 @@
   <p></p>
 
   <div class="comment_author" *ngFor="let comment of comments">
-    <span>AUTHOR</span>
     <p></p>
-    {{comment}}
+    <strong>{{comment.author.username}}</strong><p></p>
+    <img [src]="comment.author.image" routerLink="/profile/{{comment.author.username}}" style="width: 20%;"/>
+    <p></p>
+    {{comment.body}}
+    <p></p>
+    <button (click)="delete_comment(comment.id)" *ngIf="user.username === comment.author.username">
+      <fa-icon [icon]="['fas', 'trash']" size="1x"></fa-icon>
+    </button>
   </div>
-
-
-</div>
-<br>
-<div>
+  <br>
   <div>
+    <form (ngSubmit)="addComment()" >
+      <fieldset [disabled]="isSubmitting">
+        <textarea [formControl]="commentControl" placeholder="Write a comment..." rows="3" cols="50"></textarea><p></p>
+        <span style="color: red;" *ngIf="error == true">Comment mustn't blank</span>
+        <div><button type="submit">Post comment</button><button type="button">Cancel</button></div>
+      </fieldset>
+      
+    </form>
     <div>
-      <!-- <img  [routerLink]="['/profile', currentUser.username]" [src]="'../../assets/images/'+currentUser.image" onerror="this.src='../../assets/images/bbyoda.png'" alt="Image Description"> -->
-      <div>
-        <form (ngSubmit)="addComment()">
-          <fieldset>
-            <textarea [formControl]="commentControl" placeholder="Write a comment..." rows="3" cols="50"></textarea>
-            <div><button type="submit">Post comment</button><button type="button">Cancel</button></div>
-          </fieldset>
-        </form>
-      </div>
-
-
-      <div>
-        <div>
-          <a [routerLink]="['/auth/login']">Sign in</a> or <a [routerLink]="['/auth/register']">sign up</a> to add
-          comments on this
-          article.
-        </div>
-      </div>
-    </div>
+      <a [routerLink]="['/auth/login']">Sign in</a> or <a [routerLink]="['/auth/register']">sign up</a> to add
+      comments on this product.
+    </div>  
   </div>
 </div>

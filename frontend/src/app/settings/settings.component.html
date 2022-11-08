@@ -1,62 +1,62 @@
 <div class="settings-page">
-    <div class="card">
-          <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-            <fieldset [disabled]="isSubmitting">
-              <div class="avatar_image">
-                <a target="_blank" href="{{user.image}}"><img [src]="user.image || 'https://www.ibei.org/images/4611/person_box.png'"/></a>
+  <div class="card">
+        <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <div class="avatar_image">
+              <a target="_blank" href="{{user.image}}"><img [src]="user.image || 'https://www.ibei.org/images/4611/person_box.png'"/></a>
+              <fieldset class="form-group">
+                <input class="form-control"
+                  type="text"
+                  placeholder="URL of profile picture"
+                  formControlName="image" />
+              </fieldset>
+            </div>
+            <div class="controls">
+              <div>
                 <fieldset class="form-group">
-                  <input class="form-control"
+                  <input class="form-control form-control-lg"
                     type="text"
-                    placeholder="URL of profile picture"
-                    formControlName="image" />
+                    placeholder="Username"
+                    formControlName="username" />
                 </fieldset>
+    
+                
+                <fieldset class="form-group">
+                  <input class="form-control form-control-lg"
+                  type="email"
+                  placeholder="Email"
+                  formControlName="email" />
+                </fieldset>
+                
+                <fieldset class="form-group">
+                  <input class="form-control form-control-lg"
+                  type="password"
+                  placeholder="New Password"
+                  formControlName="password" />
+                </fieldset>
+                <fieldset class="form-group">
+                  <textarea class="form-control form-control-lg"
+                    rows="8" cols="50"
+                    style='resize:none'
+                    placeholder="Short bio about you"
+                    formControlName="bio">
+                  </textarea>
+                </fieldset>
+                <span style="color: red;">{{errors}}</span>
+                <button class="btn btn-lg btn-primary pull-xs-right"
+                  type="submit">
+                  Update Settings
+                </button>
               </div>
-              <div class="controls">
-                <div>
-                  <fieldset class="form-group">
-                    <input class="form-control form-control-lg"
-                      type="text"
-                      placeholder="Username"
-                      formControlName="username" />
-                  </fieldset>
-      
-                  
-                  <fieldset class="form-group">
-                    <input class="form-control form-control-lg"
-                    type="email"
-                    placeholder="Email"
-                    formControlName="email" />
-                  </fieldset>
-                  
-                  <fieldset class="form-group">
-                    <input class="form-control form-control-lg"
-                    type="password"
-                    placeholder="New Password"
-                    formControlName="password" />
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <textarea class="form-control form-control-lg"
-                      rows="8" cols="50"
-                      style='resize:none'
-                      placeholder="Short bio about you"
-                      formControlName="bio">
-                    </textarea>
-                  </fieldset>
-                  <span style="color: red;">{{errors}}</span>
-                  <button class="btn btn-lg btn-primary pull-xs-right"
-                    type="submit">
-                    Update Settings
-                  </button>
-                </div>
-              </div>
-  
-            </fieldset>
-          </form>  
-          <button class="btn btn-outline-danger"
-            (click)="logout()">
-            Logout
-          </button>
-    </div>
-    <p></p>
+            </div>
+
+          </fieldset>
+        </form>  
+        <button class="btn btn-outline-danger"
+          (click)="logout()">
+          Logout
+        </button>
+
   </div>
-  
+  <p></p>
+</div>

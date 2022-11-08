@@ -14,7 +14,10 @@
             [Profile]="Profile"
             (toggle)="onToggleFollowing($event)">
           </app-follow-button> -->
-        <button routerLink="/settings" routerLinkActive="active">Settings</button>
+        <button *ngIf="profile.username !== currentUser.username">
+            Follow Us
+        </button><hr>
+        <button *ngIf="profile.username === currentUser.username" [routerLink]="['/settings']" [routerLinkActive]="['active']">Settings</button>
     </div>
     
 </div>

@@ -18,7 +18,7 @@ const ProductSchema = mongoose.Schema({
         default: "",
         maxLength: 1000,
       },
-      tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "tags" }],
+      tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
       img: {
         type: Array
       },
