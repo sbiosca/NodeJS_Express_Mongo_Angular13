@@ -45,7 +45,7 @@ export class ProductService {
     return this.api.delete('product/' + slug + '/favorite');
   }
 
-  getfavorite(): Observable<Product> {
+  getfavorite(): Observable<Product[]> {
     return this.api.get('product/user/favorite');
   }
   // get(id: any): Observable<Product> {
