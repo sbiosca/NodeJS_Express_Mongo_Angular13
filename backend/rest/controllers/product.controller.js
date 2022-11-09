@@ -1,4 +1,7 @@
 const product = require("../models/product.model");
+const mongoose = require('mongoose');
+const { schema } = require('../models/User.model');
+const User = mongoose.model('User', schema);
 
 exports.load_product = async (req, res, next, slug) => {
     await product.findOne({ slug: slug }).populate("price")
@@ -144,3 +147,105 @@ exports.search = async (req, res) => {
 exports.delete_product = async (req, res) => {
 
 }
+
+exports.addfavorite = async (req, res, next) => {
+    if (!req.product) {
+        Product.findOne({ slug: req.params.slug }).then(function (product) {
+          if (!product) res.status(404).json({ msg: "No existe el product" });
+          var productId = product._id;
+    
+        //   User.findById(product.author).then(function (user) {
+        //     if (!user) return res.sendStatus(401);
+        //     user.updateKarmaSave(10, user);
+        //   }).catch(next);
+    
+          User.findById(req.auth.id).then(function (user) {
+            if (!user) return res.sendStatus(401);
+            return user.favorite(productId).then(function () {
+              return product.favoriteCount().then(function (product) {
+                return res.json( product.toJSONFor(user));
+              });
+            });
+          }).catch(next);
+        }).catch(function (err) {
+          console.log(err)
+          res.json(err)
+        });
+    
+    
+      } else {
+        var productId = req.product._id;
+    
+        // User.findById(req.product.author).then(function (user) {
+        //     if (!user) return res.sendStatus(401);
+        //     user.updateKarmaSave(10, user);
+        // })
+        // .catch(next);
+        User.findById(req.auth.id).then(function (user) {
+          if (!user) return res.sendStatus(402);
+    
+          return user.favorite(productId).then(function () {
+            return req.product.favoriteCount().then(function (product) {
+              return res.json(product.toListJSONFor(user) );
+            });
+          });
+        }).catch(next);
+      }
+}
+
+exports.deletefavorite = async (req, res, next) => {
+    if (!req.product) {
+        Product.findOne({ slug: req.params.slug }).then(function (product) {
+          if (!product) res.status(404).json({ msg: "No existe el product" });
+          var productId = product._id;
+    
+        //   User.findById(product.author).then(function (user) {
+        //     if (!user) return res.sendStatus(401);
+        //     user.updateKarmaSave(-10, user);
+        //   }).catch(next);
+    
+          User.findById(req.auth.id).then(function (user) {
+            if (!user) return res.sendStatus(401);
+            return user.unfavorite(productId).then(function () {
+              return product.favoriteCount().then(function (product) {
+                return res.json(product.toListJSONFor(user) );
+              });
+            });
+          }).catch(next);
+        }).catch(function (err) {
+          console.log(err)
+          res.json(err)
+        });
+    
+    
+      } else {
+        var productId = req.product._id;
+        
+        // User.findById(req.product.author).then(function (user) {
+        //   if (!user) return res.sendStatus(401);
+        //   user.updateKarmaSave(-10, user);
+        // })      .catch(next);
+        User.findById(req.auth.id).then(function (user) {
+          if (!user) return res.sendStatus(401);
+    
+          return user.unfavorite(productId).then(function () {
+            return req.product.favoriteCount().then(function (product) {
+              return res.json(product.toListJSONFor(user));
+            });
+          });
+        }).catch(next);
+      }
+}
+
+exports.getfavorite = async (req, res) => {
+  try {
+    const user = await User.findById(req.auth.id);
+    const products = await product.find({_id: user.favorites}).populate("author");
+    if (products) {
+      return res.json(products.map(product => product.toAuthorJSON(user)));
+    }
+  } catch (error) {
+    console.log(error)
+    //res.status(500).json({msg: "An error has ocurred"});
+  }
+};

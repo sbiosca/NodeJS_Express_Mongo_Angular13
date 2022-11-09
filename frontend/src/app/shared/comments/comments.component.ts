@@ -33,7 +33,6 @@ import {
       // Load the current user's data
       this.subscription = this.userService.currentUser.subscribe(
         (userData: User) => {
-          //this.canModify = userData.username === this.comment.author.username;
           this.cd.markForCheck();
         }
       );

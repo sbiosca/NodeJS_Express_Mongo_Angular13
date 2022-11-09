@@ -5,12 +5,14 @@ import { ProfileComponent } from './profile.component';
 //import { ProfileFavoritesComponent } from './profile-favorites.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
     SharedModule,
     ProfileRoutingModule,
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   declarations: [
    // ProfileArticlesComponent,
