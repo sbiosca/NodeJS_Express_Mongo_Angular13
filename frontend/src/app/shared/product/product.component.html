@@ -4,6 +4,7 @@
             <div class="product" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}">
                 <span class="price">{{prod.price}}€</span>
                 <img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" [routerLink]="['/details', prod.slug]"/>
+                <!-- <a target="_blank" [routerLink]="['/details', prod.slug]"><img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" /></a> -->
                 <span class="name_product" id="{{prod}}">{{prod.name}}</span><p></p>
                 <div class="use_buttons">
                     <button><fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon></button>
