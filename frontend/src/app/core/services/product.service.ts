@@ -37,6 +37,17 @@ export class ProductService {
     );
   } 
 
+  favorite(slug: any): Observable<Product> {
+    return this.api.post('product/' + slug + '/favorite');
+  }
+
+  unfavorite(slug: any): Observable<Product> {
+    return this.api.delete('product/' + slug + '/favorite');
+  }
+
+  getfavorite(): Observable<Product> {
+    return this.api.get('product/user/favorite');
+  }
   // get(id: any): Observable<Product> {
   //   return this.http.get(`${baseUrl}/${id}`);
   // }

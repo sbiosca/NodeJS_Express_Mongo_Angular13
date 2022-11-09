@@ -15,6 +15,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { ListErrorsComponent } from './list-errors.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 //import { ShowAuthedDirective } from "./show-authed.directive";
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
@@ -42,7 +43,8 @@ import { ListErrorsComponent } from './list-errors.component';
         CarouselComponent,
         InfinitescrollComponent,
         FiltersComponent,
-        ListErrorsComponent
+        ListErrorsComponent,
+        FavoriteComponent
         //ShowAuthedDirective
         // CarouselComponent
         
@@ -56,7 +58,8 @@ import { ListErrorsComponent } from './list-errors.component';
         FiltersComponent,
         FormsModule,
         ReactiveFormsModule,
-        ListErrorsComponent
+        ListErrorsComponent,
+        FavoriteComponent
         //ShowAuthedDirective
         // CarouselComponent        
     ]

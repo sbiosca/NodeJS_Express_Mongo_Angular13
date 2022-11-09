@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit {
   img_products?: [];
   user: User = {} as User;
   token!: String;
+  product_favorite!: Product; 
 
   constructor(
     private ProductService: ProductService,
@@ -117,18 +118,19 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  // onToggleFavorite(favorited: boolean) {
-  //   this.product.favorited = favorited;
-  //   console.log(this.product.favorited);
-  //   if (favorited) {
-  //     console.log("favorited:" + favorited);
-  //     if (typeof this.product.favorites === 'number') {
-  //       this.product.favorites++;
-  //     }
-  //   } else {
-  //     if (typeof this.product.favorites === 'number') {
-  //       this.product.favorites--;
-  //     }
-  //   }
-  // }
+  onToggleFavorite(favorited: any) {
+    //console.log("favorite")
+    // this.product_favorite.favorited = favorited;
+    // console.log(this.product_favorite.favorited);
+    // if (favorited) {
+    //   console.log("favorited:" + favorited);
+    //   if (typeof this.product_favorite.favorites === 'number') {
+    //     this.product_favorite.favorites++;
+    //   }
+    // } else {
+    //   if (typeof this.product_favorite.favorites === 'number') {
+    //     this.product_favorite.favorites--;
+    //   }
+    // }
+  }
 }

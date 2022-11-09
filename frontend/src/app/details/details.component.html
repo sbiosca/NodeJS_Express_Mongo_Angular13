@@ -9,7 +9,8 @@
   </p-carousel>
   <!-- <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p> -->
   <span style="font-size: 120%;">{{products?.price}}€</span><p></p>
-  <span style="font-size: 120%;">{{products?.description}}</span>
+  <span style="font-size: 120%;">{{products?.description}}</span><p></p>
+  <app-favorite [products]="products" (toggle)="onToggleFavorite($event)"></app-favorite>
 </div>
 
 <div class="comments">

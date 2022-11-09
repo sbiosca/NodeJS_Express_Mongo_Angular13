@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User, UserService, ProfilesService, Profile } from '../core';
+import { User, UserService, ProfilesService, Profile, ProductService, Product } from '../core';
 import { concatMap ,  tap } from 'rxjs/operators';
 
 @Component({
@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private ProfilService: ProfilesService,
+    private productService: ProductService
   ) { 
     this.url_user = this.route.snapshot.paramMap.get('username') || '' ;
   }
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
   profile: Profile = {} as Profile;
   currentUser: User = {} as User;
   isUser!: boolean;
+  favorites?: Product;
 
   ngOnInit(): void {
     this.ProfilService.get(this.url_user).subscribe({
@@ -36,8 +38,12 @@ export class ProfileComponent implements OnInit {
           this.isUser = true;
           this.router.navigateByUrl('/')
       }
-  })     
-    console.log("PROFILE.COMPONENT")
+    })     
+    this.productService.getfavorite().subscribe((data)=> {
+      //this.products = data;
+      this.favorites = data;
+      console.log(data);
+    })
   }
 
   // onToggleFollowing(following: boolean) {
