@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     url_filters?: string = '';
     filters!:Filters;
     selected?: string;
+    home_category?: number;
     //filtersForm: FormGroup;
 
     @Input() listcategory: Category[] = [];
@@ -27,44 +28,48 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             private prodComp: ProductComponent
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
-                // this.filtersForm = this.FormBuilde.group({
-                //     'priceMin': ['', Validators.required],
-                //     'priceMax': ['', Validators.required],
-                //     'cate': ['', Validators.required],
-                //     'state': ['', Validators.required]
-                //   });
+                this.ActivatedRoute.url.subscribe((data) => {
+                    if (data[1].path) {
+                        setTimeout(() => {
+                            this.home_category = parseInt(data[1].path)
+                        }, 100);
+                    }
+                })
             }
 
     ngOnInit(): void {
         this.start_filters();
-        //this.onchange();
-        //this.replaceEmit();
     }
 
     start_filters() {
+        this.prodComp.ngOnInit();
         if (this.url_filters) {
+            console.log("3")
             this.filters = JSON.parse(atob(this.url_filters));
+            this.replaceEmit()
+            console.log(this.filters)
         }
     }
 
     checkTime(filters: any) {
+        console.log("5")
         setTimeout(() => {
         if (filters === this.filters) this.replaceEmit();
         }, 500);
     }
 
     public onchange(value: any): void {
+
+        //console.log(value)
+        this.filters = new Filters();
         this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
-        this.prodComp.ngOnInit();
         if (this.url_filters) {
-            this.filters = new Filters();
             this.filters = JSON.parse(atob(this.url_filters));
-        }else {
-            this.filters = new Filters();
+            console.log(this.filters)
         }
-        console.log(value.target.id);
 
         if (value.target.id === "priceMin") {
+            console.log(value.data)
             this.filters.priceMin = value.target.value;
             //console.log("PRICE")
         }
@@ -73,16 +78,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             //console.log("PRICE")
         }
         if (value.target.id === "cate") {
+            console.log(value)
             this.filters.listcategory = value.target.value;
-            console.log("1-"+this.selected)
-            this.selected = value.target.value;
-            console.log("2-"+this.selected)
+            console.log(this.filters.listcategory)
         }
         if (value.target.id === "state") {
             this.filters.state = value.target.value;
             //console.log("STATE")
         }
-        
+        console.log("4")
 
         this.checkTime(this.filters);
         this.productcomp.product_categories()
@@ -93,11 +97,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     }
 
     replaceEmit() {
-        //console.log(this.selected)
         this.Router.navigate(['/shop/'  + btoa(JSON.stringify(this.filters))])
-        //this.location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
-        //this.prodComp.ngOnInit()
-        //this.filterEvent.emit(this.filters);
-        //console.log(this.filters)
     }
 }
