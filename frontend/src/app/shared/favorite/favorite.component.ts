@@ -5,6 +5,7 @@ import { concatMap ,  tap } from 'rxjs/operators';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import { Product, ProductService, UserService } from '../../core';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,11 +14,12 @@ import { Product, ProductService, UserService } from '../../core';
   styleUrls: ['./favorite.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent {
   @Input() products?: Product;
+  //INPUT OF PRODUCT IN DETAILS HAVE LIKE OR NOT LIKE
+  @Input() heart_color?: boolean;
   @Output() toggle = new EventEmitter<boolean>();
   isSubmitting = false;
-  heart_color: boolean = false;
   highfav!: Product;
  
 
@@ -26,44 +28,35 @@ export class FavoriteComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private cd: ChangeDetectorRef,
-    
+    private ToastrService: ToastrService
   ) {}
 
-    
+  
   //faHeart  = faHeart;
-  ngOnInit() {
-    this.productService.getfavorite().subscribe((data)=> {
-        //this.highfav = data;
-        //console.log(data.length);
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i].slug);
-          this.highfav = data[i].slug;
-        }
-        
-      })
-  }
+  
   toggleFavorite() {
-    
-    //console.log(this.products)
+    console.log(this.products)
     this.isSubmitting = true;
-    this.heart_color = false;
+    //this.heart_color = false;
+    console.log(this.heart_color)
     this.userService.isAuthenticated.pipe(concatMap(
       (authenticated) => {
-        // Not authenticated? Push to login screen
         if (!authenticated) {
           this.router.navigateByUrl('/auth/login');
+          this.ToastrService.error("YOU MUST LOG IN YOUR ACCOUNT");
           return of(null);
         }
         
-        if (!this.products?.favorited) {
+        if (!this.heart_color) {
           return this.productService.favorite(this.products?.slug)
           .pipe(tap( {
             next: (data) => {
                 this.isSubmitting = false;
-                this.toggle.emit(true);
+                //this.toggle.emit(true);
                 console.log(data)
                 this.products = data;
                 this.heart_color = data.favorited!;
+                this.ToastrService.success("PRODUCT ADDED TO FAVORITE: " +  data.name);
             },
             error: (error) => {
                 this.isSubmitting = false
@@ -74,7 +67,7 @@ export class FavoriteComponent implements OnInit {
 
         // Otherwise, unfavorite the article
         } else {
-          return this.productService.unfavorite(this.products.slug)
+          return this.productService.unfavorite(this.products?.slug)
           .pipe(tap({
               next: (data) => {
                   this.isSubmitting = false;
@@ -82,6 +75,7 @@ export class FavoriteComponent implements OnInit {
                   console.log(data)
                   this.products = data;
                   this.heart_color =  data.favorited!;
+                  this.ToastrService.info("PRODUCT DELETED TO FAVORITE: " +  data.name)
               },
               error: (error) => {
                   this.isSubmitting = false
@@ -94,5 +88,9 @@ export class FavoriteComponent implements OnInit {
     )).subscribe(() => {
       this.cd.markForCheck();
     });
+  }
+
+  highfavorite_prod() {
+    console.log("holas")
   }
 }

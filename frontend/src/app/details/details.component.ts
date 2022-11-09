@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
   user: User = {} as User;
   token!: String;
   product_favorite!: Product; 
-
+  heart_color: boolean = false;
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute,
@@ -43,6 +43,15 @@ export class DetailsComponent implements OnInit {
   
   ngOnInit() {
     this.product_details();
+    //HIGHLIGHT FAVORITE
+    this.ProductService.getfavorite().subscribe((data)=> {
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        if (this.slug === data[i].slug) {
+          console.log("PRODUCT: " + data[i].name);
+          this.heart_color = data[i].favorited!;
+      }
+    }})
   }
   product_details() {
     console.log(this.slug)
@@ -116,21 +125,5 @@ export class DetailsComponent implements OnInit {
           }
         );
     }
-  }
-
-  onToggleFavorite(favorited: any) {
-    //console.log("favorite")
-    // this.product_favorite.favorited = favorited;
-    // console.log(this.product_favorite.favorited);
-    // if (favorited) {
-    //   console.log("favorited:" + favorited);
-    //   if (typeof this.product_favorite.favorites === 'number') {
-    //     this.product_favorite.favorites++;
-    //   }
-    // } else {
-    //   if (typeof this.product_favorite.favorites === 'number') {
-    //     this.product_favorite.favorites--;
-    //   }
-    // }
   }
 }

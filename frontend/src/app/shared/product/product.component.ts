@@ -23,19 +23,21 @@ export class ProductComponent implements OnInit {
     listcategory: Category[] = [];
     product_favorite!: Product; 
     canModify!: boolean;
-    productt!: Product;
+    products!: Product;
+    heart_color: boolean = false;
+    
 
     @Input() set config(filters: Filters) {
 
         if (filters) {
           console.log("FILTROS")
         }
-      }
+    }
 
       
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
-        private ActivatedRoute: ActivatedRoute) {
+        private ActivatedRoute: ActivatedRoute,) {
         }
     ngOnInit(): void {
         this.ref_Category =
@@ -44,40 +46,47 @@ export class ProductComponent implements OnInit {
             this.ActivatedRoute.snapshot.params['filters'] || '';
         this.product_categories();
         this.list_categories();
-        console.log(this.url_filters)
+        console.log(this.ref_Category)
+        //this.heart_color;
     }
 
     product_categories() {
         //console.log(this.url_filters)
-        if ((this.ref_Category == '' ) && (this.url_filters == '')) {
-            this.ProductService.getAll().subscribe((data) => {
-                this.product = data;
+        if (this.ref_Category != "favorites") {
+            if ((this.ref_Category == '' ) && (this.url_filters == '')) {
+                this.ProductService.getAll().subscribe((data) => {
+                    this.product = data;
 
-                //console.log(data);
-            })
-        }else if((this.ref_Category != '') && (this.url_filters == '')) {
-            //console.log(this.ref_Category);
-            this.CategoryService.get(this.ref_Category).subscribe((data) => {
-                this.listcategory = data.products!;
-                console.log(data);
-                this.product = data.products!;
-            })
-        }else if((this.ref_Category == '') && (this.url_filters != '')){
-            this.filtered_products(this.url_filters);
-            // this.url_filters = JSON.parse(atob(this.url_filters));
-            // this.CategoryService.get(this.url_filters).subscribe((data) => {
-            //     console.log(data.products);
-            //     this.listcategory = data.products!;
-            //     this.product = data.products!;
-            // })
+                    //console.log(data);
+                })
+            }else if((this.ref_Category != '') && (this.url_filters == '')) {
+                //console.log(this.ref_Category);
+                this.CategoryService.get(this.ref_Category).subscribe((data) => {
+                    this.listcategory = data.products!;
+                    console.log(data);
+                    this.product = data.products!;
+
+                })
+            }else if((this.ref_Category == '') && (this.url_filters != '')){
+                this.filtered_products(this.url_filters);
+    
+                // this.url_filters = JSON.parse(atob(this.url_filters));
+                // this.CategoryService.get(this.url_filters).subscribe((data) => {
+                //     console.log(data.products);
+                //     this.listcategory = data.products!;
+                //     this.product = data.products!;
+                // })
+            }
+        }else {
+            this.profile_favorites()
         }
+       
     }
 
     list_categories() {
         this.CategoryService.getAll().subscribe((data) => {
             this.listcategory = data;
             this.listcategory = this.listcategory.filter((value) => value.reference!=-1)
-
         })
     }
 
@@ -98,33 +107,12 @@ export class ProductComponent implements OnInit {
         
     }
 
-    onToggleFavorite(favorited: any) {
-        console.log("favorite")
-        // this.product_favorite.favorited = favorited;
-        // console.log(this.product_favorite.favorited);
-        // if (favorited) {
-        //   console.log("favorited:" + favorited);
-        //   if (typeof this.product_favorite.favorites === 'number') {
-        //     this.product_favorite.favorites++;
-        //   }
-        // } else {
-        //   if (typeof this.product_favorite.favorites === 'number') {
-        //     this.product_favorite.favorites--;
-        //   }
-        // }
-      }
- 
-    // refresRouteFilter() {
-    //     this.url_filters =
-    //         this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
-    //     if(typeof(this.url_filters) == "string" ){
-    //       //this.filters = JSON.parse(atob(this.url_filters));
-    //       console.log(this.filters);
-    //     }else{
-    //       this.filters = new Filters();
-    //     }
-    //   }
-    
+    profile_favorites() {
+        this.ProductService.getfavorite().subscribe((data)=> {
+            this.product = data;
+            console.log(data)
+        })
+    }    
 }
 
 

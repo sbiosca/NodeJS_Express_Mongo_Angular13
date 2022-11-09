@@ -7,7 +7,7 @@
     </div> -->
     <div class="header_buttons">
         <button><fa-icon [icon]="['fas', 'cart-shopping']" size="3x"></fa-icon></button>
-        <button><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
+        <button routerLink="/shop/category/favorites"><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
         <!-- <button routerLink="/settings" routerLinkActive="active"><fa-icon [icon]="['fas', 'gear']" size="3x"></fa-icon></button> -->
         <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
         <div class="small_profile">

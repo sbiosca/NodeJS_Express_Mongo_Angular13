@@ -14,6 +14,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     url_filters?: string = '';
     filters!:Filters;
     selected?: string;
+    ref_Category: String = '';
+    view_filters: boolean = true;
     //filtersForm: FormGroup;
 
     @Input() listcategory: Category[] = [];
@@ -33,10 +35,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
                 //     'cate': ['', Validators.required],
                 //     'state': ['', Validators.required]
                 //   });
+                this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || ''
             }
 
     ngOnInit(): void {
         this.start_filters();
+        console.log(this.ref_Category)
+        if (this.ref_Category === "favorites"){
+            this.view_filters = false;
+        }
         //this.onchange();
         //this.replaceEmit();
     }

@@ -1,4 +1,4 @@
-<div class="filters">
+<div class="filters" *ngIf="view_filters === true">
     <!-- <form [formGroup]="filtersForm" (ngSubmit)="onchange($event)"> -->
         <select (change)="onchange($event)" id="cate">
             <option label="All Categories"></option>
@@ -15,4 +15,7 @@
         <button type="submit"><fa-icon [icon]="['fas', 'magnifying-glass']" size="2x"></fa-icon></button>
         <button [routerLink]="['/shop/category/-1']"><fa-icon [icon]="['fas', 'trash']" size="2x"></fa-icon></button>
     <!-- </form> -->
+</div>
+<div *ngIf="view_filters === false">
+    <h2 style="text-align: center; color: rgb(242, 242, 253);" >YOUR FAVOURITES</h2>
 </div>
