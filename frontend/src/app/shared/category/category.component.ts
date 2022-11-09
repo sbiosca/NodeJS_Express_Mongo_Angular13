@@ -49,7 +49,6 @@ import { CategoryService} from "src/app/core/services/category.service";
     }
     MorevisitedCategories() {
         this.CategoryService.getAll().subscribe((data) => {
-
             data = data.filter((item) => item.reference != -1)
             this.category_mv = data.sort(((a, b) => b.visited! - a.visited!)).slice(0,3);
             console.table(this.category_mv)
