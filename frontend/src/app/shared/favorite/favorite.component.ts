@@ -14,28 +14,37 @@ import { Product, ProductService, UserService } from '../../core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoriteComponent implements OnInit {
+  @Input() products?: Product;
+  @Output() toggle = new EventEmitter<boolean>();
+  isSubmitting = false;
+  heart_color: boolean = false;
+  highfav!: Product;
+ 
 
   constructor(
     private productService: ProductService,
     private router: Router,
     private userService: UserService,
-    private cd: ChangeDetectorRef
-  ) { }
+    private cd: ChangeDetectorRef,
+    
+  ) {}
 
-    @Input() products?: Product;
-    @Output() toggle = new EventEmitter<boolean>();
-    isSubmitting = false;
-    heart_color: boolean = false;
+    
   //faHeart  = faHeart;
   ngOnInit() {
     this.productService.getfavorite().subscribe((data)=> {
-        //this.products = data;
-        console.log(data);
+        //this.highfav = data;
+        //console.log(data.length);
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i].slug);
+          this.highfav = data[i].slug;
+        }
+        
       })
   }
   toggleFavorite() {
     
-    console.log(this.products)
+    //console.log(this.products)
     this.isSubmitting = true;
     this.heart_color = false;
     this.userService.isAuthenticated.pipe(concatMap(
