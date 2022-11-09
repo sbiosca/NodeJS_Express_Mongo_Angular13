@@ -20,7 +20,10 @@ export class ProductComponent implements OnInit {
     ref_Category: String = '';
     url_filters: string = '';
     filters = new Filters();
-    listcategory: Category[] = []; 
+    listcategory: Category[] = [];
+    product_favorite!: Product; 
+    canModify!: boolean;
+    productt!: Product;
 
     @Input() set config(filters: Filters) {
 
@@ -49,6 +52,7 @@ export class ProductComponent implements OnInit {
         if ((this.ref_Category == '' ) && (this.url_filters == '')) {
             this.ProductService.getAll().subscribe((data) => {
                 this.product = data;
+
                 //console.log(data);
             })
         }else if((this.ref_Category != '') && (this.url_filters == '')) {
@@ -93,6 +97,22 @@ export class ProductComponent implements OnInit {
         }
         
     }
+
+    onToggleFavorite(favorited: any) {
+        console.log("favorite")
+        // this.product_favorite.favorited = favorited;
+        // console.log(this.product_favorite.favorited);
+        // if (favorited) {
+        //   console.log("favorited:" + favorited);
+        //   if (typeof this.product_favorite.favorites === 'number') {
+        //     this.product_favorite.favorites++;
+        //   }
+        // } else {
+        //   if (typeof this.product_favorite.favorites === 'number') {
+        //     this.product_favorite.favorites--;
+        //   }
+        // }
+      }
  
     // refresRouteFilter() {
     //     this.url_filters =
