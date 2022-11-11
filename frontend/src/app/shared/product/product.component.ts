@@ -23,8 +23,9 @@ export class ProductComponent implements OnInit {
     listcategory: Category[] = [];
     product_favorite!: Product; 
     canModify!: boolean;
-    products!: Product;
+    //products!: Product;
     heart_color: boolean = false;
+    favorites: Product[] = [];
     
 
     // @Input() set config(filters: Filters) {
@@ -47,9 +48,10 @@ export class ProductComponent implements OnInit {
         this.product_categories();
         this.list_categories();
         console.log()
-        this.ProductService.getfavorite().subscribe((data)=> {
-            console.log(data)
-        })
+        // this.ProductService.getfavorite().subscribe((data)=> {
+        //     this.favorites = data;
+        //     console.log(this.favorites)
+        // })
         //this.heart_color;
     }
 
