@@ -43,14 +43,14 @@ export class SearchComponent implements OnInit {
     }
 
     private checkTime(value: any) {
-      let isShop: string = this.Router.url.split('/')[1];
+      //let isShop: string = this.Router.url.split('/')[1];
       setTimeout(() => {
         if (value === this.search) {
-          if (isShop === 'shop') {
+          //if (isShop === 'shop') {
             this.notNamefilters();
             this.searchEvent.emit(this.filters);
             this.Location.replaceState('/shop/' + btoa(JSON.stringify(this.filters)));
-          }
+          //}
           if (this.search.length != 0)  this.List_products();
         }
       }, 200);
