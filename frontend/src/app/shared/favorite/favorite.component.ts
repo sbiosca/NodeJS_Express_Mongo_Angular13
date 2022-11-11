@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./favorite.component.scss'],
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FavoriteComponent {
+export class FavoriteComponent implements OnInit {
   @Input() products?: Product;
   //INPUT OF PRODUCT IN DETAILS HAVE LIKE OR NOT LIKE
   @Input() heart_color?: boolean;
@@ -30,7 +30,17 @@ export class FavoriteComponent {
     private ToastrService: ToastrService
   ) {}
 
-  
+  ngOnInit(): void {
+    //HIGHLIGHT FAVOURITES IN SHOP AND DETAILS
+    this.productService.getfavorite().subscribe((data)=> {
+      for (let i= 0; i < data.length; i++) {
+        if (data[i].slug === this.products?.slug) {
+          console.log(data[i].slug + " FAVOURITE")
+          this.heart_color = true;
+        }
+      }
+  })
+  }
   //faHeart  = faHeart;
   
   toggleFavorite() {
