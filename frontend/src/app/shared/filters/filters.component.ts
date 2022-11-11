@@ -14,7 +14,11 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     url_filters?: string = '';
     filters!:Filters;
     selected?: string;
+    object!:{};
     home_category?: number;
+    state_highlight?: String;
+    pricemin_highlight?: number;
+    pricemax_highlight?:number;
     ref_Category: String = '';
     view_filters: boolean = true;
     //filtersForm: FormGroup;
@@ -30,13 +34,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             private prodComp: ProductComponent
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
-                this.ActivatedRoute.url.subscribe((data) => {
-                    if (data[1].path) {
-                        setTimeout(() => {
-                            this.home_category = parseInt(data[1].path)
-                        }, 100);
-                    }
-                })
+                if (this.url_filters == '') {
+                    this.ActivatedRoute.url.subscribe((data) => {
+                        if (data[1].path) {
+                            setTimeout(() => {
+                                this.home_category = parseInt(data[1].path)
+                            }, 100);
+                        }
+                    })
+                } 
                 this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || ''
             }
 
@@ -51,22 +57,29 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
         this.ActivatedRoute.url.subscribe((data) => {
             if (data[1].path) {
                 this.home_category = parseInt(data[1].path)
-                // this.filters = new Filters();
-                // this.filters = {listcategory: []}
-                //this.replaceEmit()
+                if (this.home_category < 0) {
+                    this.replaceEmit({"listcategory":undefined})
+                } else {
+                    this.replaceEmit({"listcategory":this.home_category.toString()})
+                }
             } 
         })
-        // if (this.url_filters) {
-        //     this.filters = JSON.parse(atob(this.url_filters));
-        //     console.log(this.filters)
-        //     this.replaceEmit()
-        // }
+        if (this.url_filters) {
+            this.filters = JSON.parse(atob(this.url_filters));
+            this.home_category = Number(this.filters.listcategory)
+            this.state_highlight = String(this.filters.state)
+            this.pricemin_highlight = this.filters.priceMin;
+            this.pricemax_highlight = this.filters.priceMax;
+        } else {
+            this.home_category = -1
+            this.state_highlight = "0"
+        }
     }
 
     checkTime(filters: any) {
         setTimeout(() => {
-        if (filters === this.filters) this.replaceEmit();
-        }, 100);
+        if (filters === this.filters) this.replaceEmit(this.filters);
+        }, 50);
     }
 
     public onchange(value: any): void {
@@ -89,10 +102,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             ////console.log("PRICE")
         }
         if (value.target.id === "cate") {
-            this.filters.listcategory = value.target.value;
-            this.home_category = value.target.value
-            //console.log(this.filters.listcategory)
+            if (value.target.value == -1) {
+                this.filters.listcategory = undefined;   
+            } else {
+                this.filters.listcategory = value.target.value;
+            }
+            
         }
+
         if (value.target.id === "state") {
             this.filters.state = value.target.value;
             ////console.log("STATE")
@@ -103,7 +120,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
         this.productcomp.product_categories()
     }
 
-    replaceEmit() {
-        this.location.replaceState('/shop/'  + btoa(JSON.stringify(this.filters)))
+    replaceEmit(filters: any) {
+        this.location.replaceState('/shop/'  + btoa(JSON.stringify(filters)))
+        window.location.reload()
     }
 }

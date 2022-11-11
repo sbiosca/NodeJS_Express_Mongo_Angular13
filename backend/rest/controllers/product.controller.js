@@ -37,7 +37,10 @@ exports.all_products = async (req, res) => {
         let priceMin = req.query.priceMin;
         let state = req.query.state;
         let name = req.query.name;
-
+          
+        if (listcategory == "-1") {
+          listcategory=undefined;
+        }
         if (listcategory != undefined) {
           query["categories-home.reference"]=parseInt(listcategory);
         }
@@ -58,12 +61,12 @@ exports.all_products = async (req, res) => {
         }
 
         let products = ""
+        
         if (listcategory != undefined) {
           products = await product.aggregate([{"$lookup":{"from":"categories","foreignField":"products","localField":"_id","as":"categories-home"}},{"$match": query},{"$project":{"categories-home":0}}])
         } else {
           products = await product.find(query);
         }
-      
         res.json(products)
         // .map((product) => product.toJSON()));
 
