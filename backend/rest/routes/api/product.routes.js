@@ -13,5 +13,6 @@ router.delete("/", product.delete_product);
 router.get("/user/favorite", auth.required, product.getfavorite);
 router.post("/:slug/favorite", auth.required, product.addfavorite);
 router.delete("/:slug/favorite", auth.required, product.deletefavorite);
+router.get("/:id/product", auth.required, product.getproduct_user);
 
 module.exports = router;

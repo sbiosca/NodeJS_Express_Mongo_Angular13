@@ -46,14 +46,14 @@ export class DetailsComponent implements OnInit {
     this.product_details();
     document.documentElement.scrollTop = 0;
     //HIGHLIGHT FAVORITE
-    this.ProductService.getfavorite().subscribe((data)=> {
-      console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        if (this.slug === data[i].slug) {
-          console.log("PRODUCT: " + data[i].name);
-          this.heart_color = data[i].favorited!;
-      }
-    }})
+    // this.ProductService.getfavorite().subscribe((data)=> {
+    //   console.log(data);
+    //   for (let i = 0; i < data.length; i++) {
+    //     if (this.slug === data[i].slug) {
+    //       console.log("PRODUCT: " + data[i].name);
+    //       this.heart_color = data[i].favorited!;
+    //   }
+    // }})
   }
   product_details() {
     console.log(this.slug)

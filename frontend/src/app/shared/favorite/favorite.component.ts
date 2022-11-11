@@ -13,11 +13,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./favorite.component.scss'],
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FavoriteComponent {
+export class FavoriteComponent implements OnInit {
   @Input() products?: Product;
   //INPUT OF PRODUCT IN DETAILS HAVE LIKE OR NOT LIKE
   @Input() heart_color?: boolean;
-  @Output() toggle = new EventEmitter<boolean>();
+  @Input() ref_Category?: String;
+  @Output() products_liked = new EventEmitter<Product>();
   isSubmitting = false;
   highfav!: Product;
  
@@ -30,7 +31,17 @@ export class FavoriteComponent {
     private ToastrService: ToastrService
   ) {}
 
-  
+  ngOnInit(): void {
+    //HIGHLIGHT FAVOURITES IN SHOP AND DETAILS
+    this.productService.getfavorite().subscribe((data)=> {
+      for (let i= 0; i < data.length; i++) {
+        if (data[i].slug === this.products?.slug) {
+          console.log(data[i].slug + " FAVOURITE")
+          this.heart_color = true;
+        }
+      }
+  })
+  }
   //faHeart  = faHeart;
   
   toggleFavorite() {
@@ -56,6 +67,7 @@ export class FavoriteComponent {
                 this.products = data;
                 this.heart_color = data.favorited!;
                 this.ToastrService.success("PRODUCT ADDED TO FAVORITE: " +  data.name);
+                //this.products_liked.emit(data);
             },
             error: (error) => {
                 this.isSubmitting = false
@@ -70,11 +82,16 @@ export class FavoriteComponent {
           .pipe(tap({
               next: (data) => {
                   this.isSubmitting = false;
-                  this.toggle.emit(true);
+                  //this.toggle.emit(true);
                   console.log(data)
                   this.products = data;
                   this.heart_color =  data.favorited!;
-                  this.ToastrService.info("PRODUCT DELETED TO FAVORITE: " +  data.name)
+                  this.ToastrService.info("PRODUCT DELETED TO FAVORITE: " +  data.name);
+                  console.log(this.ref_Category)
+                  if (this.ref_Category === "favorites") {
+                    this.products_liked.emit();
+                  }
+                  
               },
               error: (error) => {
                   this.isSubmitting = false
@@ -89,7 +106,4 @@ export class FavoriteComponent {
     });
   }
 
-  highfavorite_prod() {
-    console.log("holas")
-  }
 }

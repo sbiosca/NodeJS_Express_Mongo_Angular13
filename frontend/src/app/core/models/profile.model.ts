@@ -8,5 +8,6 @@ export interface Profile {
     following: Profile[];
     followers: Profile[];
     products: Product[];
+    id: string;
   }
   

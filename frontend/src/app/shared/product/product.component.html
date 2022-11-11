@@ -1,30 +1,72 @@
-<div class="all">
+<div class="all" *ngIf="!profile_products">
     <app-filters [listcategory]="listcategory"></app-filters>
-        <div class="content_products">
-            <div class="product" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}">
-                <span class="price">{{prod.price}}€</span>
-                <p-carousel class="carrousel" [value]="prod.img!" [numVisible]="1" [numScroll]="1">
-                    <ng-template let-part pTemplate="item" >
-                        <div>
-                            <img style=" height: 150px;" [routerLink]="['/details', prod.slug]" src="assets/img/{{part}}"/><p></p>
-                        </div>
-                    </ng-template>
-                </p-carousel>
-                <!-- <img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" [routerLink]="['/details', prod.slug]"/> -->
-                <!-- <a target="_blank" [routerLink]="['/details', prod.slug]"><img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" /></a> -->
-                <span class="name_product" id="{{prod}}">{{prod.name}}</span><p></p>
-                <div class="use_buttons">
-                    <button><fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon></button>
-                    <app-favorite [heart_color]="heart_color" [products]="prod" ></app-favorite>
-                </div>
+    <div class="content_products">
+        <div class="product" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}">
+            <span class="price">{{prod.price}}€</span>
+            <p-carousel class="carrousel" [value]="prod.img!" [numVisible]="1" [numScroll]="1">
+                <ng-template let-part pTemplate="item">
+                    <div>
+                        <img style=" height: 150px;" [routerLink]="['/details', prod.slug]" src="assets/img/{{part}}" />
+                        <p></p>
+                    </div>
+                </ng-template>
+            </p-carousel>
+            <!-- <img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" [routerLink]="['/details', prod.slug]"/> -->
+            <!-- <a target="_blank" [routerLink]="['/details', prod.slug]"><img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" /></a> -->
+            <span class="name_product" id="{{prod}}">{{prod.name}}</span>
+            <p></p>
+            <div class="use_buttons">
+                <button>
+                    <fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon>
+                </button>
+                <app-favorite [heart_color]="heart_color" [products]="prod" (products_liked)="profile_favorites()"
+                    [ref_Category]="ref_Category"></app-favorite>
             </div>
         </div>
-        <div *ngIf="product.length === 0">
-            <h1 style="text-align: center;">NO HAY PRODUCTOS</h1>
+    </div>
+    <div *ngIf="product.length === 0">
+        <h1 style="text-align: center;">THERE AREN'T PRODUCTS</h1>
+    </div>
+    <div id="pagination" class="pagination">
+        <div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
-        <div id="pagination" class="pagination">
-            <div>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>
+
+<div class="all" *ngIf="profile_products">
+    <h2 style="text-align: center; color: white;" *ngIf="profile_products.length != 0">PRODUCTS:</h2>
+    <h2 style="text-align: center; color: white;" *ngIf="profile_products.length === 0">THERE AREN'T PRODUCTS</h2>
+    <div class="content_products">
+        <div class="product" *ngFor="let prod of profile_products | paginate: { itemsPerPage: 9, currentPage: p}">
+            <span class="price">{{prod.price}}€</span>
+            <p-carousel class="carrousel" [value]="prod.img!" [numVisible]="1" [numScroll]="1">
+                <ng-template let-part pTemplate="item">
+                    <div>
+                        <img style=" height: 150px;" [routerLink]="['/details', prod.slug]" src="assets/img/{{part}}" />
+                        <p></p>
+                    </div>
+                </ng-template>
+            </p-carousel>
+            <!-- <img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" [routerLink]="['/details', prod.slug]"/> -->
+            <!-- <a target="_blank" [routerLink]="['/details', prod.slug]"><img src="https://thumbs.dreamstime.com/b/silla-vieja-24518976.jpg" /></a> -->
+            <span class="name_product" id="{{prod}}">{{prod.name}}</span>
+            <p></p>
+            <div class="use_buttons">
+                <button>
+                    <fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon>
+                </button>
+                <app-favorite [heart_color]="heart_color" [products]="prod" (products_liked)="profile_favorites()"
+                    [ref_Category]="ref_Category"></app-favorite>
             </div>
         </div>
+    </div>
+    <div *ngIf="product.length === 0">
+        <h1 style="text-align: center;">NO HAY PRODUCTOS</h1>
+    </div>
+    <div id="pagination" class="pagination">
+        <div>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
 </div>
