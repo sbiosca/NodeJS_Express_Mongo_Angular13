@@ -15,6 +15,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
     filters!:Filters;
     selected?: string;
     home_category?: number;
+    ref_Category: String = '';
+    view_filters: boolean = true;
     //filtersForm: FormGroup;
 
     @Input() listcategory: Category[] = [];
@@ -27,11 +29,22 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             private FormBuilde: FormBuilder,
             private prodComp: ProductComponent
             ) {
-                this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '';
+                this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
+                this.ActivatedRoute.url.subscribe((data) => {
+                    if (data[1].path) {
+                        setTimeout(() => {
+                            this.home_category = parseInt(data[1].path)
+                        }, 100);
+                    }
+                })
+                this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || ''
             }
 
     ngOnInit(): void {
         this.start_filters();
+        if (this.ref_Category === "favorites"){
+            this.view_filters = false;
+        }
     }
 
     start_filters() {

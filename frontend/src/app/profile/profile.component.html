@@ -15,14 +15,17 @@
                 </div>&nbsp;&nbsp;
                 <div style="background-color: #1b1b8d; padding: 2%;">
                     <strong>FOLLOWERS: <p>{{profile.followers.length}}</p></strong>
-                </div>&nbsp;&nbsp;
+                </div> &nbsp;&nbsp;    
                 <div style="background-color: #1b1b8d; padding: 2%;">
-                    <strong>FOLLOWING: <p></p></strong>
-                </div>                
+                    <strong>FOLLOWING: <p>{{profile.following!.length}}</p></strong>
+                </div>&nbsp;&nbsp;    
+                <div style="background-color: #1b1b8d; padding: 2%;">
+                    <strong>Products: <p>{{profile.products!.length}}</p></strong>
+                </div> 
             </div>
         </div>
         <p></p>
-        <app-follow *ngIf="profile.username !== currentUser.username" [profile]="profile" [followed]="followed" (follower)="follow_test($event)">
+        <app-follow *ngIf="profile.username !== currentUser.username" [profile]="profile" [followed]="followed" (follower)="follow_toggle($event)">
         </app-follow>
         <hr>
         <button *ngIf="profile.username === currentUser.username" [routerLink]="['/settings']" [routerLinkActive]="['active']">Settings</button>

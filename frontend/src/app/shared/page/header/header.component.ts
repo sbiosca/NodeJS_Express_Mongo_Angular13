@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class HeaderComponent implements OnInit {
@@ -14,7 +13,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router
-    //private cd: ChangeDetectorRef
   ) { }
 
   //currentUser?: User;
@@ -34,13 +32,6 @@ export class HeaderComponent implements OnInit {
         console.log(this.currentUser)
       }
     )
-
-    // this.userService.currentUser.subscribe(
-    //   (userData) => {
-    //     this.currentUser = userData;
-    //     this.cd.markForCheck();
-    //   }
-    // );
    }
 
 

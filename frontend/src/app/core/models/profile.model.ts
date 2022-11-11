@@ -1,3 +1,5 @@
+import { Product } from "./product.model";
+
 export interface Profile {
     username: string;
     bio: string;
@@ -5,5 +7,6 @@ export interface Profile {
     image: string;
     following: Profile[];
     followers: Profile[];
+    products: Product[];
   }
   

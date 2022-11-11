@@ -26,7 +26,6 @@ exports.get_username = async (req, res, next) => {
 
 exports.follow_user = async (req, res, next) => {
     var profile_id = req.profile._id;
-    //console.log(req.profile.username)
     User.findById(req.auth.id)
         .then(function (user) {
             if (!user) {
