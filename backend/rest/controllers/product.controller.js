@@ -1,4 +1,5 @@
 const product = require("../models/product.model");
+const category = require("../models/category.model");
 const mongoose = require('mongoose');
 const { schema } = require('../models/User.model');
 const User = mongoose.model('User', schema);
@@ -31,20 +32,23 @@ exports.create_products = async (req, res) => {
 exports.all_products = async (req, res) => {
     try {
         query = {}
+        let listcategory = req.query.listcategory;
         let priceMax = req.query.priceMax;
         let priceMin = req.query.priceMin;
-        //let price = req.query.price;
         let state = req.query.state;
         let name = req.query.name;
 
+        if (listcategory != undefined) {
+          query["categories-home.reference"]=parseInt(listcategory);
+        }
         if(priceMin && !priceMax) {
-          query.price = { $gt: priceMin}
+          query.price = { $gt: parseInt(priceMin)}
         }
         if(priceMax && !priceMin) {
-          query.price ={ $lt: priceMax}
+          query.price ={ $lt: parseInt(priceMax)}
         }
         if(priceMax && priceMin) {
-          query.price ={ $gt: priceMin,$lt: priceMax}
+          query.price ={ $gt: parseInt(priceMin),$lt: parseInt(priceMax)}
         }
         if(state) {
           query.state = state
@@ -52,65 +56,16 @@ exports.all_products = async (req, res) => {
         if(name) {
           query.name = name
         }
-        
-        // if ((priceMin) && (!priceMax) && (!state) && (!name)) {
-        //     query = { price: { $gt: priceMin } };
-            
-        // }
-        // if ((!priceMin) && (priceMax) && (!state) && (!name)) {
-        //     query = { price: { $lt: priceMax } };
 
-        // }
-        // if ((state) && (!priceMin) && (!priceMax) && (!name)) {
-        //     query = { state: state }
-        // }
-        // if ((name) && (!state) && (!priceMin) && (!priceMax)) {
-        //     query = { name: name }
-        // }
-        // if ((priceMin) && (state) && (!priceMax) && (!name)) {
-        //     query = { state: state, price: { $gt: priceMin } }
-
-        // }
-        // if ((priceMax) && (state) && (!priceMin) && (!name)) {
-        //     query = { state: state, price: { $lt: priceMax } }
-
-        // }
-        // if ((priceMax) && (priceMin) && (!state) && (!name)) {
-        //     query = { price: { $gt: priceMin, $lt: priceMax } }
-
-        // }
-        // if ((priceMin) && (!state) && (!priceMax) && (name)) {
-        //     query = { name: name, price: { $gt: priceMin } }
-
-        // }
-        // if ((priceMax) && (!state) && (!priceMin) && (name)) {
-        //     query = { name: name, price: { $lt: priceMax } }
-
-        // }
-        // if ((priceMax) && (state) && (priceMin) && (!name)) {
-        //     query = { state: state, price: { $gt: priceMin, $lt: priceMax } }
-
-        // }
-        // if ((priceMax) && (!state) && (priceMin) && (name)) {
-        //     query = { name: name, price: { $gt: priceMin, $lt: priceMax } }
-
-        // }
-        // if ((priceMax) && (state) && (!priceMin) && (name)) {
-        //     query = { state: state, name: name, price: { $lt: priceMax } }
-
-        // }
-        // if ((!priceMax) && (state) && (!priceMin) && (name)) {
-        //     query = { name: name, state: state }
-
-        // }
-        // if ((priceMax) && (priceMin) && (state) && (name)) {
-        //     query = { price: { $gt: priceMin, $lt: priceMax }, state: state, name: name }
-        // }
-
-        
-        console.log(query)
-        const products = await product.find(query);
-        res.json(products.map((product) => product.toJSON()));
+        let products = ""
+        if (listcategory != undefined) {
+          products = await product.aggregate([{"$lookup":{"from":"categories","foreignField":"products","localField":"_id","as":"categories-home"}},{"$match": query},{"$project":{"categories-home":0}}])
+        } else {
+          products = await product.find(query);
+        }
+      
+        res.json(products)
+        // .map((product) => product.toJSON()));
 
     } catch (error) {
         console.log(error);
