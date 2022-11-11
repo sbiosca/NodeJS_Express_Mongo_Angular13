@@ -48,4 +48,8 @@ export class ProductService {
     return this.api.get('product/user/favorite');
   }
 
+  getproduct_user(id: any): Observable<Product[]> {
+    return this.api.get('product/'+ id +'/product');
+  }
+
 }

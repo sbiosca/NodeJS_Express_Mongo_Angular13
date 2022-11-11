@@ -14,6 +14,7 @@ import { Category, Filters } from "src/app/core";
 })
 
 export class ProductComponent implements OnInit {
+    @Input() profile_products?: Product[];
     product: Product[] = [];
     p!: number;
     value_product!: Number;
@@ -47,7 +48,7 @@ export class ProductComponent implements OnInit {
             this.ActivatedRoute.snapshot.params['filters'] || '';
         this.product_categories();
         this.list_categories();
-        console.log()
+        console.log(this.profile_products)
         // this.ProductService.getfavorite().subscribe((data)=> {
         //     this.favorites = data;
         //     console.log(this.favorites)
@@ -82,7 +83,8 @@ export class ProductComponent implements OnInit {
                 // })
             }
         }else {
-            this.profile_favorites()
+            this.profile_favorites();
+            console.log(this.ref_Category)
         }
        
     }
@@ -117,6 +119,7 @@ export class ProductComponent implements OnInit {
         this.ProductService.getfavorite().subscribe((data)=> {
             this.product = data;
             console.log(data)
+            document.documentElement.scrollTop = 0;
         })
     }    
 }

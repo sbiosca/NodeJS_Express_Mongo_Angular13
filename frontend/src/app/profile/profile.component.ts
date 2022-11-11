@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   currentUser: User = {} as User;
   isUser!: boolean;
   favorites?: Product;
+  profile_products: Product[] = [];
 
   ngOnInit(): void {
     this.ProfilService.get(this.url_user).subscribe({
@@ -37,6 +38,10 @@ export class ProfileComponent implements OnInit {
           this.profile = data;
           this.currentUser = this.userService.getCurrentUser();
           console.log(data)
+          this.productService.getproduct_user(this.profile.id).subscribe((data)=> {
+              console.log(data);
+              this.profile_products = data;
+          })
       },
       error: (error) => {
           console.log(error)
@@ -48,6 +53,7 @@ export class ProfileComponent implements OnInit {
       this.favorites = data;
       console.log(data);
     })
+    // 
     console.log(this.url_user);
   }
 

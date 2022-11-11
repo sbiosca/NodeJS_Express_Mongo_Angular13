@@ -224,3 +224,17 @@ exports.getfavorite = async (req, res) => {
     //res.status(500).json({msg: "An error has ocurred"});
   }
 };
+
+exports.getproduct_user = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const products = await product.find({_id: user.products}).populate("author");
+    //console.log(products)
+    if (products) {
+      return res.json(products.map(product => product.toAuthorJSON(user)));
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({msg: "An error has ocurred"});
+  }
+};
