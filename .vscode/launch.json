@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://console.log(\"entra2\")",
+            "request": "launch",
+            "url": "http://console.log(\"entra2\")"
+        }
+    ]
+}
