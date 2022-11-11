@@ -36,62 +36,82 @@ exports.all_products = async (req, res) => {
         //let price = req.query.price;
         let state = req.query.state;
         let name = req.query.name;
-        if ((priceMin) && (!priceMax) && (!state) && (!name)) {
-            query = { price: { $gt: priceMin } };
 
+        if(priceMin && !priceMax) {
+          query.price = { $gt: priceMin}
         }
-        if ((!priceMin) && (priceMax) && (!state) && (!name)) {
-            query = { price: { $lt: priceMax } };
+        if(priceMax && !priceMin) {
+          query.price ={ $lt: priceMax}
+        }
+        if(priceMax && priceMin) {
+          query.price ={ $gt: priceMin,$lt: priceMax}
+        }
+        if(state) {
+          query.state = state
+        }
+        if(name) {
+          query.name = name
+        }
+        
+        // if ((priceMin) && (!priceMax) && (!state) && (!name)) {
+        //     query = { price: { $gt: priceMin } };
+            
+        // }
+        // if ((!priceMin) && (priceMax) && (!state) && (!name)) {
+        //     query = { price: { $lt: priceMax } };
 
-        }
-        if ((state) && (!priceMin) && (!priceMax) && (!name)) {
-            query = { state: state }
-        }
-        if ((name) && (!state) && (!priceMin) && (!priceMax)) {
-            query = { name: name }
-        }
-        if ((priceMin) && (state) && (!priceMax) && (!name)) {
-            query = { state: state, price: { $gt: priceMin } }
+        // }
+        // if ((state) && (!priceMin) && (!priceMax) && (!name)) {
+        //     query = { state: state }
+        // }
+        // if ((name) && (!state) && (!priceMin) && (!priceMax)) {
+        //     query = { name: name }
+        // }
+        // if ((priceMin) && (state) && (!priceMax) && (!name)) {
+        //     query = { state: state, price: { $gt: priceMin } }
 
-        }
-        if ((priceMax) && (state) && (!priceMin) && (!name)) {
-            query = { state: state, price: { $lt: priceMax } }
+        // }
+        // if ((priceMax) && (state) && (!priceMin) && (!name)) {
+        //     query = { state: state, price: { $lt: priceMax } }
 
-        }
-        if ((priceMax) && (priceMin) && (!state) && (!name)) {
-            query = { price: { $gt: priceMin, $lt: priceMax } }
+        // }
+        // if ((priceMax) && (priceMin) && (!state) && (!name)) {
+        //     query = { price: { $gt: priceMin, $lt: priceMax } }
 
-        }
-        if ((priceMin) && (!state) && (!priceMax) && (name)) {
-            query = { name: name, price: { $gt: priceMin } }
+        // }
+        // if ((priceMin) && (!state) && (!priceMax) && (name)) {
+        //     query = { name: name, price: { $gt: priceMin } }
 
-        }
-        if ((priceMax) && (!state) && (!priceMin) && (name)) {
-            query = { name: name, price: { $lt: priceMax } }
+        // }
+        // if ((priceMax) && (!state) && (!priceMin) && (name)) {
+        //     query = { name: name, price: { $lt: priceMax } }
 
-        }
-        if ((priceMax) && (state) && (priceMin) && (!name)) {
-            query = { state: state, price: { $gt: priceMin, $lt: priceMax } }
+        // }
+        // if ((priceMax) && (state) && (priceMin) && (!name)) {
+        //     query = { state: state, price: { $gt: priceMin, $lt: priceMax } }
 
-        }
-        if ((priceMax) && (!state) && (priceMin) && (name)) {
-            query = { name: name, price: { $gt: priceMin, $lt: priceMax } }
+        // }
+        // if ((priceMax) && (!state) && (priceMin) && (name)) {
+        //     query = { name: name, price: { $gt: priceMin, $lt: priceMax } }
 
-        }
-        if ((priceMax) && (state) && (!priceMin) && (name)) {
-            query = { state: state, name: name, price: { $lt: priceMax } }
+        // }
+        // if ((priceMax) && (state) && (!priceMin) && (name)) {
+        //     query = { state: state, name: name, price: { $lt: priceMax } }
 
-        }
-        if ((!priceMax) && (state) && (!priceMin) && (name)) {
-            query = { name: name, state: state }
+        // }
+        // if ((!priceMax) && (state) && (!priceMin) && (name)) {
+        //     query = { name: name, state: state }
 
-        }
-        if ((priceMax) && (priceMin) && (state) && (name)) {
-            query = { price: { $gt: priceMin, $lt: priceMax }, state: state, name: name }
-        }
+        // }
+        // if ((priceMax) && (priceMin) && (state) && (name)) {
+        //     query = { price: { $gt: priceMin, $lt: priceMax }, state: state, name: name }
+        // }
 
+        
+        console.log(query)
         const products = await product.find(query);
-        res.json(products.map((product) => product.toJSON())); //product.toJSONFor()
+        res.json(products.map((product) => product.toJSON()));
+
     } catch (error) {
         console.log(error);
         res.status(500).send("Hubo un error, no muestra");
@@ -112,7 +132,7 @@ exports.one_product = async (req, res, next) => {
 
 exports.search_product = async (req, res) => {
     try {
-        console.log("LIST_SEARCH!");
+        //onsole.log("LIST_SEARCH!");
         let search = new RegExp(req.params.search);
 
         const Product = await product.find({ name: { $regex: search } }).limit(20);
