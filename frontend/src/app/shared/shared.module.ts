@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-//import {CarouselModule} from 'primeng/carousel';
 import { CategoryComponent } from "./category/category.component";
 import { ProductComponent } from "./product/product.component";
 import { CarouselComponent } from "./carousel/carousel.component";
@@ -16,6 +15,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { ListErrorsComponent } from './list-errors.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { FollowComponent } from './follow/follow.component';
 //import { ShowAuthedDirective } from "./show-authed.directive";
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { CarouselComponent } from "./carousel/carousel.component";
@@ -27,7 +27,6 @@ import { FavoriteComponent } from './favorite/favorite.component';
         RouterModule,
         FontAwesomeModule,
         NgxPaginationModule,
-       // NgbModule
         CarouselModule,
         InfiniteScrollModule,
         NgxSpinnerModule,
@@ -44,7 +43,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
         InfinitescrollComponent,
         FiltersComponent,
         ListErrorsComponent,
-        FavoriteComponent
+        FavoriteComponent,
+        FollowComponent
         //ShowAuthedDirective
         // CarouselComponent
         
@@ -59,7 +59,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
         FormsModule,
         ReactiveFormsModule,
         ListErrorsComponent,
-        FavoriteComponent
+        FavoriteComponent,
+        FollowComponent
         //ShowAuthedDirective
         // CarouselComponent        
     ]

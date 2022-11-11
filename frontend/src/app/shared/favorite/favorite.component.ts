@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy, Change
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { concatMap ,  tap } from 'rxjs/operators';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import { Product, ProductService, UserService } from '../../core';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-favorite',
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoriteComponent {
   @Input() products?: Product;

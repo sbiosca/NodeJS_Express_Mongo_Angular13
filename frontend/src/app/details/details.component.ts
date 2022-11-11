@@ -30,6 +30,7 @@ export class DetailsComponent implements OnInit {
   token!: String;
   product_favorite!: Product; 
   heart_color: boolean = false;
+  
   constructor(
     private ProductService: ProductService,
     private ActivateRoute: ActivatedRoute,
@@ -43,6 +44,7 @@ export class DetailsComponent implements OnInit {
   
   ngOnInit() {
     this.product_details();
+    document.documentElement.scrollTop = 0;
     //HIGHLIGHT FAVORITE
     this.ProductService.getfavorite().subscribe((data)=> {
       console.log(data);

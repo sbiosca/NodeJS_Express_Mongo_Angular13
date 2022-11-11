@@ -3,6 +3,7 @@ export interface Profile {
     bio: string;
     email: string,
     image: string;
-    following: boolean;
+    following: Profile[];
+    followers: Profile[];
   }
   

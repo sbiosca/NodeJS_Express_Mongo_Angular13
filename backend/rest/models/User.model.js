@@ -7,12 +7,11 @@ const secret = require('../config').secret;
 const UserSchema = new mongoose.Schema({
     username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank,"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
     email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
-    //username: {type: String},
-    //email: {type: String},
     bio: String,
     image: String,
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'product' }],
-    // following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId , ref: 'User' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     hash: String,
     salt: String
 }, {timestamps: true});
@@ -57,8 +56,37 @@ UserSchema.methods.isFavorite = function (id) {
   });
 };
 
+UserSchema.methods.follow = function (id, userFollow) {
+  if (userFollow.followers.indexOf(this._id) === -1) {
+    userFollow.followers.push(this._id);
+  }
+  userFollow.save();
+  
+  console.log
+  if (this.following.indexOf(id) === -1) {
+    this.following.push(id);
+  }
+  return this.save();
+};
+
+UserSchema.methods.unfollow = function (id, userFollowed) {
+
+  userFollowed.followers.remove(this._id);
+  userFollowed.save();
+  
+  this.following.remove(id);
+  return this.save();
+};
+
+UserSchema.methods.isFollowing = function (id) {
+  return this.following.some(function (followId) {
+    return followId.toString() === id.toString();
+  });
+};
+
 UserSchema.methods.toAuthJSON = function(){
   return {
+    id: this._id,
     username: this.username,
     email: this.email,
     token: this.generateJWT(),
@@ -74,11 +102,13 @@ UserSchema.methods.updateKarmaSave = function (qty, userKarma) {
 
 UserSchema.methods.toProfileJSONFor = function(user = undefined){
   return {
+    id: this._id,
     username: this.username,
     bio: this.bio,
     email: this.email,
     image: this.image || 'https://www.ibei.org/images/4611/person_box.png',
-    //following: user ? user.isFollowing(this._id) : false
+    following: user ? user.isFollowing(this._id) : false,
+    followers: this.followers,
   };
 };
 
