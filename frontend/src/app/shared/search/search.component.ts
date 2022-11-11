@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   searchValue: string | undefined = '';
   filters: Filters = new Filters();
   search: any;
+  search_highligh?: string;
   products!: Product[];
     constructor(
         private Router: Router,
@@ -26,7 +27,8 @@ export class SearchComponent implements OnInit {
       this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters');
     }
     ngOnInit(): void {
-        this.filters_Search();
+      
+      this.filters_Search();
         
     }
 
@@ -62,6 +64,7 @@ export class SearchComponent implements OnInit {
         this.filters = JSON.parse(atob(this.url_filters));
         console.log(this.filters)
       }
+      this.search_highligh = this.filters.name;
       this.List_products();
       console.log(this.url_filters)
     }
