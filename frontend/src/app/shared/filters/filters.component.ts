@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angular/core";
 import { Category  } from "src/app/core/models/category.model";
 import { Location } from "@angular/common";
 import { ActivatedRoute ,Router} from "@angular/router";
 import { Filters } from "src/app/core/models/filters.model";
 import { ProductComponent } from "../product/product.component";
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy } from "@angular/compiler";
 
 @Component({
     selector: 'app-filters',
@@ -31,7 +32,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
             private Router: Router,
             private location: Location,
             private FormBuilde: FormBuilder,
-            private prodComp: ProductComponent
+            private prodComp: ProductComponent,
+            private cd: ChangeDetectorRef
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
                 if (this.url_filters == '') {
@@ -120,8 +122,13 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
         this.productcomp.product_categories()
     }
 
+    public delete() {
+        this.location.replaceState('/shop/e30')
+        window.location.reload()
+    }
     replaceEmit(filters: any) {
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(filters)))
         window.location.reload()
+        //this.cd.markForCheck()
     }
 }
