@@ -10,7 +10,7 @@
   <!-- <img style="width: 45%;" src="assets/img/{{products?.img}}"/><p></p> -->
   <span style="font-size: 120%;">{{products?.price}}€</span><p></p>
   <span style="font-size: 120%;">{{products?.description}}</span><p></p>
-  <app-favorite [products]="products" (toggle)="onToggleFavorite($event)"></app-favorite>
+  <app-favorite [products]="products" [heart_color]="heart_color" ></app-favorite>
 </div>
 
 <div class="comments">

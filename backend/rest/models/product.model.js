@@ -25,12 +25,6 @@ const ProductSchema = mongoose.Schema({
       img: {
         type: Array
       },
-      // img: {
-      //   type: String,
-      //   lowecase: true,
-      //   default: "",
-      //   maxLength: 100,
-      // },
       price: {
         type: Number,
         required: true,

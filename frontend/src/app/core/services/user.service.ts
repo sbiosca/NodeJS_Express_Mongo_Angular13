@@ -10,6 +10,7 @@ import { map ,  distinctUntilChanged } from 'rxjs/operators';
 })
 export class UserService {
   private currentUserSubject = new BehaviorSubject<User>({} as User);
+  //private currentUser_IdSubject = new BehaviorSubject<User>({} as User);
   public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);

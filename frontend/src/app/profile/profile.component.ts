@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   ) { 
     this.url_user = this.route.snapshot.paramMap.get('username') || '' ;
   }
-
+  followed: boolean = false;
   url_user: string = '';
   profile: Profile = {} as Profile;
   currentUser: User = {} as User;
@@ -27,11 +27,22 @@ export class ProfileComponent implements OnInit {
   favorites?: Product;
 
   ngOnInit(): void {
+    //console.log(this.userService.getCurrentUser().id)
     this.ProfilService.get(this.url_user).subscribe({
       next: (data) => {
-          console.log(data);
+          
+          for (let i = 0; i < data.followers.length; i++) {
+            //console.log(data.followers[i]);
+            if (data.followers[i] === this.userService.getCurrentUser().id) {
+                console.log("FOLLOW")
+                this.followed = true
+            }
+            
+          }
+          
           this.profile = data;
           this.currentUser = this.userService.getCurrentUser();
+          console.log(data)
       },
       error: (error) => {
           console.log(error)
@@ -49,5 +60,9 @@ export class ProfileComponent implements OnInit {
   // onToggleFollowing(following: boolean) {
   //   this.profile.following = following;
   // }
+  follow_test(value: any) { 
+    console.log(value);
+    this.profile = value;
+  }
 
 }

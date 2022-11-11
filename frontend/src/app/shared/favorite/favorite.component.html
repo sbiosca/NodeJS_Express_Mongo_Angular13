@@ -1,17 +1,14 @@
 <div *ngIf="heart_color === false">
-    <button 
-    (click)="toggleFavorite()">
-    <fa-icon [icon]="['fas', 'heart']" size="2x"></fa-icon>
-    </button> &nbsp; 
+    <button (click)="toggleFavorite()">
+        <fa-icon [icon]="['fas', 'heart']" size="2x"></fa-icon>
+    </button> &nbsp;
     <strong style="font-size: 30px;">{{products?.favorites}}</strong>
 </div>
 
 <div *ngIf="heart_color === true">
-        <button style="color: blue"
-        (click)="toggleFavorite()"
-        >
+    <button style="color: blue" (click)="toggleFavorite()">
         <fa-icon [icon]="['fas', 'heart']" size="2x"></fa-icon>
-        </button>
+    </button>
     &nbsp;
     <strong style="font-size: 30px;">{{products?.favorites}}</strong>
 </div>
