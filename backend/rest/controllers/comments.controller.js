@@ -39,7 +39,7 @@ exports.list_Comment = async (req, res, next) => {
 
 exports.create_comment = async (req, res, next) => {
     var productSlug = req.params.product;
-    console.log(req.auth.id)
+    //console.log(req.auth.id)
     try {
         await User.findById(req.auth.id)
             .then(function (user) {
@@ -55,7 +55,7 @@ exports.create_comment = async (req, res, next) => {
                     comment.author = user._id;
                     comment.product = product._id;
                     return comment.save().then(function () {
-                        console.log(comment)
+                        //console.log(comment)
                         product.tags.push(comment);
                         
                         return product.save().then(function () {
@@ -72,10 +72,9 @@ exports.create_comment = async (req, res, next) => {
 }
 
 exports.delete_Comment = async(req, res, next) => {
-    console.log("delete_comment")
+    //console.log("delete_comment")
     let idComment = req.params.comment;
     let productSlug = req.params.product;
-    //return res.json({comment: idComment, product : productSlug})
     try {
         User.findById(req.auth.id)
             .then(function (user) {

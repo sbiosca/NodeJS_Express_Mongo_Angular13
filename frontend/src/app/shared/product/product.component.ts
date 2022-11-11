@@ -27,12 +27,12 @@ export class ProductComponent implements OnInit {
     heart_color: boolean = false;
     
 
-    @Input() set config(filters: Filters) {
+    // @Input() set config(filters: Filters) {
 
-        if (filters) {
-          console.log("FILTROS")
-        }
-    }
+    //     if (filters) {
+    //       console.log("FILTROS")
+    //     }
+    // }
 
       
     constructor(private ProductService: ProductService
@@ -46,7 +46,10 @@ export class ProductComponent implements OnInit {
             this.ActivatedRoute.snapshot.params['filters'] || '';
         this.product_categories();
         this.list_categories();
-        console.log(this.ref_Category)
+        console.log()
+        this.ProductService.getfavorite().subscribe((data)=> {
+            console.log(data)
+        })
         //this.heart_color;
     }
 
@@ -56,8 +59,7 @@ export class ProductComponent implements OnInit {
             if ((this.ref_Category == '' ) && (this.url_filters == '')) {
                 this.ProductService.getAll().subscribe((data) => {
                     this.product = data;
-
-                    //console.log(data);
+                    console.log(data);
                 })
             }else if((this.ref_Category != '') && (this.url_filters == '')) {
                 //console.log(this.ref_Category);

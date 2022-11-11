@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User, UserService, ProfilesService, Profile, ProductService, Product } from '../core';
-import { concatMap ,  tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-page',
@@ -27,19 +26,14 @@ export class ProfileComponent implements OnInit {
   favorites?: Product;
 
   ngOnInit(): void {
-    //console.log(this.userService.getCurrentUser().id)
     this.ProfilService.get(this.url_user).subscribe({
       next: (data) => {
           
           for (let i = 0; i < data.followers.length; i++) {
-            //console.log(data.followers[i]);
             if (data.followers[i] === this.userService.getCurrentUser().id) {
-                console.log("FOLLOW")
                 this.followed = true
-            }
-            
+            } 
           }
-          
           this.profile = data;
           this.currentUser = this.userService.getCurrentUser();
           console.log(data)
@@ -51,16 +45,13 @@ export class ProfileComponent implements OnInit {
       }
     })     
     this.productService.getfavorite().subscribe((data)=> {
-      //this.products = data;
       this.favorites = data;
       console.log(data);
     })
+    console.log(this.url_user);
   }
 
-  // onToggleFollowing(following: boolean) {
-  //   this.profile.following = following;
-  // }
-  follow_test(value: any) { 
+  follow_toggle(value: any) { 
     console.log(value);
     this.profile = value;
   }

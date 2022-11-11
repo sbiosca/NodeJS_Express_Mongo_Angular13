@@ -13,7 +13,8 @@ const UserSchema = new mongoose.Schema({
     following: [{ type: mongoose.Schema.Types.ObjectId , ref: 'User' }],
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     hash: String,
-    salt: String
+    salt: String,
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'product' }]
 }, {timestamps: true});
 
 UserSchema.methods.validPassword = function(password) {
@@ -80,7 +81,7 @@ UserSchema.methods.unfollow = function (id, userFollowed) {
 
 UserSchema.methods.isFollowing = function (id) {
   return this.following.some(function (followId) {
-    return followId.toString() === id.toString();
+    return followId.toString();
   });
 };
 
@@ -91,7 +92,8 @@ UserSchema.methods.toAuthJSON = function(){
     email: this.email,
     token: this.generateJWT(),
     bio: this.bio,
-    image: this.image
+    image: this.image,
+    products: this.products
   };
 };
 
@@ -107,8 +109,9 @@ UserSchema.methods.toProfileJSONFor = function(user = undefined){
     bio: this.bio,
     email: this.email,
     image: this.image || 'https://www.ibei.org/images/4611/person_box.png',
-    following: user ? user.isFollowing(this._id) : false,
+    following: this.following,
     followers: this.followers,
+    products: this.products
   };
 };
 
