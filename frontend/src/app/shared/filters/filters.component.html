@@ -3,16 +3,16 @@
         <select (change)="onchange($event)" id="cate">
             <option *ngFor="let cate of listcategory" [value]="cate.reference" [selected]="cate.reference === home_category">{{cate.name_category}}</option>
         </select>
-        <input type="number" id="priceMin" placeholder="priceMin" value="$event" (input)="onchange($event)">
-        <input type="number" id="priceMax" placeholder="priceMax" value="$event" (input)="onchange($event)">
-        <select (change)="onchange($event)" id="state">
-            <option label="State Of Product" disabled selected></option>
+        <input type="number" id="priceMin" placeholder="priceMin" value="$event" [(ngModel)]='pricemin_highlight' (change)="onchange($event)">
+        <input type="number" id="priceMax" placeholder="priceMax" value="$event" [(ngModel)]='pricemax_highlight' (change)="onchange($event)">
+        <select (change)="onchange($event)" id="state" [(ngModel)]='state_highlight'>
+            <option value="0" selected>State Of Product</option>
             <option value="new">NEW</option>
             <option value="as_new">AS_NEW</option>
             <option value="good_state">GOOD_STATE</option>
         </select>
-        <button type="submit"><fa-icon [icon]="['fas', 'magnifying-glass']" size="2x"></fa-icon></button>
-        <button [routerLink]="['/shop/category/-1']"><fa-icon [icon]="['fas', 'trash']" size="2x"></fa-icon></button>
+        <!-- <button type="submit"><fa-icon [icon]="['fas', 'magnifying-glass']" size="2x"></fa-icon></button> -->
+        <button (click)="delete()"><fa-icon [icon]="['fas', 'trash']" size="2x"></fa-icon></button>
     <!-- </form> -->
 </div>
 <div *ngIf="view_filters === false">

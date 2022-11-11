@@ -57,14 +57,14 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
-        //console.log(this.url_filters)
+        //console.log(this.url_filters)  
         if (this.ref_Category != "favorites") {
-            if ((this.ref_Category == '' ) && (this.url_filters == '')) {
+            if ((this.ref_Category == '' ) && (this.url_filters == 'e30')) {
                 this.ProductService.getAll().subscribe((data) => {
                     this.product = data;
                     console.log(data);
                 })
-            }else if((this.ref_Category != '') && (this.url_filters == '')) {
+            }else if((this.ref_Category != '') && (this.url_filters == 'e30')) {
                 //console.log(this.ref_Category);
                 this.CategoryService.get(this.ref_Category).subscribe((data) => {
                     this.listcategory = data.products!;
@@ -72,7 +72,7 @@ export class ProductComponent implements OnInit {
                     this.product = data.products!;
 
                 })
-            }else if((this.ref_Category == '') && (this.url_filters != '')){
+            }else if((this.ref_Category == '') && (this.url_filters != 'e30')){
                 this.filtered_products(this.url_filters);
     
                 // this.url_filters = JSON.parse(atob(this.url_filters));

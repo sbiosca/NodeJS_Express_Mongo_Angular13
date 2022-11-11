@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit {
     constructor(
         private Router: Router,
         private ActivatedRoute: ActivatedRoute,
+        private location: Location,
         private ProdService: ProductService,
         private Location: Location
     ){
@@ -69,9 +70,8 @@ export class SearchComponent implements OnInit {
       console.log(data)
       if (typeof data.searchValue === 'string') {
         this.filters.name = data.searchValue;
-        console.log(this.filters)
-        this.Router.navigate(['/shop/' + btoa(JSON.stringify(this.filters))]);
-      }
+        this.location.replaceState('/shop/'  + btoa(JSON.stringify(this.filters)))
+        window.location.reload()      }
     }
   
     public writting_search(value: any): void {
