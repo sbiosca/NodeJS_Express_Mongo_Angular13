@@ -87,13 +87,16 @@ export class ProductComponent implements OnInit {
 
     list_categories() {
         this.CategoryService.getAll().subscribe((data) => {
-            this.listcategory = data;
+            setTimeout(() => {
+                this.listcategory = data;
+            }, 50);
+            console.table(this.listcategory)
         })
     }
 
     filtered_products(value: any) {
         this.filters = JSON.parse(atob(value));
-        //console.log(this.filters);
+        console.log(this.filters);
         if (this.filters.listcategory) {
             this.CategoryService.get(this.filters.listcategory).subscribe((data) => {
                 //console.log(data)
