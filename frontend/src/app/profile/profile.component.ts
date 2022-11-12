@@ -17,8 +17,11 @@ export class ProfileComponent implements OnInit {
     private productService: ProductService
   ) { 
     this.url_user = this.route.snapshot.paramMap.get('username') || '' ;
+    this.url_products = this.route.snapshot.paramMap.get('products') || '' ;
+
   }
   followed: boolean = false;
+  url_products: string = '';
   url_user: string = '';
   profile: Profile = {} as Profile;
   currentUser: User = {} as User;
@@ -26,10 +29,9 @@ export class ProfileComponent implements OnInit {
   favorites?: Product;
   profile_products: Product[] = [];
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.ProfilService.get(this.url_user).subscribe({
       next: (data) => {
-          
           for (let i = 0; i < data.followers.length; i++) {
             if (data.followers[i] === this.userService.getCurrentUser().id) {
                 this.followed = true
