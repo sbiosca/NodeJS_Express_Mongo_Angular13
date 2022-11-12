@@ -4,8 +4,11 @@ import { Location } from "@angular/common";
 import { ActivatedRoute ,Router} from "@angular/router";
 import { Filters } from "src/app/core/models/filters.model";
 import { ProductComponent } from "../product/product.component";
+import { of } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangeDetectionStrategy } from "@angular/compiler";
+import { UserService } from "src/app/core";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
     selector: 'app-filters',
@@ -33,7 +36,9 @@ import { ChangeDetectionStrategy } from "@angular/compiler";
             private location: Location,
             private FormBuilde: FormBuilder,
             private prodComp: ProductComponent,
-            private cd: ChangeDetectorRef
+            private cd: ChangeDetectorRef,
+            private userService: UserService,
+            private ToastrService: ToastrService
             ) {
                 this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
                 if (this.url_filters == '') {
@@ -49,9 +54,20 @@ import { ChangeDetectionStrategy } from "@angular/compiler";
             }
 
     ngOnInit(): void {
-        this.start_filters();
+        //console.log(this.filters_change)
         if (this.ref_Category === "favorites"){
+            this.userService.isAuthenticated.subscribe({
+                next: (authenticated) => {
+                    if (!authenticated) {
+                        this.Router.navigateByUrl('/auth/login');
+                        this.ToastrService.error("YOU MUST LOG IN YOUR ACCOUNT");
+                        //return of(null);
+                    }
+                }
+            })
             this.view_filters = false;
+        }else {
+            this.start_filters();
         }
     }
 
@@ -117,9 +133,9 @@ import { ChangeDetectionStrategy } from "@angular/compiler";
             ////console.log("STATE")
         }
         
-        this.checkTime(this.filters);
-        this.prodComp.ngOnInit();
-        this.productcomp.product_categories()
+         this.checkTime(this.filters);
+        // this.prodComp.ngOnInit();
+        // this.productcomp.product_categories()
     }
 
     public delete() {
@@ -128,6 +144,9 @@ import { ChangeDetectionStrategy } from "@angular/compiler";
     }
     replaceEmit(filters: any) {
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(filters)))
+        //console.log(filters)
+        //this.filterEvent.emit(filters)
+        //this.prodComp.ngOnInit()
         window.location.reload()
         //this.cd.markForCheck()
     }
