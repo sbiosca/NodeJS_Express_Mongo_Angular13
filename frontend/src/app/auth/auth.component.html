@@ -1,21 +1,40 @@
-<div id="form-auth">
-    <div id="login-form">
-        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
-            <fieldset [disabled]="isSubmitting">
-                <input formControlName="username" type="text" placeholder="Username" /><p></p>
-                <input formControlName="email" type="text" placeholder="Email@email.com" *ngIf="authType === 'register'"/><p></p>
-                <input formControlName="password" type="password" placeholder="password"/><p></p>
-                <!-- <span style="color: red;" *ngIf="errors_list">{{errors}}</span> -->
-                <input formControlName="password2" type="password" placeholder="Reapeat password" *ngIf="authType === 'register'"/><p></p>
-                <!-- <p *ngIf="authType === 'register'">Put image or url:</p> -->
-                <input formControlName="image" type="text" placeholder="Put url to image" *ngIf="authType === 'register'"/><p></p>
-                <!-- <input formControlName="image" type="file" *ngIf="authType === 'register'"/><p></p> -->
-                <a routerLink="/auth/register" *ngIf="authType === 'login'">Need an account</a><p></p>
-                <a routerLink="/auth/login" *ngIf="authType === 'register'">Have an account</a><p></p>
-                <app-list-errors [errors]="errors"></app-list-errors>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content" id="form-auth">
+			<button class="button login__submit" routerLink="/auth/register" *ngIf="authType === 'login'">Need an account</button>
+			<button class="button login__submit" routerLink="/auth/login" *ngIf="authType === 'register'">Have an account</button>
+			<form class="login" id="login-form" [formGroup]="authForm" (ngSubmit)="submitForm()">
+				<div class="login__field">
+					<fa-icon class="login__icon fas fa-user" [icon]="['fas', 'user']"></fa-icon>
+					<input formControlName="username" type="text" class="login__input" placeholder="Username">
+				</div>
+				<div class="login__field" *ngIf="authType === 'register'">
+					<fa-icon class="login__icon fas fa-lock" [icon]="['fas', 'at']"></fa-icon>
+					<input formControlName="email" type="text" class="login__input" placeholder="Email">
+				</div>
+				<div class="login__field"  formControlName="password">
+					<fa-icon class="login__icon fas fa-lock" [icon]="['fas', 'lock']"></fa-icon>
+					<input formControlName="password" type="password" class="login__input" placeholder="Password">
+				</div>
+				<div class="login__field" *ngIf="authType === 'register'">
+					<input formControlName="password2" type="password" class="login__input" placeholder="Repeat Password">
+				</div>
+				<div class="login__field" *ngIf="authType === 'register'">
+					<fa-icon class="login__icon fas fa-lock" [icon]="['fas', 'image']"></fa-icon>
+					<input formControlName="image" type="text" class="login__input" placeholder="Put url to image">
+				</div>
+				<app-list-errors [errors]="errors"></app-list-errors>
                 <span style="color: red;">{{error2}}</span>
-                <button type="submit">{{title}}</button>
-            </fieldset>
-        </form>
-    </div>
+				<button type="submit" class="button login__submit">
+					<span class="button__text">{{title}}</span>
+				</button>				
+			</form>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
 </div>
