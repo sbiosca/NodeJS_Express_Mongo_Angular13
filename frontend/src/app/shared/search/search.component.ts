@@ -74,7 +74,9 @@ export class SearchComponent implements OnInit {
       if (typeof data.searchValue === 'string') {
         this.filters.name = data.searchValue;
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(this.filters)))
-        window.location.reload()      }
+        
+        //window.location.reload()      
+      }
     }
   
     public writting_search(value: any): void {

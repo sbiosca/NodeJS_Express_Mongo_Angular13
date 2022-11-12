@@ -4,11 +4,6 @@ import { ShopComponent } from './shop.component';
 
 const routes: Routes = [
     {
-        path: 'category/-1',
-        component: ShopComponent,
-        resolve: {},
-    },
-    {
         path: 'category/:id',
         component: ShopComponent,
         resolve: {}
@@ -17,7 +12,7 @@ const routes: Routes = [
         path: ':filters',
         component: ShopComponent,
         resolve: {}
-    }
+    },
 ];
 
 @NgModule({

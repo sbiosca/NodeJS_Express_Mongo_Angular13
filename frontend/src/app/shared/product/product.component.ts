@@ -4,7 +4,7 @@ import { ProductService} from "src/app/core/services/product.service";
 import { CategoryService} from "src/app/core/services/category.service";
 import { ActivatedRoute } from '@angular/router';
 import { Category, Filters } from "src/app/core";
-
+import { Location } from "@angular/common";
 // import { Category } from "src/app/core/models/category.model";
 
 @Component ({
@@ -28,27 +28,19 @@ export class ProductComponent implements OnInit {
     heart_color: boolean = false;
     favorites: Product[] = [];
     
-
-    // @Input() set config(filters: Filters) {
-
-    //     if (filters) {
-    //       console.log("FILTROS")
-    //     }
-    // }
-
-      
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
-        private ActivatedRoute: ActivatedRoute,) {
+        private ActivatedRoute: ActivatedRoute,
+        private location: Location) {
         }
-    ngOnInit(): void {
+    ngOnInit() {
         this.ref_Category =
             this.ActivatedRoute.snapshot.paramMap.get('id') || '';
         this.url_filters =
             this.ActivatedRoute.snapshot.params['filters'] || '';
         this.product_categories();
         this.list_categories();
-        console.log(this.profile_products)
+        //console.log(this.url_filters)
         // this.ProductService.getfavorite().subscribe((data)=> {
         //     this.favorites = data;
         //     console.log(this.favorites)
@@ -113,6 +105,13 @@ export class ProductComponent implements OnInit {
             })
         }
         
+    }
+
+    output_filters(value: any) {
+        //console.log(this.url_filters)
+        this.url_filters = btoa(JSON.stringify(value));
+        this.product_categories();
+        console.log(this.url_filters);
     }
 
     profile_favorites() {
