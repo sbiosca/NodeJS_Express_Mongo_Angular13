@@ -10,11 +10,10 @@ div.all {
         width: 70%;
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
         div.product {
             background-color: white;            
             width: 25%;
-            margin: 2.5%;
+            margin: 3.5%;
             display: flex;
             flex-flow: column wrap;
             align-items: center;
