@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Product } from "src/app/core/models/product.model";
 import { ProductService} from "src/app/core/services/product.service";
 import { CategoryService} from "src/app/core/services/category.service";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category, Filters } from "src/app/core";
 import { Location } from "@angular/common";
 // import { Category } from "src/app/core/models/category.model";
@@ -32,11 +32,13 @@ export class ProductComponent implements OnInit {
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
         private ActivatedRoute: ActivatedRoute,
-        private location: Location) {
+        private location: Location,
+        private Router: Router) {
+            this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || '';
+            this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
+             
         }
     ngOnInit() {
-        this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || '';
-        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
         this.product_categories();
         this.list_categories();
         //console.log(this.url_filters)
@@ -49,6 +51,7 @@ export class ProductComponent implements OnInit {
 
     product_categories() {
         console.log(this.url_filters)  
+        this.filters_change = this.url_filters;
         if (this.ref_Category != "favorites") {
             if ((this.ref_Category == '' ) && (this.url_filters == 'e30')) {
                 this.ProductService.getAll().subscribe((data) => {
@@ -65,13 +68,6 @@ export class ProductComponent implements OnInit {
                 })
             }else if((this.ref_Category == '') && (this.url_filters != 'e30')){
                 this.filtered_products(this.url_filters);
-    
-                // this.url_filters = JSON.parse(atob(this.url_filters));
-                // this.CategoryService.get(this.url_filters).subscribe((data) => {
-                //     console.log(data.products);
-                //     this.listcategory = data.products!;
-                //     this.product = data.products!;
-                // })
             }
         }else {
             this.profile_favorites();
@@ -94,12 +90,13 @@ export class ProductComponent implements OnInit {
         console.log(this.filters);
         if (this.filters.listcategory) {
             this.CategoryService.get(this.filters.listcategory).subscribe((data) => {
-                //console.log(data)
+                console.log(data)
                 this.product = data.products!;
             })
         }
         if (this.filters.priceMax || this.filters.priceMin || this.filters.state || this.filters.name) {
             this.ProductService.getFilters(this.filters).subscribe((data) => {
+                console.log(data)
                 this.product = data;
             })
         }
@@ -108,9 +105,7 @@ export class ProductComponent implements OnInit {
 
     output_filters(value: any) {
         console.log(value)
-        // this.url_filters = atob(JSON.stringify(this.url_filters))
-        // console.log(this.url_filters)
-        this.url_filters = btoa(JSON.stringify(value + this.url_filters));
+        this.url_filters = btoa(JSON.stringify(value));
         this.filters_change = this.url_filters;
         this.product_categories();
         console.log(this.filters_change);

@@ -14,9 +14,6 @@
         <span class="name_product" id="{{prod}}">{{prod.name}}</span>
             <p></p>
             <div class="use_buttons">
-                <!-- <button>
-                    <fa-icon [icon]="['fas', 'cart-shopping']" size="2x"></fa-icon>
-                </button> -->
                 <app-favorite [heart_color]="heart_color" [products]="prod" (products_liked)="profile_favorites()"
                     [ref_Category]="ref_Category"></app-favorite>
             </div>

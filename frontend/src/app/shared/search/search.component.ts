@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
         this.filters.name = data.searchValue;
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(this.filters)))
         
-        //window.location.reload()      
+        window.location.reload()      
       }
     }
   
