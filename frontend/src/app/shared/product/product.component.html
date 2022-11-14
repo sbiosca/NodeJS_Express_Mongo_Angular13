@@ -1,5 +1,5 @@
 <div class="all" *ngIf="!profile_products">
-    <app-filters [listcategory]="listcategory" (filterEvent)="output_filters($event)"></app-filters>
+    <app-filters [listcategory]="listcategory" [filters_change]="filters_change" (filterEvent)="output_filters($event)"></app-filters>
     <div class="content_products">
         <div class="product" *ngFor="let prod of product | paginate: { itemsPerPage: 9, currentPage: p}">
             <span class="price">{{prod.price}}€</span>

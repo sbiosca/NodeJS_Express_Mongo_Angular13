@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
     //products!: Product;
     heart_color: boolean = false;
     favorites: Product[] = [];
+    filters_change!: string;
     
     constructor(private ProductService: ProductService
         , private CategoryService: CategoryService,
@@ -34,10 +35,8 @@ export class ProductComponent implements OnInit {
         private location: Location) {
         }
     ngOnInit() {
-        this.ref_Category =
-            this.ActivatedRoute.snapshot.paramMap.get('id') || '';
-        this.url_filters =
-            this.ActivatedRoute.snapshot.params['filters'] || '';
+        this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || '';
+        this.url_filters = this.ActivatedRoute.snapshot.paramMap.get('filters') || '';
         this.product_categories();
         this.list_categories();
         //console.log(this.url_filters)
@@ -49,7 +48,7 @@ export class ProductComponent implements OnInit {
     }
 
     product_categories() {
-        //console.log(this.url_filters)  
+        console.log(this.url_filters)  
         if (this.ref_Category != "favorites") {
             if ((this.ref_Category == '' ) && (this.url_filters == 'e30')) {
                 this.ProductService.getAll().subscribe((data) => {
@@ -108,10 +107,13 @@ export class ProductComponent implements OnInit {
     }
 
     output_filters(value: any) {
-        //console.log(this.url_filters)
-        this.url_filters = btoa(JSON.stringify(value));
+        console.log(value)
+        // this.url_filters = atob(JSON.stringify(this.url_filters))
+        // console.log(this.url_filters)
+        this.url_filters = btoa(JSON.stringify(value + this.url_filters));
+        this.filters_change = this.url_filters;
         this.product_categories();
-        console.log(this.url_filters);
+        console.log(this.filters_change);
     }
 
     profile_favorites() {
