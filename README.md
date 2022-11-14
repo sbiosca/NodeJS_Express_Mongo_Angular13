@@ -1,4 +1,4 @@
-# NodeJS_Express_Mongo_Angular13
+# NodeJS_Express_Mongo_Angular13-BiosPop
 Realized by Rafa Ferri Torró and Sergi Biosca Beneyto
 
      It's our first project in 2 DAW with Nodejs and Mongo, it's website has second hand 
