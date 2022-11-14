@@ -25,10 +25,13 @@ import { ToastrService } from "ngx-toastr";
     pricemax_highlight?:number;
     ref_Category: String = '';
     view_filters: boolean = true;
+    
     //filtersForm: FormGroup;
 
     @Input() listcategory: Category[] = [];
+    @Input() filters_change!: string;
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
+   
 
     constructor(private productcomp: ProductComponent,
             private ActivatedRoute: ActivatedRoute,
@@ -144,10 +147,8 @@ import { ToastrService } from "ngx-toastr";
     }
     replaceEmit(filters: any) {
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(filters)))
-        //console.log(filters)
-        //this.filterEvent.emit(filters)
-        //this.prodComp.ngOnInit()
-        window.location.reload()
-        //this.cd.markForCheck()
+        console.log(filters)
+        this.filterEvent.emit(filters)
+        //window.location.reload()
     }
 }
