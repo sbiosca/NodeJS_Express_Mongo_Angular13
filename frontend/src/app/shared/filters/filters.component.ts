@@ -29,7 +29,7 @@ import { ToastrService } from "ngx-toastr";
     //filtersForm: FormGroup;
 
     @Input() listcategory: Category[] = [];
-    @Input() filters_change!: string;
+    @Input() filters_change!: string ;
     @Output() filterEvent: EventEmitter<Filters> = new EventEmitter();
    
 
@@ -54,10 +54,10 @@ import { ToastrService } from "ngx-toastr";
                     })
                 } 
                 this.ref_Category = this.ActivatedRoute.snapshot.paramMap.get('id') || ''
+                //console.log(this.filters_change)
             }
 
     ngOnInit(): void {
-        //console.log(this.filters_change)
         if (this.ref_Category === "favorites"){
             this.userService.isAuthenticated.subscribe({
                 next: (authenticated) => {
@@ -106,6 +106,7 @@ import { ToastrService } from "ngx-toastr";
     public onchange(value: any): void {
 
         this.filters = new Filters();
+        
         this.url_filters = this.ActivatedRoute.snapshot.params['filters'] || '' ;
 
         if (this.url_filters) {
@@ -137,8 +138,6 @@ import { ToastrService } from "ngx-toastr";
         }
         
          this.checkTime(this.filters);
-        // this.prodComp.ngOnInit();
-        // this.productcomp.product_categories()
     }
 
     public delete() {
@@ -149,6 +148,6 @@ import { ToastrService } from "ngx-toastr";
         this.location.replaceState('/shop/'  + btoa(JSON.stringify(filters)))
         console.log(filters)
         this.filterEvent.emit(filters)
-        //window.location.reload()
+        window.location.reload()
     }
 }

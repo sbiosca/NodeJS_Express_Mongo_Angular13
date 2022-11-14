@@ -54,16 +54,4 @@ import { CategoryService} from "src/app/core/services/category.service";
             console.table(this.category_mv)
         })
     }
-    // jump_shop(cate: any) {
-    //     console.log(cate);
-    //     this.CategoryService.get(cate).subscribe((data) => {
-    //         console.log(data.products);
-    //     })
-    // }
-
-    // OneCategory() {
-    //     this.CategoryService.get().subscribe((data) => {
-    //         console.log(data);
-    //     })
-    // }
 }

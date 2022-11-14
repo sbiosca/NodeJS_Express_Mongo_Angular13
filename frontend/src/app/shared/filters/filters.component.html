@@ -1,5 +1,5 @@
 <div class="filters" *ngIf="view_filters === true">
-    <!-- <form [formGroup]="filtersForm" (ngSubmit)="onchange($event)"> -->
+    <!-- <form  (ngSubmit)="replaceEmit($event)"> -->
         <select (change)="onchange($event)" id="cate" >
             <option *ngFor="let cate of listcategory" [value]="cate.reference" [selected]="cate.reference === home_category">{{cate.name_category}}</option>
         </select>
