@@ -1,7 +1,7 @@
 <p-carousel class="carrousel" [value]="category" [numVisible]="3" [numScroll]="3">
     <ng-template let-part pTemplate="item">
         <div class="categ" [routerLink]="['/shop/category', part.reference]">
-            <fa-icon [icon]="[part.icon!.prefix, part.icon!.name]" size="3x"></fa-icon>
+            <fa-icon [icon]="[part.icon!.prefix, part.icon!.name]" class="icon"></fa-icon>
         </div>
     </ng-template>
 </p-carousel>
