@@ -1,15 +1,10 @@
 <header>
     <a routerLink="/"><img src="../../../../assets/img/logo2.png"/></a>
     <app-search class="search"></app-search>
-    <!-- <div class="search">
-        <input type="text" maxlength="100"/>
-        <button><fa-icon [icon]="['fas', 'search']" size="3x"></fa-icon></button>
-    </div> -->
     <div class="header_buttons">
-        <button routerLink="/profile/{{currentUser.username}}/products"><fa-icon [icon]="['fas', 'cart-shopping']" size="3x"></fa-icon></button>
-        <button routerLink="/shop/category/favorites"><fa-icon [icon]="['fas', 'heart']" size="3x"></fa-icon></button>
-        <!-- <button routerLink="/settings" routerLinkActive="active"><fa-icon [icon]="['fas', 'gear']" size="3x"></fa-icon></button> -->
-        <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" size="3x"></fa-icon></button>
+        <button routerLink="/profile/{{currentUser.username}}/products"><fa-icon [icon]="['fas', 'cart-shopping']" ></fa-icon></button>
+        <button routerLink="/shop/category/favorites"><fa-icon [icon]="['fas', 'heart']" ></fa-icon></button>
+        <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" ></fa-icon></button>
         <div class="small_profile">
             <button class="profile" routerLink="/profile/{{currentUser.username}}/currentuser" *ngIf="user == true"><img [src]= "currentUser.image || 'https://www.ibei.org/images/4611/person_box.png'"/></button>
             <button class="logout" (click)="delete_user()"><fa-icon [icon]="['fas', 'door-open']" *ngIf="user == true" ></fa-icon></button>

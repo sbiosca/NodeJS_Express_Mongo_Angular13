@@ -6,7 +6,7 @@
             <div>
                 <div class="categ" *ngFor="let cate of category_mv" [routerLink]="['/shop/category', cate.reference]">
                     <h4>Times visited <span>{{cate.visited}}</span></h4>
-                    <fa-icon class="icon_category" [icon]="[cate.icon!.prefix, cate.icon!.name]" size="5x"></fa-icon>
+                    <fa-icon class="icon_category" [icon]="[cate.icon!.prefix, cate.icon!.name]"></fa-icon>
                 </div>
             </div>
         </div>

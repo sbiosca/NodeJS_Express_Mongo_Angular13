@@ -1,46 +1,79 @@
+@media only screen and (max-width: 850px) {
+    .details {
+        max-width: 100%;
+        margin-left: auto;
+        .car {
+            width: 105%;
+        }
+    }
+    .comments {
+        max-width: 100%;
+        margin-left: auto;
+        textarea {
+            width: 80%;
+        }
+    }
+}
+
+@media only screen and (min-width: 850px) {
+    .details {
+        max-width: 60%;
+        margin-left: 10%;
+        .car {
+            width: 55%;
+        }
+    }
+    .comments {
+        max-width: 60%;
+        margin-left: 25%;
+       
+    }
+    
+}
+
 .details {
     border: 1px solid black;
     border-radius: 2%;
-    max-width: 60%;
     text-align: center;
     margin-top: 5%;
-    margin-left: 10%;
+    .p-carousel-content {
+        margin-top: 2.5%;
+        width: 100% !important;
+        height: 20%;
+        align-items: center;
+        justify-content: center;
+    }
+    .p-carousel-container {
+        max-width: 100%;
+        margin-bottom: 2.5%;
+        .p-carousel-item {
+            text-align: center;
+            padding: 2.5%;
+            max-width: 100%;
+        }
+    }
+    
 }
 
 .comments {
     border: 1px solid black;
     border-radius: 2%;
-    max-width: 40%;
+    
     text-align: center;
     margin-top: 5%;
-    margin-left: 25%;
+    
+    .comment_author {
+        border: 1px solid black;
+        border-radius: 2%;
+        max-width: 40%;
+        text-align: center;
+        margin-top: 2%;
+        margin-left: 30%;
+    }
+    
 }
 
-.comment_author {
-    border: 1px solid black;
-    border-radius: 2%;
-    max-width: 40%;
-    text-align: center;
-    margin-top: 2%;
-    margin-left: 30%;
-}
 
-.p-carousel-content {
-    margin-top: 2.5%;
-    width: 100% !important;
-    height: 20%;
-    align-items: center;
-    justify-content: center;
-}
-.p-carousel-container {
-    width: 40%;
-    margin-bottom: 2.5%;
-}
-
-.p-carousel-item {
-    text-align: center;
-    padding: 2.5%;
-}
 
 fieldset {
     border: none;
