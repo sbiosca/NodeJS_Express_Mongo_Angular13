@@ -17,6 +17,7 @@
 					<input formControlName="password" type="password" class="login__input" placeholder="Password">
 				</div>
 				<div class="login__field" *ngIf="authType === 'register'">
+					<fa-icon class="login__icon fas fa-lock" [icon]="['fas', 'lock']"></fa-icon>
 					<input formControlName="password2" type="password" class="login__input" placeholder="Repeat Password">
 				</div>
 				<div class="login__field" *ngIf="authType === 'register'">

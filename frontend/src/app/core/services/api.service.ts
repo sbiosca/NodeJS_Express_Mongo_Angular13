@@ -5,7 +5,8 @@ import { Observable ,  throwError } from 'rxjs';
 
 import { catchError } from 'rxjs/operators';
 
-const baseUrl = 'http://localhost:3000/api/';
+//const baseUrl = 'http://localhost:3000/api/';
+const baseUrl = 'http://192.168.54.20:3000/api/';
 
 @Injectable({
   providedIn: 'root'
