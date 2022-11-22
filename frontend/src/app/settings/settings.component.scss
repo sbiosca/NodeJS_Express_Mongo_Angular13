@@ -12,59 +12,61 @@ $default-color:#1b1b8d;
   border: 2px solid white;
   font-size: 18px;
 }
-
-.settings-page {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .card {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      width: 50%;
-      margin-top: 5%;
-    }
-  form {
-    fieldset {
-      border: none;
-      input {
-        padding: 5px;
-        font-size: 17px;
-        border-width: 1px;
-        border-style: groove;
-        border-radius: 7px;
-        :focus {
-          outline:none;
-        }
+@mixin all {
+  .settings-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        width: 50%;
+        margin-top: 5%;
       }
-      .avatar_image {
-        margin: 1.75%;
-        float: left;
-        width: min-content;
-        text-align: center;
-        a {
-          text-decoration: none;
-          img {
-            width: 90%;
+    form {
+      fieldset {
+        border: none;
+        input {
+          padding: 5px;
+          font-size: 17px;
+          border-width: 1px;
+          border-style: groove;
+          border-radius: 7px;
+          :focus {
+            outline:none;
+          }
+        }
+        .avatar_image {
+          margin: 1.75%;
+          float: left;
+          width: min-content;
+          text-align: center;
+          a {
+            text-decoration: none;
+            img {
+              width: 90%;
+            }
+          }
+        }
+        .controls {
+          background-color: $default-color;
+          width: 60%;
+          float: right;
+          div {
+            margin: 1.75%;
           }
         }
       }
-      .controls {
-        background-color: $default-color;
-        width: 60%;
-        float: right;
-        div {
-          margin: 1.75%;
-        }
+      button {
+       @extend %button
       }
     }
     button {
-     @extend %button
+      @extend %button;
+      background-color: red;
     }
   }
-  button {
-    @extend %button;
-    background-color: red;
-  }
 }
+@include all;
 @media only screen and (max-width: 425px) {
   .settings-page {
     width: 100%;
@@ -125,4 +127,7 @@ $default-color:#1b1b8d;
       }
     }
   }
+ }
+ @media only screen and (min-width: 900px) {
+  @include all;
  }
