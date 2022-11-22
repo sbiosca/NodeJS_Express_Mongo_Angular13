@@ -5,8 +5,8 @@ import { Product } from '../models/product.model';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 
-const baseUrl = 'http://localhost:3000/api/product/';
-//const baseUrl = 'http://192.168.54.20:3000/api/product/';
+//const baseUrl = 'http://localhost:3000/api/product/';
+const baseUrl = 'http://192.168.54.20:3000/api/product/';
 @Injectable({
   providedIn: 'root'
 })

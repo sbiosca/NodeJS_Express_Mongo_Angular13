@@ -1,75 +1,78 @@
-header {
-	height: 25%;
-	display: flex;
-	flex-flow: row wrap;
-	border-bottom: 4px solid blue;
-	a {
-		width: 20%;
-	}
-
-	.search {
+@mixin all {
+	header {
+		height: 25%;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 60%;
-		height: 100%;
-
-		input {
-			font-size: 150%;
-			height: 45%;
-			width: 50%;
-			border: none;
-			border-bottom: 3px solid blue;
+		flex-flow: row wrap;
+		border-bottom: 4px solid blue;
+		a {
+			width: 20%;
 		}
-
-		button {
-			height: 45%;
-			width: 10%;
-			border: transparent;
-			background-color: transparent;
-			&:hover {
-				color: blue;
-			}
-		}
-	}
-
-	.header_buttons {
-		width: 20%;
-		height: 100%;
-		float: right;
-		button {
-			padding: 1.5%;
-			width: 33.3%;
+	
+		.search {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
 			height: 100%;
-			border: transparent;
-			background-color: transparent;
-			&:hover {
-				color: blue;
+	
+			input {
+				font-size: 150%;
+				height: 45%;
+				width: 50%;
+				border: none;
+				border-bottom: 3px solid blue;
 			}
-
-		}
-
-		.small_profile {
-			width: 30%;
-			margin: 0%;
-			float: right;
-
-			.profile {
-				border-radius: 50%;
-
-				img {
-					width: 150%;
-					border-radius: 50%;
+	
+			button {
+				height: 45%;
+				width: 10%;
+				border: transparent;
+				background-color: transparent;
+				&:hover {
+					color: blue;
 				}
 			}
-
-			.logout {
-				font-size: 15px;
+		}
+	
+		.header_buttons {
+			width: 20%;
+			height: 100%;
+			float: right;
+			button {
+				padding: 1.5%;
+				width: 33.3%;
+				height: 100%;
+				border: transparent;
+				background-color: transparent;
+				&:hover {
+					color: blue;
+				}
+	
+			}
+	
+			.small_profile {
+				width: 30%;
+				margin: 0%;
+				float: right;
+	
+				.profile {
+					border-radius: 50%;
+	
+					img {
+						width: 150%;
+						border-radius: 50%;
+					}
+				}
+	
+				.logout {
+					font-size: 15px;
+				}
 			}
 		}
+	
 	}
-
 }
+@include all;
 @media only screen and (max-width: 425px) {
 	header {
 		img {
@@ -122,7 +125,7 @@ header {
 		width: 250px;
 	}
 	.header_buttons {
-		font-size: 150%;
+		font-size: 105%;
 		.icon {
 			display: none;
 		}
@@ -139,3 +142,6 @@ header {
 	}
 }
 
+@media only screen and (min-width: 900px) {
+    @include all;
+   }
