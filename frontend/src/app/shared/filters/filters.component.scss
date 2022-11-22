@@ -38,3 +38,19 @@ $letter-size: 20px;
         }
     }
 }
+@media only screen and (max-width: 425px) {
+    .filters {
+        display: flex;
+        select {
+            width: 45%;
+            &#cate {
+             order: -2;   
+            }
+            &#state {
+                order: -1;
+            }    
+        }
+    } 
+}
+   
+ 

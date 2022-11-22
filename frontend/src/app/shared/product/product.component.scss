@@ -54,3 +54,44 @@ div.all {
         color: blue;
     }
 }
+@media only screen and (max-width: 425px) {
+    div.all {
+        .content_products{
+            width: 100%;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            div.product {
+                width: 80%;
+                div.use_buttons {
+                    width: 80%;
+                    text-align: left;
+                }
+            }
+        }
+        .pagination {
+            width: 85%;
+        }
+    }
+   }
+   
+   @media only screen and (min-width: 820px) {
+    div.all {
+        .content_products{
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            div.product {
+                width: 40%;
+                div.use_buttons {
+                    width: 80%;
+                    text-align: left;
+                }
+            }
+        }
+        .pagination {
+            width: 85%;
+        }
+    }
+   }

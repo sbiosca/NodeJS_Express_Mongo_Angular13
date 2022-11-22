@@ -65,3 +65,64 @@ $default-color:#1b1b8d;
     background-color: red;
   }
 }
+@media only screen and (max-width: 425px) {
+  .settings-page {
+    width: 100%;
+    display: block;
+    text-align: center;
+    .card {
+      width: 100%;
+    }
+    form {
+      fieldset {
+        textarea {
+          width: 300px;
+        }
+        .avatar_image {
+          float: none;
+          display: inline-block;
+          justify-content: center;
+          a {
+            img {
+              width: 30%;
+            }
+          }
+        }
+        .controls {
+          width: 100%;
+          float: none;
+        }
+      }
+    }
+  }
+ }
+ 
+ @media only screen and (min-width: 820px) {
+  .settings-page {
+    width: 100%;
+    display: block;
+    .card {
+      width: 100%;
+    }
+    form {
+      fieldset {
+        textarea {
+          width: 90%;
+        }
+        .avatar_image {
+          float: left;
+          
+          a {
+            img {
+              width: 90%;
+            }
+          }
+        }
+        .controls {
+          width: 50%;
+          float: right;
+        }
+      }
+    }
+  }
+ }

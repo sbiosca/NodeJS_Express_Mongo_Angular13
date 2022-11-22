@@ -1,27 +1,8 @@
-@media only screen and (max-width: 650px) {
-	img {
-		width: 155%;
-	}
-	fa-icon {
-		font-size: 150%;
-	}
-}
-
-@media only screen and (min-width: 650px) {
-	img {
-		width: 105%;
-	}
-	fa-icon {
-		font-size: 350%;
-	}
-}
-
 header {
 	height: 25%;
 	display: flex;
 	flex-flow: row wrap;
 	border-bottom: 4px solid blue;
-
 	a {
 		width: 20%;
 		
@@ -58,7 +39,6 @@ header {
 		width: 20%;
 		height: 100%;
 		float: right;
-
 		button {
 			padding: 1.5%;
 			width: 33.3%;
@@ -93,3 +73,58 @@ header {
 	}
 
 }
+@media only screen and (max-width: 425px) {
+	header {
+		img {
+			width: 150px;
+		}
+		.header_buttons {
+			z-index: 101;
+			.hidden {
+				display: none;
+			}
+			.profile {
+				img {
+					width: 50px;
+				}
+			}
+			.icon {
+				font-size: 150%;
+				&:focus + .hidden {
+				display: block;
+				flex-flow: column wrap;
+				position: fixed;
+				background-color: white;
+				border: 2px solid black;
+				button {
+					width: 100%;
+					font-size: 150%;
+				}
+			}
+			}
+		}
+	};
+}
+
+@media only screen and (min-width: 820px) {
+	img {
+		width: 250px;
+	}
+	.header_buttons {
+		font-size: 33%;
+		.icon {
+			display: none;
+		}
+		.profile {
+			img {
+				width: 50px;
+			}
+		}
+		div {
+			button {
+				font-size: 250%;
+			}
+		}
+	}
+}
+
