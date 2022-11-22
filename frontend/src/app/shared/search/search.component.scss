@@ -24,6 +24,9 @@
 @media only screen and (max-width: 425px) {
     .search {
         button {
+            .icons {
+                font-size: 150%;
+            }
             font-size: 15px;
         }
         input {
@@ -35,6 +38,9 @@
    @media only screen and (min-width: 820px) {
     .search {
         button {
+            .icons {
+                font-size: 300%;
+            }
             font-size: 15px;
         }
         input {

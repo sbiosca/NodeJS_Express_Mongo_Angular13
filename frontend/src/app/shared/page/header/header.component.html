@@ -8,7 +8,6 @@
             <button routerLink="/shop/category/favorites"><fa-icon [icon]="['fas', 'heart']" ></fa-icon></button>
             <button routerLink="/auth/login" routerLinkActive="active" *ngIf="user == false"><fa-icon [icon]="['fas', 'user']" ></fa-icon></button>
             <button class="profile" routerLink="/profile/{{currentUser.username}}/currentuser" *ngIf="user == true"><img [src]= "currentUser.image || 'https://www.ibei.org/images/4611/person_box.png'"/></button>
-            <!-- <button class="logout" (click)="delete_user()"><fa-icon [icon]="['fas', 'door-open']" *ngIf="user == true" ></fa-icon></button> -->
         </div>
     </div>
 </header>

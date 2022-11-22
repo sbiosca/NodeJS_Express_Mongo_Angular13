@@ -1,7 +1,7 @@
 <div class="search">
     <input type="text" list="list_search" maxlength="100" [(ngModel)]='search_highligh' (change)="enter_key(this)"
     (input)="writting_search($any($event.target).value)"/>
-    <button><fa-icon [icon]="['fas', 'search']"></fa-icon></button>
+    <button><fa-icon [icon]="['fas', 'search']" class="icons"></fa-icon></button>
     <datalist id="list_search">
         <option *ngFor="let product of products" [value]="product.name">{{product.name}}</option>
     </datalist>

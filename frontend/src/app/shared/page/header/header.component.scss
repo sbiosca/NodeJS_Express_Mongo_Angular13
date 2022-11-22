@@ -5,7 +5,6 @@ header {
 	border-bottom: 4px solid blue;
 	a {
 		width: 20%;
-		
 	}
 
 	.search {
@@ -28,7 +27,6 @@ header {
 			width: 10%;
 			border: transparent;
 			background-color: transparent;
-
 			&:hover {
 				color: blue;
 			}
@@ -45,7 +43,6 @@ header {
 			height: 100%;
 			border: transparent;
 			background-color: transparent;
-
 			&:hover {
 				color: blue;
 			}
@@ -76,18 +73,19 @@ header {
 @media only screen and (max-width: 425px) {
 	header {
 		img {
-			width: 150px;
+			width: 140px;
 		}
 		.header_buttons {
 			z-index: 101;
 			.hidden {
 				display: none;
-			}
-			.profile {
-				img {
-					width: 50px;
+				.profile {
+					img {
+						width: 50px;
+					}
 				}
 			}
+			
 			.icon {
 				font-size: 150%;
 				&:focus + .hidden {
@@ -103,7 +101,7 @@ header {
 			}
 			}
 		}
-	};
+	}
 }
 
 @media only screen and (min-width: 820px) {
@@ -111,7 +109,7 @@ header {
 		width: 250px;
 	}
 	.header_buttons {
-		font-size: 33%;
+		font-size: 100%;
 		.icon {
 			display: none;
 		}

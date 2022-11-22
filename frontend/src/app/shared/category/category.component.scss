@@ -1,17 +1,32 @@
+@mixin button() {
+    color: white;
+    background-color: blue;
+    border-radius: 50%;
+    border: none;
+    padding: 1.75%;
+    font-size: 20px;
+    float: center;
+    position: static;
+    z-index: 101;
+}
+$width_common: 100;
+$font_size: 100;
+$color: blue;
+
 @media only screen and (max-width: 650px) {
     div.categ {
         h4 {
-            width: 90%;
+            width: $width_common - 10%;
 
             span {
-                font-size: 35px;
+                font-size: $font_size - 65px;
             }
         }
 
         .icon_category {
-            width: 50%;
+            width: $width_common - 50%;
             float: right;
-            font-size: 250%;
+            font-size: $font_size + 150%;
         }
     }
 
@@ -20,34 +35,34 @@
 @media only screen and (min-width: 650px) {
     div.categ {
         h4 {
-            width: 40%;
+            width: $width_common - 60%;
 
             span {
-                font-size: 35px;
+                font-size: $font_size - 65px;
             }
         }
 
         .icon_category {
-            width: 50%;
+            width: $width_common - 50%;
             float: right;
-            font-size: 350%;
+            font-size: $font_size + 250%;
         }
     }
 }
 
 .category_box {
-    width: 100%;
+    width: $width_common + 0%;
     display: flex;
     justify-content: center;
 
     div {
-        width: 100%;
+        width: $width_common + 0%;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
 
         :hover {
-            color: blue;
+            color: $color;
         }
 
         div.categ {
@@ -65,7 +80,7 @@
 
 h1 {
     padding: 1.5%;
-    width: 100%;
+    width: $width_common + 0%;
     text-align: center;
     background-image: linear-gradient(90deg, blue, white);
     border-top-left-radius: 80px 80px;
@@ -74,17 +89,10 @@ h1 {
 }
 
 button {
-    color: white;
-    background-color: blue;
-    border-radius: 50%;
-    border: none;
-    padding: 1.75%;
-    font-size: 20px;
-    float: center;
-    position: static;
-    z-index: 101;
+    @include button();
 }
 
 .none {
     display: none;
 }
+
